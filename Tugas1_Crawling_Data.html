@@ -65,6 +65,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
+      <style>
+        .logo-circle {
+            width: 100px; /* Atur ukuran sesuai kebutuhan */
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            text-align: center; /* Mengatur teks agar berada di tengah */
+            margin-top: 10px; /* Jarak antara gambar dan teks */
+        }
+
+        .logo-text h2 {
+            margin: 0; /* Menghilangkan margin default pada h2 */
+            font-size: 1.2em; /* Ukuran font untuk nama */
+        }
+
+        .logo-text p {
+            margin: 0; /* Menghilangkan margin default pada p */
+            font-size: 0.9em; /* Ukuran font untuk jabatan */
+            color: #555; /* Warna teks jabatan */
+        }
+      </style>
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
@@ -153,8 +177,12 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
   
   
 </a></div>
@@ -1017,12 +1045,12 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="markdown-notebooks.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome To My Repository</p>
+        <p class="prev-next-title">Notebooks with MyST Markdown</p>
       </div>
     </a>
     <a class="right-next"

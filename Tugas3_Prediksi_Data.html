@@ -65,6 +65,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
+      <style>
+        .logo-circle {
+            width: 100px; /* Atur ukuran sesuai kebutuhan */
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            text-align: center; /* Mengatur teks agar berada di tengah */
+            margin-top: 10px; /* Jarak antara gambar dan teks */
+        }
+
+        .logo-text h2 {
+            margin: 0; /* Menghilangkan margin default pada h2 */
+            font-size: 1.2em; /* Ukuran font untuk nama */
+        }
+
+        .logo-text p {
+            margin: 0; /* Menghilangkan margin default pada p */
+            font-size: 0.9em; /* Ukuran font untuk jabatan */
+            color: #555; /* Warna teks jabatan */
+        }
+      </style>
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
@@ -153,8 +177,12 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
   
   
 </a></div>
@@ -356,7 +384,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -372,6 +402,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spliting-data"><strong>Spliting Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modeling"><strong>Data Modeling</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model"><strong>Evaluasi Model</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengujian"><strong>Pengujian</strong></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -738,7 +780,8 @@ document.write(`
   </div>
 </div></div>
 </div>
-<h2><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></h2>
+<section id="tf-idf-term-frequency-inverse-document-frequency">
+<h2><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong><a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1287,7 +1330,9 @@ document.write(`
   </div>
 </div></div>
 </div>
-<h2> <strong>Spliting Data</strong></h2>
+</section>
+<section id="spliting-data">
+<h2><strong>Spliting Data</strong><a class="headerlink" href="#spliting-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -1311,7 +1356,9 @@ Shape of X_test: (4, 1475)
 </div>
 </div>
 </div>
-<h2><strong>Data Modeling</strong></h2>
+</section>
+<section id="data-modeling">
+<h2><strong>Data Modeling</strong><a class="headerlink" href="#data-modeling" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
@@ -1328,7 +1375,9 @@ Shape of X_test: (4, 1475)
 </div>
 </div>
 </div>
-<h2><strong>Evaluasi Model</strong></h2>
+</section>
+<section id="evaluasi-model">
+<h2><strong>Evaluasi Model</strong><a class="headerlink" href="#evaluasi-model" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluasi hasil prediksi</span>
@@ -1387,7 +1436,9 @@ Cross-validation accuracy: 46.67%
 </div>
 </div>
 </div>
-<h2>###<strong>Pengujian</strong></h2>
+</section>
+<section id="pengujian">
+<h2><strong>Pengujian</strong><a class="headerlink" href="#pengujian" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
@@ -1442,6 +1493,7 @@ Prediksi untuk teks 2: Otomotif
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1498,6 +1550,25 @@ Prediksi untuk teks 2: Otomotif
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spliting-data"><strong>Spliting Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-modeling"><strong>Data Modeling</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model"><strong>Evaluasi Model</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengujian"><strong>Pengujian</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
