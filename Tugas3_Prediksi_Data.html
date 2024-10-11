@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My Sample Book</title>
+    <title>Tugas 3: Prediksi Data &#8212; My sample book</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas3';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas3_Prediksi_Data';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Tugas4.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Tugas2.html" />
+    <link rel="next" title="Tugas 4: Encoder dan Graf" href="Tugas4_Encoder_dan_Graf.html" />
+    <link rel="prev" title="Tugas 2: Preprocessing dan TF-IDF" href="Tugas2_Pre-processing_dan_TF-IDF.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/qoid.jpg" class="logo__image only-light" alt="My Sample Book - Home"/>
-    <script>document.write(`<img src="_static/qoid.jpg" class="logo__image only-dark" alt="My Sample Book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
   
 </a></div>
@@ -179,10 +179,14 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas1: Crawling Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 3: Prediksi Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
 </ul>
 
     </div>
@@ -254,7 +258,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas3.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas3_Prediksi_Data.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +288,7 @@
       
       
       
-      <li><a href="_sources/Tugas3.ipynb" target="_blank"
+      <li><a href="_sources/Tugas3_Prediksi_Data.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -355,9 +359,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -368,19 +370,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Tugas 3: Prediksi Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -390,7 +384,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section id="tugas-3-prediksi-data">
+<h1><strong>Tugas 3: Prediksi Data</strong><a class="headerlink" href="#tugas-3-prediksi-data" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
 <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
@@ -1449,6 +1445,7 @@ Prediksi untuk teks 2: Otomotif
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1481,20 +1478,20 @@ Prediksi untuk teks 2: Otomotif
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Tugas2.html"
+       href="Tugas2_Pre-processing_dan_TF-IDF.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="Tugas4.html"
+       href="Tugas4_Encoder_dan_Graf.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Tugas 4: Encoder dan Graf</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1505,21 +1502,6 @@ Prediksi untuk teks 2: Otomotif
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
@@ -1529,7 +1511,7 @@ Prediksi untuk teks 2: Otomotif
   <div class="footer-item">
     
 <p class="component-author">
-By The Juputer Book Community
+By The Jupyter Book Community
 </p>
 
   </div>

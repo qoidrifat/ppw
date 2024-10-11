@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My Sample Book</title>
+    <title>Tugas1: Crawling Data &#8212; My sample book</title>
   
   
   
@@ -57,10 +57,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas1_Crawling_Data';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Tugas2.html" />
+    <link rel="next" title="Tugas 2: Preprocessing dan TF-IDF" href="Tugas2_Pre-processing_dan_TF-IDF.html" />
     <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/qoid.jpg" class="logo__image only-light" alt="My Sample Book - Home"/>
-    <script>document.write(`<img src="_static/qoid.jpg" class="logo__image only-dark" alt="My Sample Book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
   
 </a></div>
@@ -179,10 +179,14 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas1: Crawling Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
 </ul>
 
     </div>
@@ -254,7 +258,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas1_Crawling_Data.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +288,7 @@
       
       
       
-      <li><a href="_sources/Tugas1.ipynb" target="_blank"
+      <li><a href="_sources/Tugas1_Crawling_Data.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Tugas1: Crawling Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +381,10 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-crawling"><strong>Apa itu Crawling?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-adalah-beberapa-fungsi-dari-crawling"><strong>Berikut adalah beberapa fungsi dari crawling:</strong></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -390,9 +395,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>###<strong>Apa itu Crawling?</strong></p>
+  <section id="tugas1-crawling-data">
+<h1><strong>Tugas1: Crawling Data</strong><a class="headerlink" href="#tugas1-crawling-data" title="Link to this heading">#</a></h1>
+<section id="apa-itu-crawling">
+<h2><strong>Apa itu Crawling?</strong><a class="headerlink" href="#apa-itu-crawling" title="Link to this heading">#</a></h2>
 <p>Proses crawling adalah penggunaan program komputer untuk secara otomatis menjelajahi dan mengumpulkan data dari berbagai halaman web di internet. Proses ini dilakukan oleh bot yang disebut web crawlers atau spiders, yang akan menelusuri situs web, mengakses halaman-halaman, dan mengunduh atau mengekstraksi informasi yang dibutuhkan sebelum disimpan atau diindeks dalam database.</p>
-<p>###<strong>Berikut adalah beberapa fungsi dari crawling:</strong></p>
+</section>
+<section id="berikut-adalah-beberapa-fungsi-dari-crawling">
+<h2><strong>Berikut adalah beberapa fungsi dari crawling:</strong><a class="headerlink" href="#berikut-adalah-beberapa-fungsi-dari-crawling" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Data Collection</strong>: Crawling digunakan untuk mengumpulkan data dari berbagai sumber, seperti situs web, forum, dan lain-lain. Data yang dikumpulkan dapat berupa teks, gambar, video, dan lain-lain.</p></li>
 <li><p><strong>Indexing</strong>: Crawling digunakan untuk membuat indeks dari data yang dikumpulkan. Indeks ini dapat digunakan untuk mencari data yang relevan dengan kata kunci atau query.</p></li>
@@ -450,11 +460,49 @@ document.write(`
 <span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_sec</span>
+<span class="g g-Whitespace">     </span><span class="mi">93</span>   <span class="k">while</span> <span class="ow">not</span> <span class="n">deadline</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">_read_next_input_message</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span>   <span class="n">reply</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>   <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">40</span>     <span class="n">_</span><span class="p">,</span> <span class="n">reply</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">stdin_socket</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">NOBLOCK</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>   <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="c1"># We treat invalid messages as empty replies.</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/jupyter_client/session.py</span> in <span class="ni">recv</span><span class="nt">(self, socket, mode, content, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">807</span>             <span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span>
+<span class="g g-Whitespace">    </span><span class="mi">808</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">809</span>             <span class="n">msg_list</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv_multipart</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">810</span>         <span class="k">except</span> <span class="n">zmq</span><span class="o">.</span><span class="n">ZMQError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">811</span>             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">zmq</span><span class="o">.</span><span class="n">EAGAIN</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/sugar/socket.py</span> in <span class="ni">recv_multipart</span><span class="nt">(self, flags, copy, track)</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span>             <span class="k">for</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reasons</span> <span class="p">:</span><span class="n">func</span><span class="p">:</span><span class="err">`</span><span class="o">~</span><span class="n">Socket</span><span class="o">.</span><span class="n">recv</span><span class="err">`</span> <span class="n">might</span> <span class="n">fail</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">729</span><span class="s2">         parts = [self.recv(flags, copy=copy, track=track)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">730</span><span class="s2">         # have first part already, only loop while more to receive</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span><span class="s2">         while self.getsockopt(zmq.RCVMORE):</span>
+
+<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket.Socket.recv</span><span class="nt">()</span>
+
+<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket.Socket.recv</span><span class="nt">()</span>
+
+<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket._recv_copy</span><span class="nt">()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/backend/cython/checkrc.pxd</span> in <span class="ni">zmq.backend.cython.checkrc._check_rc</span><span class="nt">()</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/error.py</span> in <span class="ni">__init__</span><span class="nt">(self, errno, msg)</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span><span class="s2">     def __init__(self, errno=&quot;ignored&quot;, msg=&quot;ignored&quot;):</span>
+<span class="ne">--&gt; </span><span class="mi">104</span><span class="s2">         from zmq import EAGAIN</span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">106</span><span class="s2">         super().__init__(EAGAIN)</span>
+
+<span class="nn">/usr/lib/python3.10/importlib/_bootstrap.py</span> in <span class="ni">_handle_fromlist</span><span class="nt">(module, fromlist, import_, recursive)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -938,6 +986,8 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
   </div>
 </div></div>
 </div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -979,11 +1029,11 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
       </div>
     </a>
     <a class="right-next"
-       href="Tugas2.html"
+       href="Tugas2_Pre-processing_dan_TF-IDF.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1002,9 +1052,10 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-crawling"><strong>Apa itu Crawling?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-adalah-beberapa-fungsi-dari-crawling"><strong>Berikut adalah beberapa fungsi dari crawling:</strong></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -1018,7 +1069,7 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
   <div class="footer-item">
     
 <p class="component-author">
-By The Juputer Book Community
+By The Jupyter Book Community
 </p>
 
   </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My Sample Book</title>
+    <title>Tugas 2: Preprocessing dan TF-IDF &#8212; My sample book</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas2_Pre-processing_dan_TF-IDF';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Tugas3.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Tugas1.html" />
+    <link rel="next" title="Tugas 3: Prediksi Data" href="Tugas3_Prediksi_Data.html" />
+    <link rel="prev" title="Tugas1: Crawling Data" href="Tugas1_Crawling_Data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,8 +153,8 @@
       
     
     
-    <img src="_static/qoid.jpg" class="logo__image only-light" alt="My Sample Book - Home"/>
-    <script>document.write(`<img src="_static/qoid.jpg" class="logo__image only-dark" alt="My Sample Book - Home"/>`);</script>
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
   
   
 </a></div>
@@ -179,10 +179,14 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas1: Crawling Data</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
 </ul>
 
     </div>
@@ -254,7 +258,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas2_Pre-processing_dan_TF-IDF.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +288,7 @@
       
       
       
-      <li><a href="_sources/Tugas2.ipynb" target="_blank"
+      <li><a href="_sources/Tugas2_Pre-processing_dan_TF-IDF.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Tugas 2: Preprocessing dan TF-IDF</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -377,9 +381,13 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleansing"><em><strong>Cleansing</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding"><em><strong>Case Folding</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization"><em><strong>Tokenization</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal"><em><strong>Stopword Removal</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em></a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -390,7 +398,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>##<strong>Tugas 2 : Preprocessing dan TFIDF</strong></p>
+  <section id="tugas-2-preprocessing-dan-tf-idf">
+<h1><strong>Tugas 2: Preprocessing dan TF-IDF</strong><a class="headerlink" href="#tugas-2-preprocessing-dan-tf-idf" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
@@ -722,7 +731,8 @@ document.write(`
   </div>
 </div></div>
 </div>
-<p>##<em><strong>Cleansing</strong></em></p>
+<section id="cleansing">
+<h2><em><strong>Cleansing</strong></em><a class="headerlink" href="#cleansing" title="Link to this heading">#</a></h2>
 <p>Cleansing adalah proses pengolahan data yang bertujuan untuk menghilangkan noise, error, atau data yang tidak relevan dari data yang telah dikumpulkan. Proses cleansing ini dilakukan untuk meningkatkan kualitas data dan memudahkan analisis dan pengolahan data.</p>
 <p>Cleansing dapat dilakukan dengan cara mengidentifikasi dan menghapus data yang tidak relevan, seperti:</p>
 <ol class="arabic simple">
@@ -1079,7 +1089,9 @@ document.write(`
   </div>
 </div></div>
 </div>
-<p>##<em><strong>Case Folding</strong></em></p>
+</section>
+<section id="case-folding">
+<h2><em><strong>Case Folding</strong></em><a class="headerlink" href="#case-folding" title="Link to this heading">#</a></h2>
 <p>Case folding adalah proses pengkonversian teks menjadi bentuk yang sama, baik huruf besar atau huruf kecil, untuk memudahkan analisis dan pengolahan teks. Case folding dilakukan dengan cara mengkonversi semua huruf besar menjadi huruf kecil atau sebaliknya.</p>
 <p>Contoh:</p>
 <ul class="simple">
@@ -1414,7 +1426,9 @@ document.write(`
   </div>
 </div></div>
 </div>
-<p>##<em><strong>Tokenization</strong></em></p>
+</section>
+<section id="tokenization">
+<h2><em><strong>Tokenization</strong></em><a class="headerlink" href="#tokenization" title="Link to this heading">#</a></h2>
 <p>Tokenization adalah proses pengkonversian teks menjadi unit-unit kecil yang disebut token. Token dapat berupa kata, frasa, atau karakter individu. Tujuan dari tokenization adalah untuk memudahkan analisis dan pengolahan teks, seperti analisis sintaks, analisis semantik, dan lain-lain.</p>
 <p>Tokenization dilakukan dengan cara mengidentifikasi unit-unit kecil dalam teks, seperti:</p>
 <ol class="arabic simple">
@@ -1747,7 +1761,9 @@ document.write(`
   </div>
 </div></div>
 </div>
-<p>##<em><strong>Stopword Removal</strong></em></p>
+</section>
+<section id="stopword-removal">
+<h2><em><strong>Stopword Removal</strong></em><a class="headerlink" href="#stopword-removal" title="Link to this heading">#</a></h2>
 <p>Stopword removal adalah proses penghapusan kata-kata yang tidak berarti atau tidak penting dalam teks, seperti kata-kata yang berfungsi sebagai konjungsi, preposisi, atau kata-kata yang tidak memiliki arti yang jelas. Kata-kata ini disebut stopwords.</p>
 <p>Stopwords dapat mengganggu analisis teks, karena mereka dapat membuat teks menjadi tidak jelas atau sulit dipahami. Oleh karena itu, stopwords harus dihapus dari teks sebelum melakukan analisis.</p>
 <p>Contoh stopwords:</p>
@@ -2109,7 +2125,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##<em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em></p>
+</section>
+<section id="tf-idf-term-frequency-inverse-document-frequency">
+<h2><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em><a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Link to this heading">#</a></h2>
 <p>TF-IDF (Term Frequency-Inverse Document Frequency) adalah suatu metode yang digunakan untuk menghitung pentingnya suatu kata dalam suatu dokumen. Metode ini menghitung frekuensi kata dalam suatu dokumen (Term Frequency) dan juga menghitung frekuensi kata dalam semua dokumen lainnya (Inverse Document Frequency). Dengan demikian, TF-IDF dapat digunakan untuk menghitung pentingnya suatu kata dalam suatu dokumen dan juga untuk menghitung relevansi suatu kata dengan suatu topik.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2641,6 +2659,8 @@ document.write(`
   </div>
 </div></div>
 </div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2673,20 +2693,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Tugas1.html"
+       href="Tugas1_Crawling_Data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Tugas1: Crawling Data</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="Tugas3.html"
+       href="Tugas3_Prediksi_Data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><strong>Tugas 3: Prediksi Data</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2705,9 +2725,13 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleansing"><em><strong>Cleansing</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding"><em><strong>Case Folding</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization"><em><strong>Tokenization</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal"><em><strong>Stopword Removal</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em></a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
@@ -2721,7 +2745,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Juputer Book Community
+By The Jupyter Book Community
 </p>
 
   </div>
