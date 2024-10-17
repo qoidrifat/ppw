@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Word Embeding (Skip-gram)</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'word_embeding';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tugas 4: Encoder dan Graf" href="Tugas4_Encoder_dan_Graf.html" />
+    <link rel="prev" title="Tugas 3: Prediksi Data" href="Tugas3_Prediksi_Data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  <style>
+    .logo-circle {
+        width: 100px; /* Atur ukuran sesuai kebutuhan */
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .logo-text {
+        text-align: center; /* Mengatur teks agar berada di tengah */
+        margin-top: 10px; /* Jarak antara gambar dan teks */
+    }
+
+    .logo-text h2 {
+        margin: 0; /* Menghilangkan margin default pada h2 */
+        font-size: 1.2em; /* Ukuran font untuk nama */
+    }
+
+    .logo-text p {
+        margin: 0; /* Menghilangkan margin default pada p */
+        font-size: 0.9em; /* Ukuran font untuk jabatan */
+        color: #555; /* Warna teks jabatan */
+    }
+  </style>
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to My Repository
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas1: Crawling Data</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Word Embeding (Skip-gram)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas5_Keyword_Extraction.html"><strong>Tugas 5 : Keyword Extraction</strong></a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fword_embeding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/word_embeding.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Word Embeding (Skip-gram)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram"><strong>Skip-gram</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan"><strong>Contoh Perhitungan</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-one-hot-encoding-untuk-setiap-kata-dalam-kalimat-tersebut"><strong>Representasi one-hot encoding untuk setiap kata dalam kalimat tersebut</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-kata-target-dan-konteks"><strong>Berikut kata target dan konteks</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-word-embedding"><strong>Membuat word Embedding</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-1"><strong>Iterasi ke 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-2"><strong>Iterasi ke 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-3"><strong>Iterasi ke 3</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="word-embeding">
+<h1><strong>Word Embeding</strong><a class="headerlink" href="#word-embeding" title="Link to this heading">#</a></h1>
+<section id="skip-gram">
+<h2><strong>Skip-gram</strong><a class="headerlink" href="#skip-gram" title="Link to this heading">#</a></h2>
+<p>Skip-Gram adalah metode yang digunakan untuk membuat komputer memahami arti kata dengan melihat kata-kata yang ada di sekitarnya.</p>
+<p>Penjelasan Sederhana:
+Bayangkan saat kita membaca kalimat, dan fokus pada satu kata. Skip-Gram akan mencoba mempelajari kata-kata apa saja yang biasanya muncul di dekat kata tersebut.</p>
+<p>Contoh: Kalimat: “Anak itu sedang bermain bola.”</p>
+<p>Jika kata yang dipelajari adalah “bermain,” Skip-Gram akan mencoba memahami kata-kata yang sering muncul di dekatnya, seperti “anak” dan “bola.”
+Dengan cara ini, Skip-Gram membantu komputer mengerti hubungan antar kata, sehingga bisa “memahami” makna kata berdasarkan konteksnya.</p>
+<p>Jadi, intinya Skip-Gram adalah cara untuk mengajarkan komputer memahami arti kata dari kata-kata di sekitarnya.</p>
+<section id="contoh-perhitungan">
+<h3><strong>Contoh Perhitungan</strong><a class="headerlink" href="#contoh-perhitungan" title="Link to this heading">#</a></h3>
+<p>contoh dalam perhitungannya adalah sebagai berikut  dengan kalimat yang akan kita gunakan adalah : <strong>“kucing itu sedang tidur di atas sofa”</strong></p>
+</section>
+<section id="representasi-one-hot-encoding-untuk-setiap-kata-dalam-kalimat-tersebut">
+<h3><strong>Representasi one-hot encoding untuk setiap kata dalam kalimat tersebut</strong><a class="headerlink" href="#representasi-one-hot-encoding-untuk-setiap-kata-dalam-kalimat-tersebut" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Kata</p></th>
+<th class="head"><p>One-Hot Encoding</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Kucing</p></td>
+<td><p>[1, 0, 0, 0, 0, 0, 0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>itu</p></td>
+<td><p>[0, 1, 0, 0, 0, 0, 0]</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>sedang</p></td>
+<td><p>[0, 0, 1, 0, 0, 0, 0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>tidur</p></td>
+<td><p>[0, 0, 0, 1, 0, 0, 0]</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>di</p></td>
+<td><p>[0, 0, 0, 0, 1, 0, 0]</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>atas</p></td>
+<td><p>[0, 0, 0, 0, 0, 1, 0]</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>sofa</p></td>
+<td><p>[0, 0, 0, 0, 0, 0, 1]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="berikut-kata-target-dan-konteks">
+<h3><strong>Berikut kata target dan konteks</strong><a class="headerlink" href="#berikut-kata-target-dan-konteks" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kata target</p></th>
+<th class="head"><p>kata konteks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>kucing</p></td>
+<td><p>itu</p></td>
+</tr>
+<tr class="row-odd"><td><p>itu</p></td>
+<td><p>kucing, sedang</p></td>
+</tr>
+<tr class="row-even"><td><p>sedang</p></td>
+<td><p>itu, tidur</p></td>
+</tr>
+<tr class="row-odd"><td><p>tidur</p></td>
+<td><p>sedang, di</p></td>
+</tr>
+<tr class="row-even"><td><p>di</p></td>
+<td><p>tidur, atas</p></td>
+</tr>
+<tr class="row-odd"><td><p>atas</p></td>
+<td><p>di, sofa</p></td>
+</tr>
+<tr class="row-even"><td><p>sofa</p></td>
+<td><p>atas</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="membuat-word-embedding">
+<h3><strong>Membuat word Embedding</strong><a class="headerlink" href="#membuat-word-embedding" title="Link to this heading">#</a></h3>
+<p>Setelah mendapatkan pasangan kata, gunakan model embedding untuk mengonversi setiap kata menjadi vektor. Misalkan kita tentukan ukuran dimensi vektor embedding adalah 3</p>
+<p>buat nilai embedding acak untuk setiap kata sebagai berikut :</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kata</p></th>
+<th class="head"><p>Word Embedding</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Kucing</p></td>
+<td><p>[0.1, 0.2, 0.3]</p></td>
+</tr>
+<tr class="row-odd"><td><p>itu</p></td>
+<td><p>[0.4, 0.5, 0.6]</p></td>
+</tr>
+<tr class="row-even"><td><p>sedang</p></td>
+<td><p>[0.7, 0.8, 0.9]</p></td>
+</tr>
+<tr class="row-odd"><td><p>tidur</p></td>
+<td><p>[0.3, 0.2, 0.1]</p></td>
+</tr>
+<tr class="row-even"><td><p>di</p></td>
+<td><p>[0.6, 0.5, 0.4]</p></td>
+</tr>
+<tr class="row-odd"><td><p>atas</p></td>
+<td><p>[0.9, 0.8, 0.7]</p></td>
+</tr>
+<tr class="row-even"><td><p>sofa</p></td>
+<td><p>[0.8, 0.2, 0.1]</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="iterasi-ke-1">
+<h3><strong>Iterasi ke 1</strong><a class="headerlink" href="#iterasi-ke-1" title="Link to this heading">#</a></h3>
+<p>sekarang akan menghitung representasi untuk kata “itu” menggunakan tetangga kiri dan kanan yaitu ‘kucing’ dan ‘sedang’</p>
+<ol class="arabic">
+<li><p>untuk “itu” dengan tetangga kiri ‘kucing’:
+Vector “itu” = [0.4,0.5,0.6]
+Vector “kucing” = [0.1,0.2,0.3]</p></li>
+<li><p>Untuk “itu” dengan tetangga “sedang”:
+Vector “sedang” = [0.7,0.8,0.9]</p>
+<p>Vector itu = $<span class="math notranslate nohighlight">\(\frac{[0.1, 0.2, 0.3] + [0.7, 0.8, 0.9]}{2} = \frac{[0.8, 1.0, 1.2]}{2} = [0.4, 0.5, 0.6]
+\)</span>$</p>
+</li>
+</ol>
+<p>Kesimpulan
+Perhitungan di atas merupakan bagian dari iterasi pertama, di mana kita menggunakan pasangan kata-tetangga untuk membentuk representasi awal dari kata. Setelah beberapa iterasi, representasi vektor akan diperbarui dan menjadi lebih akurat dalam merepresentasikan hubungan semantik antar kata.</p>
+</section>
+<section id="iterasi-ke-2">
+<h3><strong>Iterasi ke 2</strong><a class="headerlink" href="#iterasi-ke-2" title="Link to this heading">#</a></h3>
+<p>Menggunakan contoh kata sama dengan kata target “itu” dan tetangganya “kucing” serta “sedang”. Misalkan setelah iterasi pertama, kita menghitung error dan ingin memperbarui vektor embedding untuk kata “itu”.</p>
+<p>Vektor Awal dari Iterasi Pertama: Pada iterasi pertama, kita telah menghitung representasi sementara sebagai berikut:
+kucing : [0.1,0.2,0.3]
+itu: [0.4,0.5,0.6]
+sedang : [0.7,0.8,0.9]</p>
+<p>Perbarui vektor embedding untuk kata target “itu” dengan memperhitungkan error</p>
+<p>Misalnya, untuk pasangan “itu” dengan tetangga “kucing” dan “sedang”, kita perbarui embedding “itu” menggunakan rumus:</p>
+<p>Rumus:$<span class="math notranslate nohighlight">\(\text{vektor_itu} = \text{vektor_itu} -\text{learning rate} \times \text{gradien error}
+\)</span>$</p>
+<ol class="arabic simple">
+<li><p>Gradien error mengacu pada perbedaan antara prediksi model dan hasil yang diharapkan. Misalkan gradien yang dihasilkan adalah 0.05 untuk setiap dimensi vektor.</p></li>
+<li><p>Pembaruan dilakukan berdasarkan gradient descent, di mana bobot embedding diubah sedikit untuk memperbaiki error. Misalkan kita menggunakan learning rate sebesar 0.1</p></li>
+</ol>
+<p>Berikut perhitungannya</p>
+<p><strong>Pembaruan vektor itu:</strong></p>
+<p>a. Dimensi pertama vector itu:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.4−(0.1×0.05)=0.395</p></li>
+</ul>
+<p>b. Dimensi kedua vector itu:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.5−(0.1×0.05)=0.495</p></li>
+</ul>
+<p>c. Dimensi Ketiga vector itu:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.6−(0.1×0.05)=0.595</p></li>
+</ul>
+<p>Setelah pembaruan untuk pasangan pertama, vektor embedding untuk “itu” adalah:[0.395,0.495,0.595]</p>
+<p><strong>Pembaruan Vektor “kucing”</strong>
+Kita akan memperbarui vektor embedding untuk kata “kucing” berdasarkan error yang dihitung setelah iterasi pertama.
+a. Dimensi pertama vector kucing</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.1−(0.1×0.05)=0.095</p></li>
+</ul>
+<p>b. Dimensi kedua vector kucing</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.2−(0.1×0.05)=0.195</p></li>
+</ul>
+<p>c. Dimensi ketiga vector kucing</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.3−(0.1×0.05)=0.295</p></li>
+</ul>
+<p>Hasil Vektor “kucing” setelah Iterasi Kedua =[0.095,0.195,0.295]</p>
+<p>Perbarui Vektor Embedding Tetangga “sedang”: Sama halnya, kita lakukan pembaruan untuk tetangga “sedang” menggunakan vektor embedding “itu”. Misalkan gradien error untuk “sedang” juga sebesar 0.05 .</p>
+<p>a. Dimensi pertama vector sedang</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.7−(0.1×0.05)=0.695</p></li>
+</ul>
+<p>b. Dimensi kedua vector sedang</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.8−(0.1×0.05)=0.795</p></li>
+</ul>
+<p>c. Dimensi ketiga vector sedang</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.9−(0.1×0.05)=0.895</p></li>
+</ul>
+<p>Setelah pembaruan untuk tetangga “sedang” =[0.695,0.795,0.895]</p>
+<p>Rekapitulasi Vektor Embedding
+Setelah iterasi kedua, berikut adalah vektor embedding yang diperbarui untuk kata “itu”, “kucing”, dan “sedang”:</p>
+<ul class="simple">
+<li><p>Vektor “itu”: [0.395,0.495,0.595]</p></li>
+<li><p>Vektor “sedang”: [0.695,0.795,0.895]</p></li>
+<li><p>Vektor “kucing”: [0.095,0.195,0.295]</p></li>
+</ul>
+<p>Kesimpulan
+Pada iterasi kedua, kita telah memperbarui vektor embedding untuk kata “itu”, “kucing”, dan “sedang” berdasarkan hasil dari iterasi pertama dengan menggunakan backpropagation dan pembaruan bobot (embedding).</p>
+</section>
+<section id="iterasi-ke-3">
+<h3><strong>Iterasi ke 3</strong><a class="headerlink" href="#iterasi-ke-3" title="Link to this heading">#</a></h3>
+<p>Pada iterasi ketiga, kita akan melanjutkan pembaruan vektor embedding untuk kata “itu”, “kucing”, dan “sedang” berdasarkan hasil dari iterasi kedua.</p>
+<p>Vektor embedding setelah iterasi kedua:</p>
+<p>Vektor “itu”: [0.395,0.495,0.595]
+Vektor “kucing”: [0.095,0.195,0.295]
+Vektor “sedang”: [0.695,0.795,0.895]</p>
+<p>Pembaruan pada Iterasi Ketiga
+Untuk iterasi ketiga, kita asumsikan nilai gradien error tetap 0.05 per dimensi, dan learning rate tetap 0.1 .</p>
+<p><strong>Pembaruan Vektor “itu”</strong></p>
+<p>a. Dimensi pertama vektor “itu”:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.395−(0.1×0.05)=0.39</p></li>
+</ul>
+<p>b. Dimensi kedua vektor “itu”:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.495−(0.1×0.05)=0.49</p></li>
+</ul>
+<p>c. Dimensi ketiga vektor “itu”:</p>
+<ul class="simple">
+<li><p>vektor_itu_baru=0.595−(0.1×0.05)=0.59</p></li>
+</ul>
+<p>Jadi, setelah memperbarui vektor embedding untuk “itu”, vektor “itu” menjadi:[0.39,0.49,0.59]</p>
+<p><strong>Pembaruan vector “kucing”</strong></p>
+<p>a. Dimensi pertama vektor “kucing”:</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.095−(0.1×0.05)=0.09</p></li>
+</ul>
+<p>b. Dimensi kedua vektor “kucing”:</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.195−(0.1×0.05)=0.19</p></li>
+</ul>
+<p>c. Dimensi ketiga vektor “kucing”:</p>
+<ul class="simple">
+<li><p>vektor_kucing_baru=0.295−(0.1×0.05)=0.29</p></li>
+</ul>
+<p>Setelah pembaruan, vektor embedding “kucing” menjadi: [0.09,0.19,0.29]</p>
+<p><strong>Pembaruan Vektor “sedang”</strong></p>
+<p>a. Dimensi pertama vektor “sedang”:</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.695−(0.1×0.05)=0.69</p></li>
+</ul>
+<p>b. Dimensi kedua vektor “sedang”:</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.795−(0.1×0.05)=0.79</p></li>
+</ul>
+<p>c. Dimensi ketiga vektor “sedang”:</p>
+<ul class="simple">
+<li><p>vektor_sedang_baru=0.895−(0.1×0.05)=0.89</p></li>
+</ul>
+<p>Setelah pembaruan, vektor embedding “sedang” menjadi: [0.69,0.79,0.89]</p>
+<p>Rekapitulasi Vektor
+Embedding Setelah Iterasi Ketiga
+Setelah iterasi ketiga, berikut adalah vektor embedding yang diperbarui untuk kata “itu”, “kucing”, dan “sedang”:</p>
+<ul class="simple">
+<li><p>Vektor “itu”: [0.39,0.49,0.59]</p></li>
+<li><p>Vektor “kucing”: [0.09,0.19,0.29]</p></li>
+<li><p>Vektor “sedang”: [0.69,0.79,0.89]</p></li>
+</ul>
+<p>Kesimpulan
+Pada iterasi ketiga, kita telah memperbarui vektor embedding untuk kata “itu”, “kucing”, dan “sedang” dengan menggunakan proses backpropagation yang didasarkan pada gradien error dari iterasi sebelumnya</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Tugas3_Prediksi_Data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Tugas 3: Prediksi Data</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Tugas4_Encoder_dan_Graf.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Tugas 4: Encoder dan Graf</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram"><strong>Skip-gram</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan"><strong>Contoh Perhitungan</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representasi-one-hot-encoding-untuk-setiap-kata-dalam-kalimat-tersebut"><strong>Representasi one-hot encoding untuk setiap kata dalam kalimat tersebut</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#berikut-kata-target-dan-konteks"><strong>Berikut kata target dan konteks</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-word-embedding"><strong>Membuat word Embedding</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-1"><strong>Iterasi ke 1</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-2"><strong>Iterasi ke 2</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterasi-ke-3"><strong>Iterasi ke 3</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Qoid Rif'at
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
