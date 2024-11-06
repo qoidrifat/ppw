@@ -8,25 +8,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tugas1: Crawling Data &#8212; My sample book</title>
+    <title>Tugas 1: Crawling Data Olahraga dan Otomotif</title>
   
-  
+    <link rel="icon" type="image/webp" href="_static/icon.webp">
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -36,10 +38,11 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -60,11 +63,37 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas1_Crawling_Data';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tugas 2: Preprocessing dan TF-IDF" href="Tugas2_Pre-processing_dan_TF-IDF.html" />
-    <link rel="prev" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
+    <link rel="next" title="Tugas 2 : Pre-processing dan TFIDF" href="Tugas2_Pre-processing_dan_TF-IDF.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
+  <style>
+    
+    .logo-circle {
+        width: 100px; /* Atur ukuran sesuai kebutuhan */
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .logo-text {
+        text-align: center; /* Mengatur teks agar berada di tengah */
+        margin-top: 10px; /* Jarak antara gambar dan teks */
+    }
+
+    .logo-text h2 {
+        margin: 0; /* Menghilangkan margin default pada h2 */
+        font-size: 1.2em; /* Ukuran font untuk nama */
+    }
+
+    .logo-text p {
+        margin: 0; /* Menghilangkan margin default pada p */
+        font-size: 0.9em; /* Ukuran font untuk jabatan */
+        color: #555; /* Warna teks jabatan */
+    }
+  </style>
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
@@ -79,19 +108,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +117,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,8 +124,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -124,7 +141,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -153,40 +171,39 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
+      <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    <strong>Welcome to My Repository</strong>
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas1: Crawling Data</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 1: Crawling Data Olahraga dan Otomotif</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2 : Pre-processing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Logistic_Regression.html"><strong>Tugas 3: Logistic Regression</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_embeding.html"><strong>Word Embeding (Skip-gram)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graph</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas5_Keyword_Extraction.html"><strong>Tugas 5: Keyword Extraction</strong></a></li>
 </ul>
 
     </div>
@@ -341,24 +358,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -372,7 +381,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tugas1: Crawling Data</h1>
+    <h1>Crawling Data Olahraga dan Otomotif</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -395,8 +404,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="tugas1-crawling-data">
-<h1><strong>Tugas1: Crawling Data</strong><a class="headerlink" href="#tugas1-crawling-data" title="Link to this heading">#</a></h1>
+  <section id="crawling-data-olahraga-dan-otomotif">
+<h1><strong>Crawling Data Olahraga dan Otomotif</strong><a class="headerlink" href="#crawling-data-olahraga-dan-otomotif" title="Link to this heading">#</a></h1>
 <section id="apa-itu-crawling">
 <h2><strong>Apa itu Crawling?</strong><a class="headerlink" href="#apa-itu-crawling" title="Link to this heading">#</a></h2>
 <p>Proses crawling adalah penggunaan program komputer untuk secara otomatis menjelajahi dan mengumpulkan data dari berbagai halaman web di internet. Proses ini dilakukan oleh bot yang disebut web crawlers atau spiders, yang akan menelusuri situs web, mengakses halaman-halaman, dan mengunduh atau mengekstraksi informasi yang dibutuhkan sebelum disimpan atau diindeks dalam database.</p>
@@ -460,49 +469,11 @@ document.write(`
 <span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
 
 <span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span>     <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_sec</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span>   <span class="k">while</span> <span class="ow">not</span> <span class="n">deadline</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
 <span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">_read_next_input_message</span><span class="nt">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span>   <span class="n">reply</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>   <span class="k">try</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">40</span>     <span class="n">_</span><span class="p">,</span> <span class="n">reply</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">stdin_socket</span><span class="p">,</span> <span class="n">zmq</span><span class="o">.</span><span class="n">NOBLOCK</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">41</span>   <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>  <span class="c1"># pylint: disable=broad-except</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="c1"># We treat invalid messages as empty replies.</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/jupyter_client/session.py</span> in <span class="ni">recv</span><span class="nt">(self, socket, mode, content, copy)</span>
-<span class="g g-Whitespace">    </span><span class="mi">807</span>             <span class="n">socket</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span>
-<span class="g g-Whitespace">    </span><span class="mi">808</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">809</span>             <span class="n">msg_list</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">recv_multipart</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">810</span>         <span class="k">except</span> <span class="n">zmq</span><span class="o">.</span><span class="n">ZMQError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">811</span>             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">errno</span> <span class="o">==</span> <span class="n">zmq</span><span class="o">.</span><span class="n">EAGAIN</span><span class="p">:</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/sugar/socket.py</span> in <span class="ni">recv_multipart</span><span class="nt">(self, flags, copy, track)</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span>             <span class="k">for</span> <span class="nb">any</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reasons</span> <span class="p">:</span><span class="n">func</span><span class="p">:</span><span class="err">`</span><span class="o">~</span><span class="n">Socket</span><span class="o">.</span><span class="n">recv</span><span class="err">`</span> <span class="n">might</span> <span class="n">fail</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">729</span><span class="s2">         parts = [self.recv(flags, copy=copy, track=track)]</span>
-<span class="g g-Whitespace">    </span><span class="mi">730</span><span class="s2">         # have first part already, only loop while more to receive</span>
-<span class="g g-Whitespace">    </span><span class="mi">731</span><span class="s2">         while self.getsockopt(zmq.RCVMORE):</span>
-
-<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket.Socket.recv</span><span class="nt">()</span>
-
-<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket.Socket.recv</span><span class="nt">()</span>
-
-<span class="nn">zmq/backend/cython/socket.pyx</span> in <span class="ni">zmq.backend.cython.socket._recv_copy</span><span class="nt">()</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/backend/cython/checkrc.pxd</span> in <span class="ni">zmq.backend.cython.checkrc._check_rc</span><span class="nt">()</span>
-
-<span class="nn">/usr/local/lib/python3.10/dist-packages/zmq/error.py</span> in <span class="ni">__init__</span><span class="nt">(self, errno, msg)</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span><span class="s2">     def __init__(self, errno=&quot;ignored&quot;, msg=&quot;ignored&quot;):</span>
-<span class="ne">--&gt; </span><span class="mi">104</span><span class="s2">         from zmq import EAGAIN</span>
-<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">106</span><span class="s2">         super().__init__(EAGAIN)</span>
-
-<span class="nn">/usr/lib/python3.10/importlib/_bootstrap.py</span> in <span class="ni">_handle_fromlist</span><span class="nt">(module, fromlist, import_, recursive)</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -523,8 +494,48 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># Fungsi untuk membersihkan konten dari elemen-elemen yang tidak diinginkan</span>
+<span class="k">def</span> <span class="nf">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">content_element</span><span class="p">:</span>
+        <span class="c1"># Hapus elemen yang berisi daftar isi</span>
+        <span class="k">for</span> <span class="n">daftar_isi</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;collapsible&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">daftar_isi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">unwanted</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi tag</span>
+        <span class="k">for</span> <span class="n">tag_class</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;aevp&quot;</span><span class="p">,</span> <span class="s2">&quot;detail__body-tag mgt-16&quot;</span><span class="p">]:</span>
+            <span class="n">unwanted</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="n">tag_class</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">unwanted</span><span class="p">:</span>
+                <span class="n">el</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen yang berisi link sisipan</span>
+        <span class="n">link_sisip</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;linksisip&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">link_sisip</span><span class="p">:</span>
+            <span class="n">table</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Hapus elemen paragraf dan span dengan class &#39;para_caption&#39;</span>
+        <span class="n">unwanted_paragraphs</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">find_all</span><span class="p">([</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;span&quot;</span><span class="p">],</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;para_caption&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">unwanted_paragraphs</span><span class="p">:</span>
+            <span class="n">para</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+
+        <span class="c1"># Kembalikan teks yang tersisa</span>
+        <span class="k">return</span> <span class="n">content_element</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;Content Not Found&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fungsi untuk mengambil data dari halaman web Detik.com</span>
-<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">kategori</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
@@ -536,8 +547,8 @@ document.write(`
     <span class="n">articles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;article&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;list-content__item&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">articles</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">return</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">kategori</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Menghentikan proses jika jumlah artikel sudah mencapai minimum yang diinginkan</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">link</span> <span class="o">=</span> <span class="n">article</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
@@ -555,18 +566,29 @@ document.write(`
         <span class="n">content_element</span> <span class="o">=</span> <span class="n">article_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;detail__body-text&quot;</span><span class="p">)</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">content_element</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="n">content_element</span> <span class="k">else</span> <span class="s2">&quot;Content Not Found&quot;</span>
 
-        <span class="c1"># Menambahkan data ke dalam list</span>
+        <span class="c1"># Bersihkan konten menggunakan fungsi clean_content</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">clean_content</span><span class="p">(</span><span class="n">content_element</span><span class="p">)</span>
+
+
         <span class="n">judul</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">tanggal</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
         <span class="n">isi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>  <span class="c1"># Menambahkan kategori ke dalam list</span>
+        <span class="c1"># url_list.append(link)</span>
+        <span class="n">kategori_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kategori</span><span class="p">)</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 1 detik antara permintaan artikel</span>
 
 <span class="c1"># Membuat list url dan kategori yang akan di-crawl</span>
-<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://sport.detik.com/indeks&quot;</span><span class="p">]</span>
-<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Olahraga&quot;</span><span class="p">]</span>
+<span class="n">base_urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://sport.detik.com/indeks&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://oto.detik.com/indeks&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Olahraga&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Otomotif&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 
 <span class="c1"># Inisialisasi list untuk menyimpan data</span>
 <span class="n">judul</span> <span class="o">=</span> <span class="p">[]</span>
@@ -574,40 +596,40 @@ document.write(`
 <span class="n">isi</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">kategori_list</span> <span class="o">=</span> <span class="p">[]</span>
 
+<span class="c1"># Batas minimal artikel per kategori</span>
+<span class="n">min_articles_per_category</span> <span class="o">=</span> <span class="mi">50</span>
+
 <span class="c1"># Melakukan iterasi untuk setiap url dan kategori</span>
 <span class="k">for</span> <span class="n">base_url</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">base_urls</span><span class="p">,</span> <span class="n">categories</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>  <span class="c1"># Looping untuk beralih halaman</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">judul</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Hentikan jika sudah 10 berita</span>
-            <span class="k">break</span>
-
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">kategori_list</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">category</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">min_articles_per_category</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+        <span class="n">get_data</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">min_articles_per_category</span><span class="p">)</span>
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Menambahkan jeda waktu 2 detik antara permintaan halaman</span>
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="c1"># Membuat dataframe dari list data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span>
-    <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span>
-    <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span>
-    <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span>
-<span class="p">})</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;judul&quot;</span><span class="p">:</span> <span class="n">judul</span><span class="p">,</span> <span class="s2">&quot;tanggal&quot;</span><span class="p">:</span> <span class="n">tanggal</span><span class="p">,</span> <span class="s2">&quot;isi&quot;</span><span class="p">:</span> <span class="n">isi</span><span class="p">,</span> <span class="s2">&quot;kategori&quot;</span><span class="p">:</span> <span class="n">kategori_list</span><span class="p">})</span>
 
-<span class="c1"># Menyimpan dataframe ke file CSV</span>
+<span class="c1"># Menyimpan dataframe ke file csv</span>
 <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;data_berita.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan dataframe</span>
+<span class="c1"># print(df)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas
-220 Atlet Anggar Perebutkan Medali PON 2024
-NPC: Ada Peran Menpora di Balik Sukses Paralimpiade 2024
-Hasil Hong Kong Open 2024: Chico Terdepak di Babak Pertama
-Hong Kong Open 2024: Gregoria Melaju ke Babak Kedua
-Momen 14 Peraih Medali Paralimpiade dapat Bonus dari Jokowi
-Momen Jokowi Serahkan Bonus ke Peraih Medali Paralimpiade
-Hong Kong Open 2024: Jonatan Menang Mudah, Tembus Babak 16 Besar
-Hong Kong Open 2024: Dejan/Gloria Langsung Tersingkir
-Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Comeback Tahun Depan
+Hasil Korea Masters 2024: Putri KW Lanjut ke 16 Besar
+Fajar/Rian di Japan dan China Masters: Inginnya Juara
+Hasil Korea Masters 2024: Komang Ayu Tersingkir
+Korea Masters 2024 Hari Kedua: Tiga Wakil RI Berjuang ke 16 Besar
+Korea Masters 2024: Fikri/Daniel Puji Lawan Usai Lolos 16 Besar
+Catalunya Resmi Gantikan Valencia Jadi Seri Terakhir MotoGP 2024
+Korea Masters 2024: Fikri/Daniel Singkirkan Pasangan Malaysia
+Hitung-hitungan Jorge Martin Bisa Juara MotoGP 2024
+Ranking BWF: Lanny/Fadia Melesat 38 Anak Tangga Dunia
 </pre></div>
 </div>
 </div>
@@ -621,7 +643,7 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-e6162873-76ca-46fa-8293-fd32157d369a" class="colab-df-container">
+  <div id="df-787b5813-de18-43fd-80a8-34a6ac2f05f7" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -641,89 +663,97 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>Momen 14 Peraih Medali Paralimpiade dapat Bonu...</td>
-      <td>Jakarta - Sebanyak 14 peraih medali Paralimpia...</td>
-      <td>Rabu, 11 Sep 2024 19:05 WIB</td>
-      <td>Olahraga</td>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>Momen Jokowi Serahkan Bonus ke Peraih Medali P...</td>
-      <td>Presiden Joko Widodo (Jokowi) menyerahkan bonu...</td>
-      <td>1,532 Views  |  Rabu, 11 Sep 2024 18:41 WIB</td>
-      <td>Olahraga</td>
+      <th>95</th>
+      <td>Inikah Motor Baru Honda yang Meluncur di Indon...</td>
+      <td>Selasa, 05 Nov 2024 07:14 WIB</td>
+      <td>Jakarta - PT Astra Honda Motor (AHM) akan melu...</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>Hong Kong Open 2024: Jonatan Menang Mudah, Tem...</td>
-      <td>Hong Kong - Jonatan Christie menjejak babak 16...</td>
-      <td>Rabu, 11 Sep 2024 18:51 WIB</td>
-      <td>Olahraga</td>
+      <th>96</th>
+      <td>Kenapa Harus Ganti Aki Meski Mobil Masih Kuat ...</td>
+      <td>Senin, 04 Nov 2024 20:25 WIB</td>
+      <td>Jakarta - Ketika mobil masih bisa distater ban...</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>Hong Kong Open 2024: Dejan/Gloria Langsung Ter...</td>
-      <td>Hong Kong - Dejan Ferdinansyah/Gloria Emanuell...</td>
-      <td>Rabu, 11 Sep 2024 18:39 WIB</td>
-      <td>Olahraga</td>
+      <th>97</th>
+      <td>Biaya Bikin SIM A: Syarat, Cara Buat Baru, dan...</td>
+      <td>Senin, 04 Nov 2024 19:38 WIB</td>
+      <td>Jakarta - Pengemudi mobil diwajibkan memiliki ...</td>
+      <td>Otomotif</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>Leani Ratri Langsung Bidik Paralimpiade 2028, ...</td>
-      <td>Jakarta - Atlet Para Badminton Indonesia Leani...</td>
-      <td>Rabu, 11 Sep 2024 17:12 WIB</td>
-      <td>Olahraga</td>
+      <th>98</th>
+      <td>Penjualan Mobil Turun, Kok Permintaan Motor Ma...</td>
+      <td>Senin, 04 Nov 2024 19:06 WIB</td>
+      <td>Jakarta - Berbeda dengan mobil, penjualan moto...</td>
+      <td>Otomotif</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Kawasaki W175 Injeksi Bakal Diproduksi Lokal M...</td>
+      <td>Senin, 04 Nov 2024 18:26 WIB</td>
+      <td>Jakarta - PT Kawasaki Motor Indonesia (KMI) ak...</td>
+      <td>Otomotif</td>
     </tr>
   </tbody>
 </table>
+<p>100 rows × 4 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-e6162873-76ca-46fa-8293-fd32157d369a')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-787b5813-de18-43fd-80a8-34a6ac2f05f7')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -775,12 +805,12 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
 
     <script>
       const buttonEl =
-        document.querySelector('#df-e6162873-76ca-46fa-8293-fd32157d369a button.colab-df-convert');
+        document.querySelector('#df-787b5813-de18-43fd-80a8-34a6ac2f05f7 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-e6162873-76ca-46fa-8293-fd32157d369a');
+        const element = document.querySelector('#df-787b5813-de18-43fd-80a8-34a6ac2f05f7');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -800,8 +830,8 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
   </div>
 
 
-<div id="df-69c1beaa-adbe-4ee3-b380-b428cf03bf8e">
-  <button class="colab-df-quickchart" onclick="quickchart('df-69c1beaa-adbe-4ee3-b380-b428cf03bf8e')"
+<div id="df-9f3e4580-90f3-4b85-a2a8-b48d27c3e404">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9f3e4580-90f3-4b85-a2a8-b48d27c3e404')"
             title="Suggest charts"
             style="display:none;">
 
@@ -920,14 +950,14 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-69c1beaa-adbe-4ee3-b380-b428cf03bf8e button');
+        document.querySelector('#df-9f3e4580-90f3-4b85-a2a8-b48d27c3e404 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_b7ba26b2-f3a0-4b52-9a47-2b9c554ee828">
+  <div id="id_b4a56546-c2ca-4c0e-be83-781b7e8cb6ea">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -971,7 +1001,7 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_b7ba26b2-f3a0-4b52-9a47-2b9c554ee828 button.colab-df-generate');
+        document.querySelector('#id_b4a56546-c2ca-4c0e-be83-781b7e8cb6ea button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1020,12 +1050,12 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="markdown-notebooks.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
       </div>
     </a>
     <a class="right-next"
@@ -1033,7 +1063,7 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></p>
+        <p class="prev-next-title"><strong>Tugas 2 : Pre-processing dan TFIDF</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1044,7 +1074,8 @@ Leani Ratri Langsung Bidik Paralimpiade 2028, Ini Targetnya
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1103,8 +1134,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

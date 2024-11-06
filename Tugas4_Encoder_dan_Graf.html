@@ -8,25 +8,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tugas 4: Encoder dan Graf &#8212; My sample book</title>
+    <title>Tugas 4: Encoder dan Graph</title>
   
-  
+    <link rel="icon" type="image/webp" href="_static/icon.webp">
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -36,10 +38,11 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -60,10 +63,37 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas4_Encoder_dan_Graf';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Tugas 3: Prediksi Data" href="Tugas3_Prediksi_Data.html" />
+    <link rel="next" title="Tugas 5: Keyword Extraction" href="Tugas5_Keyword_Extraction.html" />
+    <link rel="prev" title="Word Embeding" href="word_embeding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
+  <style>
+    
+    .logo-circle {
+        width: 100px; /* Atur ukuran sesuai kebutuhan */
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .logo-text {
+        text-align: center; /* Mengatur teks agar berada di tengah */
+        margin-top: 10px; /* Jarak antara gambar dan teks */
+    }
+
+    .logo-text h2 {
+        margin: 0; /* Menghilangkan margin default pada h2 */
+        font-size: 1.2em; /* Ukuran font untuk nama */
+    }
+
+    .logo-text p {
+        margin: 0; /* Menghilangkan margin default pada p */
+        font-size: 0.9em; /* Ukuran font untuk jabatan */
+        color: #555; /* Warna teks jabatan */
+    }
+  </style>
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
@@ -78,19 +108,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -98,7 +117,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -106,8 +124,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -123,7 +141,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -152,40 +171,38 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
+      <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    <strong>Welcome to My Repository</strong>
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas1: Crawling Data</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas 1: Crawling Data Olahraga dan Otomotif</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas2_Pre-processing_dan_TF-IDF.html"><strong>Tugas 2 : Pre-processing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Logistic_Regression.html"><strong>Tugas 3: Logistic Regression</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_embeding.html"><strong>Word Embeding (Skip-gram)</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 4: Encoder dan Graph</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas5_Keyword_Extraction.html"><strong>Tugas 5: Keyword Extraction</strong></a></li>
 </ul>
 
     </div>
@@ -340,24 +357,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -371,7 +380,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tugas 4: Encoder dan Graf</h1>
+    <h1>Tugas 4: Encoder dan Graph</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -384,7 +393,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder"><strong>Encoder</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data"><strong>Split Data</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting"><strong>TF-IDF Weighting</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graf"><strong>Graf</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -396,8 +404,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="tugas-4-encoder-dan-graf">
-<h1><strong>Tugas 4: Encoder dan Graf</strong><a class="headerlink" href="#tugas-4-encoder-dan-graf" title="Link to this heading">#</a></h1>
+  <section id="tugas-4-encoder-dan-graph">
+<h1><strong>Tugas 4: Encoder dan Graph</strong><a class="headerlink" href="#tugas-4-encoder-dan-graph" title="Link to this heading">#</a></h1>
 <section id="encoder">
 <h2><strong>Encoder</strong><a class="headerlink" href="#encoder" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -456,7 +464,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-2484dea3-16b4-4282-9fde-6d9023bfcafe" class="colab-df-container">
+  <div id="df-a4798b45-a125-47b1-ad0f-b09c20c89d48" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -476,8 +484,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -488,58 +496,58 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
-      <td>Banda Aceh  Cabor Soft Tennis PON  dimulai Per...</td>
-      <td>banda aceh  cabor soft tennis pon  dimulai per...</td>
-      <td>['banda', 'aceh', 'cabor', 'soft', 'tennis', '...</td>
-      <td>banda aceh cabor soft tennis pon persaingan ke...</td>
+      <td>Jakarta  Atlet bulutangkis Indonesia Apriyani ...</td>
+      <td>jakarta  atlet bulutangkis indonesia apriyani ...</td>
+      <td>['jakarta', 'atlet', 'bulutangkis', 'indonesia...</td>
+      <td>jakarta atlet bulutangkis indonesia apriyani r...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
-      <td>Jakarta  Cabang olahraga anggar pada Pekan Ola...</td>
-      <td>jakarta  cabang olahraga anggar pada pekan ola...</td>
-      <td>['jakarta', 'cabang', 'olahraga', 'anggar', 'p...</td>
-      <td>jakarta cabang olahraga anggar pekan olahraga ...</td>
+      <td>Jakarta  Putri Kusuma Wardani hadapi wakil Tai...</td>
+      <td>jakarta  putri kusuma wardani hadapi wakil tai...</td>
+      <td>['jakarta', 'putri', 'kusuma', 'wardani', 'had...</td>
+      <td>jakarta putri kusuma wardani hadapi wakil taiw...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
-      <td>Tangerang  National Paralympic Committee NPC I...</td>
-      <td>tangerang  national paralympic committee npc i...</td>
-      <td>['tangerang', 'national', 'paralympic', 'commi...</td>
-      <td>tangerang national paralympic committee npc in...</td>
+      <td>Jakarta  Fajar AlfianMuhammad Rian Ardianto be...</td>
+      <td>jakarta  fajar alfianmuhammad rian ardianto be...</td>
+      <td>['jakarta', 'fajar', 'alfianmuhammad', 'rian',...</td>
+      <td>jakarta fajar alfianmuhammad rian ardianto ber...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...</td>
-      <td>hong kong  chico aura dwi wardoyo mesti langsu...</td>
-      <td>['hong', 'kong', 'chico', 'aura', 'dwi', 'ward...</td>
-      <td>hong kong chico aura dwi wardoyo mesti langsun...</td>
+      <td>Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...</td>
+      <td>jakarta  komang ayu cahya dewi hadapi liang ti...</td>
+      <td>['jakarta', 'komang', 'ayu', 'cahya', 'dewi', ...</td>
+      <td>jakarta komang ayu cahya dewi hadapi liang tin...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Gregoria Mariska Tunjung melaju ke ...</td>
-      <td>hong kong  gregoria mariska tunjung melaju ke ...</td>
-      <td>['hong', 'kong', 'gregoria', 'mariska', 'tunju...</td>
-      <td>hong kong gregoria mariska tunjung melaju baba...</td>
+      <td>Jakarta  Turnamen Korea Masters  memasuki hari...</td>
+      <td>jakarta  turnamen korea masters  memasuki hari...</td>
+      <td>['jakarta', 'turnamen', 'korea', 'masters', 'm...</td>
+      <td>jakarta turnamen korea masters memasuki penyel...</td>
     </tr>
   </tbody>
 </table>
@@ -547,7 +555,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-2484dea3-16b4-4282-9fde-6d9023bfcafe')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a4798b45-a125-47b1-ad0f-b09c20c89d48')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -599,12 +607,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-2484dea3-16b4-4282-9fde-6d9023bfcafe button.colab-df-convert');
+        document.querySelector('#df-a4798b45-a125-47b1-ad0f-b09c20c89d48 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-2484dea3-16b4-4282-9fde-6d9023bfcafe');
+        const element = document.querySelector('#df-a4798b45-a125-47b1-ad0f-b09c20c89d48');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -624,8 +632,8 @@ document.write(`
   </div>
 
 
-<div id="df-0436a7f1-ad35-411a-8054-b895ae1b4681">
-  <button class="colab-df-quickchart" onclick="quickchart('df-0436a7f1-ad35-411a-8054-b895ae1b4681')"
+<div id="df-67dd56c7-f33d-4291-b503-0ce97225a4aa">
+  <button class="colab-df-quickchart" onclick="quickchart('df-67dd56c7-f33d-4291-b503-0ce97225a4aa')"
             title="Suggest charts"
             style="display:none;">
 
@@ -744,7 +752,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-0436a7f1-ad35-411a-8054-b895ae1b4681 button');
+        document.querySelector('#df-67dd56c7-f33d-4291-b503-0ce97225a4aa button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -778,158 +786,97 @@ document.write(`
 
 DataFrame setelah Label Encoding:
                                                 judul  \
-0     Soft Tenis PON 2024 Dimulai, Keras Berebut Emas   
-1         220 Atlet Anggar Perebutkan Medali PON 2024   
-2   NPC: Ada Peran Menpora di Balik Sukses Paralim...   
-3   Hasil Hong Kong Open 2024: Chico Terdepak di B...   
-4   Hong Kong Open 2024: Gregoria Melaju ke Babak ...   
-5   Momen 14 Peraih Medali Paralimpiade dapat Bonu...   
-6   Momen Jokowi Serahkan Bonus ke Peraih Medali P...   
-7   Hong Kong Open 2024: Jonatan Menang Mudah, Tem...   
-8   Hong Kong Open 2024: Dejan/Gloria Langsung Ter...   
-9   Leani Ratri Langsung Bidik Paralimpiade 2028, ...   
-10  Bioetanol Jadi Pendorong Pertumbuhan Ekonomi, ...   
-11  Airlangga Bilang Mobil Hybrid Laris Tanpa Inse...   
-12  Urgensi Pengembangan Bioetanol, Benarkah Lebih...   
-13            Semarak Parade Pebalap MotoGP di Lombok   
-14  Alex Marquez Terpesona Sirkuit Mandalika: Lint...   
-15  Hyundai-Wuling Bangun Pabrik Baterai EV di RI,...   
-16     Kesan Francesco Bagnaia soal Sirkuit Mandalika   
-17  Potret Mobil Niaga Listrik Terbaru BYD, Bisa T...   
-18  Iritnya Konsumsi BBM Honda Lead 125, Seliter B...   
-19  Menko Airlangga: Program Biodiesel B40 Dimulai...   
+0   Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...   
+1   Hasil Korea Masters 2024: Putri KW Lanjut ke 1...   
+2   Fajar/Rian di Japan dan China Masters: Inginny...   
+3     Hasil Korea Masters 2024: Komang Ayu Tersingkir   
+4   Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...   
+..                                                ...   
+95  Inikah Motor Baru Honda yang Meluncur di Indon...   
+96  Kenapa Harus Ganti Aki Meski Mobil Masih Kuat ...   
+97  Biaya Bikin SIM A: Syarat, Cara Buat Baru, dan...   
+98  Penjualan Mobil Turun, Kok Permintaan Motor Ma...   
+99  Kawasaki W175 Injeksi Bakal Diproduksi Lokal M...   
 
-                                                  isi  \
-0   Banda Aceh - Cabor Soft Tennis PON 2024 dimula...   
-1   Jakarta - Cabang olahraga anggar pada Pekan Ol...   
-2   Tangerang - National Paralympic Committee (NPC...   
-3   Hong Kong - Chico Aura Dwi Wardoyo mesti langs...   
-4   Hong Kong - Gregoria Mariska Tunjung melaju ke...   
-5   Jakarta - Sebanyak 14 peraih medali Paralimpia...   
-6   Presiden Joko Widodo (Jokowi) menyerahkan bonu...   
-7   Hong Kong - Jonatan Christie menjejak babak 16...   
-8   Hong Kong - Dejan Ferdinansyah/Gloria Emanuell...   
-9   Jakarta - Atlet Para Badminton Indonesia Leani...   
-10  Jakarta - Peneliti dari ITB Prof. Dr. Ronny Pu...   
-11  Jakarta - Menko Bidang Perekonomian Airlangga ...   
-12  Jakarta - Semangat untuk bisa menekan emisi ga...   
-13  Mataram - Sejumlah pebalap MotoGP mengikuti pa...   
-14  Jakarta - Pebalap Gresini Racing Alex Marquez ...   
-15  Jakarta - Permintaan mobil listrik di Indonesi...   
-16  Jakarta - Francesco Bagnaia punya kesan tersen...   
-17  Jakarta - BYD memperluas portofolio kendaraan ...   
-18  Jakarta - Honda Lead 125 baru telah meluncur d...   
-19  Jakarta - Menteri Koordinator Bidang Perekonom...   
+                          tanggal  \
+0     Rabu, 06 Nov 2024 15:25 WIB   
+1     Rabu, 06 Nov 2024 14:36 WIB   
+2     Rabu, 06 Nov 2024 14:13 WIB   
+3     Rabu, 06 Nov 2024 12:45 WIB   
+4     Rabu, 06 Nov 2024 10:55 WIB   
+..                            ...   
+95  Selasa, 05 Nov 2024 07:14 WIB   
+96   Senin, 04 Nov 2024 20:25 WIB   
+97   Senin, 04 Nov 2024 19:38 WIB   
+98   Senin, 04 Nov 2024 19:06 WIB   
+99   Senin, 04 Nov 2024 18:26 WIB   
 
-                                        tanggal  kategori  \
-0                   Rabu, 11 Sep 2024 23:15 WIB  Olahraga   
-1                   Rabu, 11 Sep 2024 22:15 WIB  Olahraga   
-2                   Rabu, 11 Sep 2024 21:15 WIB  Olahraga   
-3                   Rabu, 11 Sep 2024 20:11 WIB  Olahraga   
-4                   Rabu, 11 Sep 2024 19:15 WIB  Olahraga   
-5                   Rabu, 11 Sep 2024 19:05 WIB  Olahraga   
-6   1,532 Views  |  Rabu, 11 Sep 2024 18:41 WIB  Olahraga   
-7                   Rabu, 11 Sep 2024 18:51 WIB  Olahraga   
-8                   Rabu, 11 Sep 2024 18:39 WIB  Olahraga   
-9                   Rabu, 11 Sep 2024 17:12 WIB  Olahraga   
-10                  Rabu, 25 Sep 2024 20:32 WIB  Otomotif   
-11                  Rabu, 25 Sep 2024 20:07 WIB  Otomotif   
-12                  Rabu, 25 Sep 2024 19:34 WIB  Otomotif   
-13                  Rabu, 25 Sep 2024 19:30 WIB  Otomotif   
-14                  Rabu, 25 Sep 2024 19:10 WIB  Otomotif   
-15                  Rabu, 25 Sep 2024 18:33 WIB  Otomotif   
-16                  Rabu, 25 Sep 2024 18:02 WIB  Otomotif   
-17                  Rabu, 25 Sep 2024 17:37 WIB  Otomotif   
-18                  Rabu, 25 Sep 2024 17:04 WIB  Otomotif   
-19                  Rabu, 25 Sep 2024 16:34 WIB  Otomotif   
+                                                  isi  kategori  \
+0   Jakarta - Atlet bulutangkis Indonesia Apriyani...  Olahraga   
+1   Jakarta - Putri Kusuma Wardani hadapi wakil Ta...  Olahraga   
+2   Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...  Olahraga   
+3   Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...  Olahraga   
+4   Jakarta - Turnamen Korea Masters 2024 memasuki...  Olahraga   
+..                                                ...       ...   
+95  Jakarta - PT Astra Honda Motor (AHM) akan melu...  Otomotif   
+96  Jakarta - Ketika mobil masih bisa distater ban...  Otomotif   
+97  Jakarta - Pengemudi mobil diwajibkan memiliki ...  Otomotif   
+98  Jakarta - Berbeda dengan mobil, penjualan moto...  Otomotif   
+99  Jakarta - PT Kawasaki Motor Indonesia (KMI) ak...  Otomotif   
 
                                             cleansing  \
-0   Banda Aceh  Cabor Soft Tennis PON  dimulai Per...   
-1   Jakarta  Cabang olahraga anggar pada Pekan Ola...   
-2   Tangerang  National Paralympic Committee NPC I...   
-3   Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...   
-4   Hong Kong  Gregoria Mariska Tunjung melaju ke ...   
-5   Jakarta  Sebanyak  peraih medali Paralimpiade ...   
-6   Presiden Joko Widodo Jokowi menyerahkan bonus ...   
-7   Hong Kong  Jonatan Christie menjejak babak  be...   
-8   Hong Kong  Dejan FerdinansyahGloria Emanuelle ...   
-9   Jakarta  Atlet Para Badminton Indonesia Leani ...   
-10  Jakarta  Peneliti dari ITB Prof Dr Ronny Purwa...   
-11  Jakarta  Menko Bidang Perekonomian Airlangga H...   
-12  Jakarta  Semangat untuk bisa menekan emisi gas...   
-13  Mataram  Sejumlah pebalap MotoGP mengikuti par...   
-14  Jakarta  Pebalap Gresini Racing Alex Marquez s...   
-15  Jakarta  Permintaan mobil listrik di Indonesia...   
-16  Jakarta  Francesco Bagnaia punya kesan tersend...   
-17  Jakarta  BYD memperluas portofolio kendaraan l...   
-18  Jakarta  Honda Lead  baru telah meluncur di Vi...   
-19  Jakarta  Menteri Koordinator Bidang Perekonomi...   
+0   Jakarta  Atlet bulutangkis Indonesia Apriyani ...   
+1   Jakarta  Putri Kusuma Wardani hadapi wakil Tai...   
+2   Jakarta  Fajar AlfianMuhammad Rian Ardianto be...   
+3   Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...   
+4   Jakarta  Turnamen Korea Masters  memasuki hari...   
+..                                                ...   
+95  Jakarta  PT Astra Honda Motor AHM akan meluncu...   
+96  Jakarta  Ketika mobil masih bisa distater bany...   
+97  Jakarta  Pengemudi mobil diwajibkan memiliki S...   
+98  Jakarta  Berbeda dengan mobil penjualan motor ...   
+99  Jakarta  PT Kawasaki Motor Indonesia KMI akan ...   
 
                                          case_folding  \
-0   banda aceh  cabor soft tennis pon  dimulai per...   
-1   jakarta  cabang olahraga anggar pada pekan ola...   
-2   tangerang  national paralympic committee npc i...   
-3   hong kong  chico aura dwi wardoyo mesti langsu...   
-4   hong kong  gregoria mariska tunjung melaju ke ...   
-5   jakarta  sebanyak  peraih medali paralimpiade ...   
-6   presiden joko widodo jokowi menyerahkan bonus ...   
-7   hong kong  jonatan christie menjejak babak  be...   
-8   hong kong  dejan ferdinansyahgloria emanuelle ...   
-9   jakarta  atlet para badminton indonesia leani ...   
-10  jakarta  peneliti dari itb prof dr ronny purwa...   
-11  jakarta  menko bidang perekonomian airlangga h...   
-12  jakarta  semangat untuk bisa menekan emisi gas...   
-13  mataram  sejumlah pebalap motogp mengikuti par...   
-14  jakarta  pebalap gresini racing alex marquez s...   
-15  jakarta  permintaan mobil listrik di indonesia...   
-16  jakarta  francesco bagnaia punya kesan tersend...   
-17  jakarta  byd memperluas portofolio kendaraan l...   
-18  jakarta  honda lead  baru telah meluncur di vi...   
-19  jakarta  menteri koordinator bidang perekonomi...   
+0   jakarta  atlet bulutangkis indonesia apriyani ...   
+1   jakarta  putri kusuma wardani hadapi wakil tai...   
+2   jakarta  fajar alfianmuhammad rian ardianto be...   
+3   jakarta  komang ayu cahya dewi hadapi liang ti...   
+4   jakarta  turnamen korea masters  memasuki hari...   
+..                                                ...   
+95  jakarta  pt astra honda motor ahm akan meluncu...   
+96  jakarta  ketika mobil masih bisa distater bany...   
+97  jakarta  pengemudi mobil diwajibkan memiliki s...   
+98  jakarta  berbeda dengan mobil penjualan motor ...   
+99  jakarta  pt kawasaki motor indonesia kmi akan ...   
 
                                              tokenize  \
-0   [&#39;banda&#39;, &#39;aceh&#39;, &#39;cabor&#39;, &#39;soft&#39;, &#39;tennis&#39;, &#39;...   
-1   [&#39;jakarta&#39;, &#39;cabang&#39;, &#39;olahraga&#39;, &#39;anggar&#39;, &#39;p...   
-2   [&#39;tangerang&#39;, &#39;national&#39;, &#39;paralympic&#39;, &#39;commi...   
-3   [&#39;hong&#39;, &#39;kong&#39;, &#39;chico&#39;, &#39;aura&#39;, &#39;dwi&#39;, &#39;ward...   
-4   [&#39;hong&#39;, &#39;kong&#39;, &#39;gregoria&#39;, &#39;mariska&#39;, &#39;tunju...   
-5   [&#39;jakarta&#39;, &#39;sebanyak&#39;, &#39;peraih&#39;, &#39;medali&#39;, &#39;p...   
-6   [&#39;presiden&#39;, &#39;joko&#39;, &#39;widodo&#39;, &#39;jokowi&#39;, &#39;meny...   
-7   [&#39;hong&#39;, &#39;kong&#39;, &#39;jonatan&#39;, &#39;christie&#39;, &#39;menje...   
-8   [&#39;hong&#39;, &#39;kong&#39;, &#39;dejan&#39;, &#39;ferdinansyahgloria&#39;...   
-9   [&#39;jakarta&#39;, &#39;atlet&#39;, &#39;para&#39;, &#39;badminton&#39;, &#39;ind...   
-10  [&#39;jakarta&#39;, &#39;peneliti&#39;, &#39;dari&#39;, &#39;itb&#39;, &#39;prof&#39;,...   
-11  [&#39;jakarta&#39;, &#39;menko&#39;, &#39;bidang&#39;, &#39;perekonomian&#39;,...   
-12  [&#39;jakarta&#39;, &#39;semangat&#39;, &#39;untuk&#39;, &#39;bisa&#39;, &#39;mene...   
-13  [&#39;mataram&#39;, &#39;sejumlah&#39;, &#39;pebalap&#39;, &#39;motogp&#39;, &#39;...   
-14  [&#39;jakarta&#39;, &#39;pebalap&#39;, &#39;gresini&#39;, &#39;racing&#39;, &#39;a...   
-15  [&#39;jakarta&#39;, &#39;permintaan&#39;, &#39;mobil&#39;, &#39;listrik&#39;, ...   
-16  [&#39;jakarta&#39;, &#39;francesco&#39;, &#39;bagnaia&#39;, &#39;punya&#39;, &#39;...   
-17  [&#39;jakarta&#39;, &#39;byd&#39;, &#39;memperluas&#39;, &#39;portofolio&#39;,...   
-18  [&#39;jakarta&#39;, &#39;honda&#39;, &#39;lead&#39;, &#39;baru&#39;, &#39;telah&#39;, ...   
-19  [&#39;jakarta&#39;, &#39;menteri&#39;, &#39;koordinator&#39;, &#39;bidang&#39;...   
+0   [&#39;jakarta&#39;, &#39;atlet&#39;, &#39;bulutangkis&#39;, &#39;indonesia...   
+1   [&#39;jakarta&#39;, &#39;putri&#39;, &#39;kusuma&#39;, &#39;wardani&#39;, &#39;had...   
+2   [&#39;jakarta&#39;, &#39;fajar&#39;, &#39;alfianmuhammad&#39;, &#39;rian&#39;,...   
+3   [&#39;jakarta&#39;, &#39;komang&#39;, &#39;ayu&#39;, &#39;cahya&#39;, &#39;dewi&#39;, ...   
+4   [&#39;jakarta&#39;, &#39;turnamen&#39;, &#39;korea&#39;, &#39;masters&#39;, &#39;m...   
+..                                                ...   
+95  [&#39;jakarta&#39;, &#39;pt&#39;, &#39;astra&#39;, &#39;honda&#39;, &#39;motor&#39;, &#39;...   
+96  [&#39;jakarta&#39;, &#39;ketika&#39;, &#39;mobil&#39;, &#39;masih&#39;, &#39;bisa&#39;...   
+97  [&#39;jakarta&#39;, &#39;pengemudi&#39;, &#39;mobil&#39;, &#39;diwajibkan&#39;...   
+98  [&#39;jakarta&#39;, &#39;berbeda&#39;, &#39;dengan&#39;, &#39;mobil&#39;, &#39;pen...   
+99  [&#39;jakarta&#39;, &#39;pt&#39;, &#39;kawasaki&#39;, &#39;motor&#39;, &#39;indone...   
 
                                      stopword_removal  kategori_encoded  
-0   banda aceh cabor soft tennis pon persaingan ke...                 0  
-1   jakarta cabang olahraga anggar pekan olahraga ...                 0  
-2   tangerang national paralympic committee npc in...                 0  
-3   hong kong chico aura dwi wardoyo mesti langsun...                 0  
-4   hong kong gregoria mariska tunjung melaju baba...                 0  
-5   jakarta peraih medali paralimpiade menerima bo...                 0  
-6   presiden joko widodo jokowi menyerahkan bonus ...                 0  
-7   hong kong jonatan christie menjejak babak hong...                 0  
-8   hong kong dejan ferdinansyahgloria emanuelle w...                 0  
-9   jakarta atlet badminton indonesia leani ratri ...                 0  
-10  jakarta peneliti itb prof dr ronny purwadi pen...                 1  
-11  jakarta menko bidang perekonomian airlangga ha...                 1  
-12  jakarta semangat menekan emisi gas buang dipup...                 1  
-13  mataram pebalap motogp mengikuti parade jalan ...                 1  
-14  jakarta pebalap gresini racing alex marquez si...                 1  
-15  jakarta permintaan mobil listrik indonesia men...                 1  
-16  jakarta francesco bagnaia kesan tersendiri sir...                 1  
-17  jakarta byd memperluas portofolio kendaraan li...                 1  
-18  jakarta honda lead meluncur vietnam harganya t...                 1  
-19  jakarta menteri koordinator bidang perekonomia...                 1  
+0   jakarta atlet bulutangkis indonesia apriyani r...                 0  
+1   jakarta putri kusuma wardani hadapi wakil taiw...                 0  
+2   jakarta fajar alfianmuhammad rian ardianto ber...                 0  
+3   jakarta komang ayu cahya dewi hadapi liang tin...                 0  
+4   jakarta turnamen korea masters memasuki penyel...                 0  
+..                                                ...               ...  
+95  jakarta pt astra honda motor ahm meluncurkan p...                 1  
+96  jakarta mobil distater menganggap kondisi aki ...                 1  
+97  jakarta pengemudi mobil diwajibkan memiliki su...                 1  
+98  jakarta berbeda mobil penjualan motor indonesi...                 1  
+99  jakarta pt kawasaki motor indonesia kmi mempro...                 1  
+
+[100 rows x 9 columns]
 </pre></div>
 </div>
 </div>
@@ -965,51 +912,33 @@ DataFrame setelah Label Encoding:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     banda aceh cabor soft tennis pon persaingan ke...
-1     jakarta cabang olahraga anggar pekan olahraga ...
-2     tangerang national paralympic committee npc in...
-3     hong kong chico aura dwi wardoyo mesti langsun...
-4     hong kong gregoria mariska tunjung melaju baba...
-5     jakarta peraih medali paralimpiade menerima bo...
-6     presiden joko widodo jokowi menyerahkan bonus ...
-7     hong kong jonatan christie menjejak babak hong...
-8     hong kong dejan ferdinansyahgloria emanuelle w...
-9     jakarta atlet badminton indonesia leani ratri ...
-10    jakarta peneliti itb prof dr ronny purwadi pen...
-11    jakarta menko bidang perekonomian airlangga ha...
-12    jakarta semangat menekan emisi gas buang dipup...
-13    mataram pebalap motogp mengikuti parade jalan ...
-14    jakarta pebalap gresini racing alex marquez si...
-15    jakarta permintaan mobil listrik indonesia men...
-16    jakarta francesco bagnaia kesan tersendiri sir...
-17    jakarta byd memperluas portofolio kendaraan li...
-18    jakarta honda lead meluncur vietnam harganya t...
-19    jakarta menteri koordinator bidang perekonomia...
-Name: stopword_removal, dtype: object
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     jakarta atlet bulutangkis indonesia apriyani r...
+1     jakarta putri kusuma wardani hadapi wakil taiw...
+2     jakarta fajar alfianmuhammad rian ardianto ber...
+3     jakarta komang ayu cahya dewi hadapi liang tin...
+4     jakarta turnamen korea masters memasuki penyel...
+                            ...                        
+95    jakarta pt astra honda motor ahm meluncurkan p...
+96    jakarta mobil distater menganggap kondisi aki ...
+97    jakarta pengemudi mobil diwajibkan memiliki su...
+98    jakarta berbeda mobil penjualan motor indonesi...
+99    jakarta pt kawasaki motor indonesia kmi mempro...
+Name: stopword_removal, Length: 100, dtype: object
 0     0
 1     0
 2     0
 3     0
 4     0
-5     0
-6     0
-7     0
-8     0
-9     0
-10    1
-11    1
-12    1
-13    1
-14    1
-15    1
-16    1
-17    1
-18    1
-19    1
-Name: kategori_encoded, dtype: int64
+     ..
+95    1
+96    1
+97    1
+98    1
+99    1
+Name: kategori_encoded, Length: 100, dtype: int64
 ==================================================
-Jumlah data latih: 16
-Jumlah data uji: 4
+Jumlah data latih: 80
+Jumlah data uji: 20
 </pre></div>
 </div>
 </div>
@@ -1042,7 +971,7 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-2cba8f02-0184-479a-93a8-285a15a8d1e9" class="colab-df-container">
+  <div id="df-cfb1748b-c4c8-4fd5-a1e4-17f4dbce1f78" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1061,422 +990,302 @@ Jumlah data uji: 4
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>abadi</th>
+      <th>abdul</th>
+      <th>abs</th>
       <th>absen</th>
-      <th>abubakar</th>
+      <th>absennya</th>
+      <th>ac</th>
       <th>acara</th>
-      <th>aceh</th>
-      <th>acehsumut</th>
-      <th>acehsumutini</th>
-      <th>adakah</th>
-      <th>additional</th>
-      <th>adik</th>
-      <th>advance</th>
+      <th>accident</th>
+      <th>accu</th>
+      <th>acosta</th>
       <th>...</th>
-      <th>wuling</th>
-      <th>xin</th>
-      <th>xxi</th>
-      <th>ya</th>
-      <th>yamaha</th>
-      <th>yuhsuanpada</th>
-      <th>yuk</th>
+      <th>yra</th>
+      <th>yu</th>
+      <th>yuan</th>
+      <th>yuhsun</th>
+      <th>yzrm</th>
+      <th>zarco</th>
       <th>zenix</th>
-      <th>zheng</th>
-      <th>zulfikar</th>
+      <th>zero</th>
+      <th>zf</th>
+      <th>zhi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.036597</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.036597</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.032472</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.223717</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.027777</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.036097</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.04808</td>
-      <td>0.000000</td>
-      <td>0.041872</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.04808</td>
-      <td>0.000000</td>
+      <td>0.086085</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.117086</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <th>...</th>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.058447</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>75</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.033573</td>
-      <td>0.000000</td>
-      <td>0.209293</td>
-      <td>0.201435</td>
-      <td>0.033573</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
+      <td>0.122434</td>
       <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.100718</td>
-      <td>0.029237</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.033573</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>76</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.040518</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>77</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.210224</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>78</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
       <td>0.000000</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.036187</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
     <tr>
-      <th>10</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.042651</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.048975</td>
-      <td>0.042651</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <th>79</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.033354</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.127954</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.086690</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.277896</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.037402</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>...</td>
-      <td>0.074804</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.00000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.039771</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
     </tr>
   </tbody>
 </table>
-<p>16 rows × 1275 columns</p>
+<p>80 rows × 3837 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-2cba8f02-0184-479a-93a8-285a15a8d1e9')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-cfb1748b-c4c8-4fd5-a1e4-17f4dbce1f78')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1528,12 +1337,12 @@ Jumlah data uji: 4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-2cba8f02-0184-479a-93a8-285a15a8d1e9 button.colab-df-convert');
+        document.querySelector('#df-cfb1748b-c4c8-4fd5-a1e4-17f4dbce1f78 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-2cba8f02-0184-479a-93a8-285a15a8d1e9');
+        const element = document.querySelector('#df-cfb1748b-c4c8-4fd5-a1e4-17f4dbce1f78');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1553,8 +1362,8 @@ Jumlah data uji: 4
   </div>
 
 
-<div id="df-149c8f7f-1eff-4945-85f4-86784cfbf26b">
-  <button class="colab-df-quickchart" onclick="quickchart('df-149c8f7f-1eff-4945-85f4-86784cfbf26b')"
+<div id="df-d7f49ed7-f9ff-4ad9-9bca-43341bc011ac">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d7f49ed7-f9ff-4ad9-9bca-43341bc011ac')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1673,14 +1482,14 @@ Jumlah data uji: 4
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-149c8f7f-1eff-4945-85f4-86784cfbf26b button');
+        document.querySelector('#df-d7f49ed7-f9ff-4ad9-9bca-43341bc011ac button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_a76df610-9a66-41bb-8c27-186dd2c322b9">
+  <div id="id_272bd4a9-8a2c-416e-83e2-9d862729ba74">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -1724,7 +1533,7 @@ Jumlah data uji: 4
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_a76df610-9a66-41bb-8c27-186dd2c322b9 button.colab-df-generate');
+        document.querySelector('#id_272bd4a9-8a2c-416e-83e2-9d862729ba74 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1751,7 +1560,7 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-2e18dde6-9f3d-4ca6-a3b1-19fa361bd375" class="colab-df-container">
+  <div id="df-55a9bb12-aea2-4d38-ac07-8725808b390e" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1770,27 +1579,27 @@ Jumlah data uji: 4
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>abadi</th>
+      <th>abdul</th>
+      <th>abs</th>
       <th>absen</th>
-      <th>abubakar</th>
+      <th>absennya</th>
+      <th>ac</th>
       <th>acara</th>
-      <th>aceh</th>
-      <th>acehsumut</th>
-      <th>acehsumutini</th>
-      <th>adakah</th>
-      <th>additional</th>
-      <th>adik</th>
-      <th>advance</th>
+      <th>accident</th>
+      <th>accu</th>
+      <th>acosta</th>
       <th>...</th>
-      <th>wuling</th>
-      <th>xin</th>
-      <th>xxi</th>
-      <th>ya</th>
-      <th>yamaha</th>
-      <th>yuhsuanpada</th>
-      <th>yuk</th>
+      <th>yra</th>
+      <th>yu</th>
+      <th>yuan</th>
+      <th>yuhsun</th>
+      <th>yzrm</th>
+      <th>zarco</th>
       <th>zenix</th>
-      <th>zheng</th>
-      <th>zulfikar</th>
+      <th>zero</th>
+      <th>zf</th>
+      <th>zhi</th>
     </tr>
   </thead>
   <tbody>
@@ -1915,7 +1724,31 @@ Jumlah data uji: 4
       <td>0</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>75</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1939,7 +1772,7 @@ Jumlah data uji: 4
       <td>0</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>76</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1963,7 +1796,7 @@ Jumlah data uji: 4
       <td>0</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>77</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -1987,7 +1820,7 @@ Jumlah data uji: 4
       <td>0</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>78</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2011,151 +1844,7 @@ Jumlah data uji: 4
       <td>0</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>...</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
+      <th>79</th>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -2180,12 +1869,12 @@ Jumlah data uji: 4
     </tr>
   </tbody>
 </table>
-<p>16 rows × 1275 columns</p>
+<p>80 rows × 3837 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-2e18dde6-9f3d-4ca6-a3b1-19fa361bd375')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-55a9bb12-aea2-4d38-ac07-8725808b390e')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2237,12 +1926,12 @@ Jumlah data uji: 4
 
     <script>
       const buttonEl =
-        document.querySelector('#df-2e18dde6-9f3d-4ca6-a3b1-19fa361bd375 button.colab-df-convert');
+        document.querySelector('#df-55a9bb12-aea2-4d38-ac07-8725808b390e button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-2e18dde6-9f3d-4ca6-a3b1-19fa361bd375');
+        const element = document.querySelector('#df-55a9bb12-aea2-4d38-ac07-8725808b390e');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2262,8 +1951,8 @@ Jumlah data uji: 4
   </div>
 
 
-<div id="df-74ce7fa5-679f-4c52-b340-94a03a994bf2">
-  <button class="colab-df-quickchart" onclick="quickchart('df-74ce7fa5-679f-4c52-b340-94a03a994bf2')"
+<div id="df-4e8b79ee-4284-421d-b3ed-6b44322719db">
+  <button class="colab-df-quickchart" onclick="quickchart('df-4e8b79ee-4284-421d-b3ed-6b44322719db')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2382,14 +2071,14 @@ Jumlah data uji: 4
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-74ce7fa5-679f-4c52-b340-94a03a994bf2 button');
+        document.querySelector('#df-4e8b79ee-4284-421d-b3ed-6b44322719db button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_5c621f75-6cd7-43fa-a934-672506b60888">
+  <div id="id_57c795b5-507f-4792-8be4-cf8f0b681d64">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -2433,7 +2122,7 @@ Jumlah data uji: 4
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_5c621f75-6cd7-43fa-a934-672506b60888 button.colab-df-generate');
+        document.querySelector('#id_57c795b5-507f-4792-8be4-cf8f0b681d64 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -2481,20 +2170,20 @@ Jumlah data uji: 4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>             Node  Degree Centrality
-0           absen                0.0
-847     pekerjaan                0.0
-854    pembakaran                0.0
-853   pemandangan                0.0
-852        pemain                0.0
-...           ...                ...
-424      jauhjauh                0.0
-423         jauhi                0.0
-422         jatim                0.0
-421        jateng                0.0
-1274     zulfikar                0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              Node  Degree Centrality
+2431           not           0.000521
+586        content           0.000521
+1075         found           0.000521
+2556     pekerjaan           0.000000
+2561    pelanpelan           0.000000
+...            ...                ...
+1284          imos           0.000000
+1285  implementasi           0.000000
+1286         impor           0.000000
+1287          inch           0.000000
+3836           zhi           0.000000
 
-[1275 rows x 2 columns]
+[3837 rows x 2 columns]
 </pre></div>
 </div>
 </div>
@@ -2513,48 +2202,37 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame setelah menghapus fitur di bawah top 10:
-    absen  pekerjaan  pembakaran  pemandangan  pemain  pelumas  peluang  \
-0       0          0           0            0       0        0        0   
-1       0          0           0            0       0        0        0   
-2       0          0           0            0       0        0        0   
-3       0          0           0            0       0        0        0   
-4       0          0           0            0       0        0        0   
-5       0          0           0            0       0        0        0   
-6       0          0           0            0       0        0        0   
-7       0          0           0            0       0        0        0   
-8       0          0           0            0       0        0        0   
-9       0          0           0            0       0        0        0   
-10      0          0           0            0       0        0        0   
-11      0          0           0            0       0        0        0   
-12      0          0           0            0       0        0        0   
-13      0          0           0            0       0        0        0   
-14      0          0           0            0       0        0        0   
-15      0          0           0            0       0        0        0   
+    not  content  found  pekerjaan  pelanpelan  pelanggan  pelaku  pelaksana  \
+0     0        0      0          0           0          0       0          0   
+1     0        0      0          0           0          0       0          0   
+2     0        0      0          0           0          0       0          0   
+3     0        0      0          0           0          0       0          0   
+4     0        0      0          0           0          0       0          0   
+..  ...      ...    ...        ...         ...        ...     ...        ...   
+75    0        0      0          0           0          0       0          0   
+76    0        0      0          0           0          0       0          0   
+77    0        0      0          0           0          0       0          0   
+78    0        0      0          0           0          0       0          0   
+79    0        0      0          0           0          0       0          0   
 
-    pelestarian  pelaksanaan  pekan  
-0             0            0      0  
-1             0            0      0  
-2             0            0      0  
-3             0            0      0  
-4             0            0      0  
-5             0            0      0  
-6             0            0      0  
-7             0            0      0  
-8             0            0      0  
-9             0            0      0  
-10            0            0      0  
-11            0            0      0  
-12            0            0      0  
-13            0            0      0  
-14            0            0      0  
-15            0            0      0  
+    pelajar  pekerja  
+0         0        0  
+1         0        0  
+2         0        0  
+3         0        0  
+4         0        0  
+..      ...      ...  
+75        0        0  
+76        0        0  
+77        0        0  
+78        0        0  
+79        0        0  
+
+[80 rows x 10 columns]
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="graf">
-<h2><strong>Graf</strong><a class="headerlink" href="#graf" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -2593,7 +2271,7 @@ Jumlah data uji: 4
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ee44e640ef07159501044825abf5e2f4e58e8360029ca17939c77ccbc2fe415d.png" src="_images/ee44e640ef07159501044825abf5e2f4e58e8360029ca17939c77ccbc2fe415d.png" />
+<img alt="_images/f4e5ccd9197975a24ab0c798e3f9d09a07a3114d0238e49aad2cf1de36c6ee31.png" src="_images/f4e5ccd9197975a24ab0c798e3f9d09a07a3114d0238e49aad2cf1de36c6ee31.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2618,29 +2296,17 @@ Jumlah data uji: 4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Node  Degree Centrality  Closeness Centrality  \
-0        absen                0.0                   0.0   
-1    pekerjaan                0.0                   0.0   
-2   pembakaran                0.0                   0.0   
-3  pemandangan                0.0                   0.0   
-4       pemain                0.0                   0.0   
-5      pelumas                0.0                   0.0   
-6      peluang                0.0                   0.0   
-7  pelestarian                0.0                   0.0   
-8  pelaksanaan                0.0                   0.0   
-9        pekan                0.0                   0.0   
-
-   Betweenness Centrality  
-0                     0.0  
-1                     0.0  
-2                     0.0  
-3                     0.0  
-4                     0.0  
-5                     0.0  
-6                     0.0  
-7                     0.0  
-8                     0.0  
-9                     0.0  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Node  Degree Centrality  Closeness Centrality  Betweenness Centrality
+0         not           0.000521              0.222222                     0.0
+1     content           0.000521              0.222222                     0.0
+2       found           0.000521              0.222222                     0.0
+3   pekerjaan           0.000000              0.000000                     0.0
+4  pelanpelan           0.000000              0.000000                     0.0
+5   pelanggan           0.000000              0.000000                     0.0
+6      pelaku           0.000000              0.000000                     0.0
+7   pelaksana           0.000000              0.000000                     0.0
+8     pelajar           0.000000              0.000000                     0.0
+9     pekerja           0.000000              0.000000                     0.0
 </pre></div>
 </div>
 </div>
@@ -2652,30 +2318,23 @@ Jumlah data uji: 4
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Teks berita yang telah dirapikan</span>
-<span class="n">news_text_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; Ini adalah PON pertama cabor Soft Tenis digelar Saya Ingin membuktikan dan bagian dari sejarah untuk membawa harum</span>
-<span class="s2">daerah saya yaitu Sulawesi Utara dengan semaksimal mungkin meraih medali emas di Aceh ini papar petenis asal Sulawesi Utara Anadeleyda</span>
-<span class="s2">dalam rilis kepada detikSportAna yang meraih medali perunggu SEA Games  lolos ke babak kedua usai menempati posisi kedua di poolnya</span>
-<span class="s2">Di babak utama nanti saya akan mengeluarkan seluruh kemampuan agar bisa terus hingga ke babak final paparnyaSementara itu Damrah</span>
-<span class="s2">selaku technical delegate Cabor Soft Tenis PON  mengapresiasi penampilan para atlet yang bekerja keras untuk mengharumkan daerahnya</span>
-<span class="s2">masing masing. Salut kepada para atlet Soft Tennis PON tahun ini Pastinya pemain yang masuk ke babak kedua adalah pemain terbaik dari</span>
-<span class="s2">masing provinsi Mudahan akan muncul pemain terbaik dari yang baik papar DamrahBerikut Daftar Pemain yang lolos ke babak kedua atau</span>
-<span class="s2">besar Soft TennisPutra Bagus Angga DKI Jakarta Gusti Jaya Kusuma Jawa Timur Maulidan Aceh M Fajar Amarta DIY Marie Muhammad</span>
-<span class="s2">Kalimantan Timur Risky Syahputra Sumatera Barat Pande Surya NTB Reza Fahlefi Jawa TengahPutri Anadeleyda K Sulut Alifa Siti Marwah</span>
-<span class="s2">Aceh Allif Nafiiah Jawa Tengah Ha iyah Rahmah DIY Fikratus Sumbar Salsabila Kaltim Oxy Grafitasi DKI Jakarta Herafita Taher Jawa Timur &quot;&quot;&quot;</span>
+<span class="n">news_text_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; Putri Kusuma Wardani hadapi wakil Taiwan, Huang Yu-Hsun di Korea Masters 2024. Putri KW menang dua gim langsung dan</span>
+<span class="s2">kunci tiket ke babak 16 besar! Korea Masters 2024 berlangsung di Iksan City, Korea Selatan, Rabu (6/1). Hari ini merupakan perebutan</span>
+<span class="s2">tiket ke babak 16 besar. Di nomor tunggal putri, Putri Kusuma Wardani ditantang Huang Yu-Hsun. Putri KW menangi gim pertama 21-4 dan</span>
+<span class="s2">menangi gim kedua .. Gim pertama dimulai, Putri KW langsung pegang kendali. Dirinya nyaman memimpin 7-1, lalu unggul di interval 11-2.</span>
+<span class="s2">Putri KW terus tancap gas. Tak butuh waktu lama, dirinya sudahi gim pertama dengan kemenangan telak 21-4. Gim kedua, Huang Yu-Hsun</span>
+<span class="s2">coba bangkit dengan unggul duluan 3-1. Putri KW langsung menyalipnya, 4-3 dan unggul di interval 11-4. Putri KW terus memimpin 15-5.</span>
+<span class="s2">Selanjutnya, Putri KW mampu kunci gim kedua dengan kemenangan 21-9. &quot;&quot;&quot;</span>
 
-<span class="n">news_text_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; Menteri Koordinator Bidang Perekonomian Airlangga Hartarto Foto: Kemenko PerekonomianMenurutnya, pemerintah seharusnya</span>
-<span class="s2">tak hanya fokus memberikan stimulus mobil listrik. Sebab, berdasarkan demand structure, kendaraan tersebut hanya menjadi mobil tambahan</span>
-<span class="s2">atau additional car. Sementara untuk meningkatkan pasar butuh menyasar segmen first buyer.&quot;&quot;First buyer rata-rata dipakai untuk main car.</span>
-<span class="s2">Sebagai mobil utama berarti masyarakat harus percaya dulu soal infrastruktur pada saat mereka menggunakan kendaraan itu, harus aman dan</span>
-<span class="s2">tenang. Paling pas saat ini adalah mobil hybrid Karena mobil hybrid itu tidak terbatas atau terpaku dengan masalah pengecasan dan masih</span>
-<span class="s2">isi bensin. Kenapa hybrid dulu, seperti teori ayam dan telur, kita tidak mau menunggu infrastruktur dulu atau yang mana dulu. Kita</span>
-<span class="s2">inginnya jalan barengan,&quot;&quot; tambahnya.Toyota soal insentif mobil hybrid Foto: IstimewaResha juga sedikit menyinggung pasar mobil hybrid</span>
-<span class="s2">di Thailand. Pemerintah setempat tetap memberikan insentif meski penjualannya sudah cukup baik. Bahkan, insentifnya tergantung emisi</span>
-<span class="s2">yang bisa dipangkas.Sebelumnya, di lokasi yang sama, Airlangga bilang penjualan mobil hybrid di Indonesia sudah tinggi tanpa insentif.</span>
-<span class="s2">Sehingga, saat ini skema pembeliannya masih sama atau tanpa perubahan.&quot;&quot;Selama ini tanpa insentif juga kan penjualannya sudah cukup baik,</span>
-<span class="s2">demikian respons singkat Airlangga saat ditanya kemungkinan adanya insentif mobil hybrid di masa depan.Sebagai catatan, selama semester</span>
-<span class="s2">satu 2024, penjualan mobil hybrid di Indonesia mencapai 25.791 unit. Nominal tersebut naik 49 persen dibandingkan periode yang sama tahun</span>
-<span class="s2">lalu. &quot;&quot;&quot;</span>
+<span class="n">news_text_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; Suzuki Motor Corporation resmi meluncurkan mobil listrik bertenaga baterai (BEV) pertamanya. Mobil listrik hasil</span>
+<span class="s2">produksi massal dari eVX itu dijual dengan nama e Vitara. Suzuki meluncurkan e Vitara pertama kali di Eropa, tepatnya di Milan, Italia.</span>
+<span class="s2">Produksi akan dimulai di Suzuki Motor Gujarat di India pada 2025. Mobil ini akan mulai dijual di berbagai negara, termasuk Eropa,</span>
+<span class="s2">India, dan Jepang, sekitar pertengahan tahun 2025. &quot;&quot;e VITARA adalah BEV pertama kami, yang dikembangkan melalui uji coba berulang</span>
+<span class="s2">kali untuk menciptakan BEV yang mudah digunakan bagi pelanggan kami. Untuk mewujudkan masyarakat yang netral karbon, kami akan menyediakan</span>
+<span class="s2">berbagai pilihan, termasuk BEV, kendaraan hybrid, dan kendaraan CNG, yang disesuaikan dengan wilayah tertentu,&quot;&quot; kata Toshihiro Suzuki,</span>
+<span class="s2">Representative Director and President Suzuki Motor Corporation dikutip dari siaran persnya &quot;&quot;Peluncuran e VITARA merupakan tonggak penting</span>
+<span class="s2">dalam mencapai netralitas karbon. Setelah peluncuran e VITARA, kami akan terus memperluas jajaran BEV kami dan mengusulkan solusi mobilitas</span>
+<span class="s2">yang disesuaikan dengan kebutuhan negara dan wilayah tertentu&quot;&quot;. &quot;&quot;&quot;</span>
 
 <span class="c1"># Mengubah teks menjadi DataFrame</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">news_text_1</span><span class="p">,</span> <span class="n">news_text_2</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
@@ -2687,8 +2346,8 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                text
-0   Ini adalah PON pertama cabor Soft Tenis digel...
-1   Menteri Koordinator Bidang Perekonomian Airla...
+0   Putri Kusuma Wardani hadapi wakil Taiwan, Hua...
+1   Suzuki Motor Corporation resmi meluncurkan mo...
 </pre></div>
 </div>
 </div>
@@ -2729,17 +2388,17 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10 Fitur Terbaik:
-       Feature     Score
-152     mobil  0.447404
-84     hybrid  0.357923
-268      yang  0.317256
-56         di  0.273120
-21      babak  0.266930
-90   insentif  0.223702
-106     kedua  0.213544
-105        ke  0.213544
-98       jawa  0.213544
-172    pemain  0.213544
+     Feature     Score
+119   putri  0.501649
+28       di  0.375537
+43      gim  0.351154
+72       kw  0.351154
+152    yang  0.276980
+60     kami  0.276980
+18      bev  0.276980
+130  suzuki  0.276980
+147  vitara  0.276980
+25      dan  0.264737
 </pre></div>
 </div>
 </div>
@@ -2771,29 +2430,29 @@ Jumlah data uji: 4
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cosine Similarity Matrix:
-              mobil    hybrid      yang        di     babak  insentif  \
-mobil     1.000000  1.000000  0.556870  0.813095  0.000000  1.000000   
-hybrid    1.000000  1.000000  0.556870  0.813095  0.000000  1.000000   
-yang      0.556870  0.556870  1.000000  0.936306  0.830600  0.556870   
-di        0.813095  0.813095  0.936306  1.000000  0.582131  0.813095   
-babak     0.000000  0.000000  0.830600  0.582131  1.000000  0.000000   
-insentif  1.000000  1.000000  0.556870  0.813095  0.000000  1.000000   
-kedua     0.000000  0.000000  0.830600  0.582131  1.000000  0.000000   
-ke        0.000000  0.000000  0.830600  0.582131  1.000000  0.000000   
-jawa      0.000000  0.000000  0.830600  0.582131  1.000000  0.000000   
-pemain    0.000000  0.000000  0.830600  0.582131  1.000000  0.000000   
+            putri        di       gim        kw      yang      kami       bev  \
+putri   1.000000  0.671242  1.000000  1.000000  0.000000  0.000000  0.000000   
+di      0.671242  1.000000  0.671242  0.671242  0.741238  0.741238  0.741238   
+gim     1.000000  0.671242  1.000000  1.000000  0.000000  0.000000  0.000000   
+kw      1.000000  0.671242  1.000000  1.000000  0.000000  0.000000  0.000000   
+yang    0.000000  0.741238  0.000000  0.000000  1.000000  1.000000  1.000000   
+kami    0.000000  0.741238  0.000000  0.000000  1.000000  1.000000  1.000000   
+bev     0.000000  0.741238  0.000000  0.000000  1.000000  1.000000  1.000000   
+suzuki  0.000000  0.741238  0.000000  0.000000  1.000000  1.000000  1.000000   
+vitara  0.000000  0.741238  0.000000  0.000000  1.000000  1.000000  1.000000   
+dan     0.561844  0.990318  0.561844  0.561844  0.827243  0.827243  0.827243   
 
-             kedua        ke      jawa    pemain  
-mobil     0.000000  0.000000  0.000000  0.000000  
-hybrid    0.000000  0.000000  0.000000  0.000000  
-yang      0.830600  0.830600  0.830600  0.830600  
-di        0.582131  0.582131  0.582131  0.582131  
-babak     1.000000  1.000000  1.000000  1.000000  
-insentif  0.000000  0.000000  0.000000  0.000000  
-kedua     1.000000  1.000000  1.000000  1.000000  
-ke        1.000000  1.000000  1.000000  1.000000  
-jawa      1.000000  1.000000  1.000000  1.000000  
-pemain    1.000000  1.000000  1.000000  1.000000  
+          suzuki    vitara       dan  
+putri   0.000000  0.000000  0.561844  
+di      0.741238  0.741238  0.990318  
+gim     0.000000  0.000000  0.561844  
+kw      0.000000  0.000000  0.561844  
+yang    1.000000  1.000000  0.827243  
+kami    1.000000  1.000000  0.827243  
+bev     1.000000  1.000000  0.827243  
+suzuki  1.000000  1.000000  0.827243  
+vitara  1.000000  1.000000  0.827243  
+dan     0.827243  0.827243  1.000000  
 </pre></div>
 </div>
 </div>
@@ -2810,17 +2469,17 @@ pemain    1.000000  1.000000  1.000000  1.000000
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Classification Matrix:
-           mobil  hybrid  yang  di  babak  insentif  kedua  ke  jawa  pemain
-mobil         1       1     1   1      0         1      0   0     0       0
-hybrid        1       1     1   1      0         1      0   0     0       0
-yang          1       1     1   1      1         1      1   1     1       1
-di            1       1     1   1      1         1      1   1     1       1
-babak         0       0     1   1      1         0      1   1     1       1
-insentif      1       1     1   1      0         1      0   0     0       0
-kedua         0       0     1   1      1         0      1   1     1       1
-ke            0       0     1   1      1         0      1   1     1       1
-jawa          0       0     1   1      1         0      1   1     1       1
-pemain        0       0     1   1      1         0      1   1     1       1
+         putri  di  gim  kw  yang  kami  bev  suzuki  vitara  dan
+putri       1   1    1   1     0     0    0       0       0    1
+di          1   1    1   1     1     1    1       1       1    1
+gim         1   1    1   1     0     0    0       0       0    1
+kw          1   1    1   1     0     0    0       0       0    1
+yang        0   1    0   0     1     1    1       1       1    1
+kami        0   1    0   0     1     1    1       1       1    1
+bev         0   1    0   0     1     1    1       1       1    1
+suzuki      0   1    0   0     1     1    1       1       1    1
+vitara      0   1    0   0     1     1    1       1       1    1
+dan         1   1    1   1     1     1    1       1       1    1
 </pre></div>
 </div>
 </div>
@@ -2846,13 +2505,13 @@ pemain        0       0     1   1      1         0      1   1     1       1
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree:
- {&#39;mobil&#39;: 6, &#39;hybrid&#39;: 6, &#39;yang&#39;: 11, &#39;di&#39;: 11, &#39;babak&#39;: 8, &#39;insentif&#39;: 6, &#39;kedua&#39;: 8, &#39;ke&#39;: 8, &#39;jawa&#39;: 8, &#39;pemain&#39;: 8}
+ {&#39;putri&#39;: 6, &#39;di&#39;: 11, &#39;gim&#39;: 6, &#39;kw&#39;: 6, &#39;yang&#39;: 8, &#39;kami&#39;: 8, &#39;bev&#39;: 8, &#39;suzuki&#39;: 8, &#39;vitara&#39;: 8, &#39;dan&#39;: 11}
 
 Closeness Centrality:
- {&#39;mobil&#39;: 0.6428571428571429, &#39;hybrid&#39;: 0.6428571428571429, &#39;yang&#39;: 1.0, &#39;di&#39;: 1.0, &#39;babak&#39;: 0.75, &#39;insentif&#39;: 0.6428571428571429, &#39;kedua&#39;: 0.75, &#39;ke&#39;: 0.75, &#39;jawa&#39;: 0.75, &#39;pemain&#39;: 0.75}
+ {&#39;putri&#39;: 0.6428571428571429, &#39;di&#39;: 1.0, &#39;gim&#39;: 0.6428571428571429, &#39;kw&#39;: 0.6428571428571429, &#39;yang&#39;: 0.75, &#39;kami&#39;: 0.75, &#39;bev&#39;: 0.75, &#39;suzuki&#39;: 0.75, &#39;vitara&#39;: 0.75, &#39;dan&#39;: 1.0}
 
 Betweenness Centrality:
- {&#39;mobil&#39;: 0.0, &#39;hybrid&#39;: 0.0, &#39;yang&#39;: 0.20833333333333331, &#39;di&#39;: 0.20833333333333331, &#39;babak&#39;: 0.0, &#39;insentif&#39;: 0.0, &#39;kedua&#39;: 0.0, &#39;ke&#39;: 0.0, &#39;jawa&#39;: 0.0, &#39;pemain&#39;: 0.0}
+ {&#39;putri&#39;: 0.0, &#39;di&#39;: 0.20833333333333331, &#39;gim&#39;: 0.0, &#39;kw&#39;: 0.0, &#39;yang&#39;: 0.0, &#39;kami&#39;: 0.0, &#39;bev&#39;: 0.0, &#39;suzuki&#39;: 0.0, &#39;vitara&#39;: 0.0, &#39;dan&#39;: 0.20833333333333331}
 </pre></div>
 </div>
 </div>
@@ -2881,7 +2540,7 @@ Betweenness Centrality:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3beacc9f9e698af0c48afa66f5d92009011e25d234b73fc6464a0815db207c58.png" src="_images/3beacc9f9e698af0c48afa66f5d92009011e25d234b73fc6464a0815db207c58.png" />
+<img alt="_images/811d2f3f118a225a455aa09579dd09b6c26f70919fb1e4631e772e16bfa5580e.png" src="_images/811d2f3f118a225a455aa09579dd09b6c26f70919fb1e4631e772e16bfa5580e.png" />
 </div>
 </div>
 </section>
@@ -2918,13 +2577,22 @@ Betweenness Centrality:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Tugas3_Prediksi_Data.html"
+       href="word_embeding.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Tugas 3: Prediksi Data</strong></p>
+        <p class="prev-next-title"><strong>Word Embeding</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="Tugas5_Keyword_Extraction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Tugas 5: Keyword Extraction</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -2933,7 +2601,8 @@ Betweenness Centrality:
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2945,7 +2614,6 @@ Betweenness Centrality:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder"><strong>Encoder</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data"><strong>Split Data</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting"><strong>TF-IDF Weighting</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graf"><strong>Graf</strong></a></li>
 </ul>
   </nav></div>
 
@@ -2994,8 +2662,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

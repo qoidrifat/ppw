@@ -8,25 +8,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tugas 2: Preprocessing dan TF-IDF &#8212; My sample book</title>
+    <title>Tugas 2 : Pre-processing dan TF-IDF</title>
   
-  
+    <link rel="icon" type="image/webp" href="_static/icon.webp">
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -36,10 +38,11 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -60,11 +63,37 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas2_Pre-processing_dan_TF-IDF';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tugas 3: Prediksi Data" href="Tugas3_Prediksi_Data.html" />
-    <link rel="prev" title="Tugas1: Crawling Data" href="Tugas1_Crawling_Data.html" />
+    <link rel="next" title="Tugas 3: Logistic Regression" href="Tugas3_Logistic_Regression.html" />
+    <link rel="prev" title="Crawling Data Olahraga dan Otomotif" href="Tugas1_Crawling_Data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
+  <style>
+    
+    .logo-circle {
+        width: 100px; /* Atur ukuran sesuai kebutuhan */
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .logo-text {
+        text-align: center; /* Mengatur teks agar berada di tengah */
+        margin-top: 10px; /* Jarak antara gambar dan teks */
+    }
+
+    .logo-text h2 {
+        margin: 0; /* Menghilangkan margin default pada h2 */
+        font-size: 1.2em; /* Ukuran font untuk nama */
+    }
+
+    .logo-text p {
+        margin: 0; /* Menghilangkan margin default pada p */
+        font-size: 0.9em; /* Ukuran font untuk jabatan */
+        color: #555; /* Warna teks jabatan */
+    }
+  </style>
   
   
   <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
@@ -79,19 +108,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -99,7 +117,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -107,8 +124,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -124,7 +141,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -153,40 +171,39 @@
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  <img src="_static/logo.png" class="logo__image only-light logo-circle" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`);</script>
+    <div class="logo-text">
+        <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+        <p>Beginner Web Developer | Data Analytics</p>
+    </div>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
+      <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
+                    <strong>Welcome to My Repository</strong>
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Content with notebooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas1: Crawling Data</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 2: Preprocessing dan TF-IDF</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas3_Prediksi_Data.html"><strong>Tugas 3: Prediksi Data</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graf</strong></a></li>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Tugas1_Crawling_Data.html"><strong>Tugas 1: Crawling Data Olahraga dan Otomotif</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Tugas 2 : Pre-processing dan TF-IDF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas3_Logistic_Regression.html"><strong>Tugas 3: Logistic Regression</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="word_embeding.html"><strong>Word Embeding (Skip-gram)</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas4_Encoder_dan_Graf.html"><strong>Tugas 4: Encoder dan Graph</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tugas5_Keyword_Extraction.html"><strong>Tugas 5: Keyword Extraction</strong></a></li>
 </ul>
 
     </div>
@@ -341,24 +358,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -372,7 +381,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tugas 2: Preprocessing dan TF-IDF</h1>
+    <h1>Tugas 2 : Pre-processing dan TFIDF</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,7 +395,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding"><em><strong>Case Folding</strong></em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization"><em><strong>Tokenization</strong></em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal"><em><strong>Stopword Removal</strong></em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf"><em><strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong></em></a></li>
 </ul>
             </nav>
         </div>
@@ -398,8 +407,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="tugas-2-preprocessing-dan-tf-idf">
-<h1><strong>Tugas 2: Preprocessing dan TF-IDF</strong><a class="headerlink" href="#tugas-2-preprocessing-dan-tf-idf" title="Link to this heading">#</a></h1>
+  <section id="tugas-2-pre-processing-dan-tfidf">
+<h1><strong>Tugas 2 : Pre-processing dan TFIDF</strong><a class="headerlink" href="#tugas-2-pre-processing-dan-tfidf" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
@@ -456,7 +465,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-142ffbab-54d8-47bd-93d0-c8bed7756230" class="colab-df-container">
+  <div id="df-49f0c9dd-bea4-49f7-91cf-24d16649b935" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -476,45 +485,45 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
     </tr>
   </tbody>
@@ -523,7 +532,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-142ffbab-54d8-47bd-93d0-c8bed7756230')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-49f0c9dd-bea4-49f7-91cf-24d16649b935')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -575,12 +584,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-142ffbab-54d8-47bd-93d0-c8bed7756230 button.colab-df-convert');
+        document.querySelector('#df-49f0c9dd-bea4-49f7-91cf-24d16649b935 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-142ffbab-54d8-47bd-93d0-c8bed7756230');
+        const element = document.querySelector('#df-49f0c9dd-bea4-49f7-91cf-24d16649b935');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -600,8 +609,8 @@ document.write(`
   </div>
 
 
-<div id="df-2f85470f-650b-42a1-a7df-5f20a5adc0c6">
-  <button class="colab-df-quickchart" onclick="quickchart('df-2f85470f-650b-42a1-a7df-5f20a5adc0c6')"
+<div id="df-93552072-87f4-44d5-95b6-0dd64be8206b">
+  <button class="colab-df-quickchart" onclick="quickchart('df-93552072-87f4-44d5-95b6-0dd64be8206b')"
             title="Suggest charts"
             style="display:none;">
 
@@ -720,7 +729,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-2f85470f-650b-42a1-a7df-5f20a5adc0c6 button');
+        document.querySelector('#df-93552072-87f4-44d5-95b6-0dd64be8206b button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -808,7 +817,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-87e2416b-f0e5-4581-b9c9-11f44581c5fb" class="colab-df-container">
+  <div id="df-1317292a-c9df-422b-bd4a-0c12ac7c5b85" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -828,8 +837,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
     </tr>
@@ -837,43 +846,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
-      <td>Banda Aceh  Cabor Soft Tennis PON  dimulai Per...</td>
+      <td>Jakarta  Atlet bulutangkis Indonesia Apriyani ...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
-      <td>Jakarta  Cabang olahraga anggar pada Pekan Ola...</td>
+      <td>Jakarta  Putri Kusuma Wardani hadapi wakil Tai...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
-      <td>Tangerang  National Paralympic Committee NPC I...</td>
+      <td>Jakarta  Fajar AlfianMuhammad Rian Ardianto be...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...</td>
+      <td>Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Gregoria Mariska Tunjung melaju ke ...</td>
+      <td>Jakarta  Turnamen Korea Masters  memasuki hari...</td>
     </tr>
   </tbody>
 </table>
@@ -881,7 +890,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-87e2416b-f0e5-4581-b9c9-11f44581c5fb')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-1317292a-c9df-422b-bd4a-0c12ac7c5b85')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -933,12 +942,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-87e2416b-f0e5-4581-b9c9-11f44581c5fb button.colab-df-convert');
+        document.querySelector('#df-1317292a-c9df-422b-bd4a-0c12ac7c5b85 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-87e2416b-f0e5-4581-b9c9-11f44581c5fb');
+        const element = document.querySelector('#df-1317292a-c9df-422b-bd4a-0c12ac7c5b85');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -958,8 +967,8 @@ document.write(`
   </div>
 
 
-<div id="df-1f136125-8644-42bf-a11f-12fd6050ceef">
-  <button class="colab-df-quickchart" onclick="quickchart('df-1f136125-8644-42bf-a11f-12fd6050ceef')"
+<div id="df-f0fb1e3c-c642-4d1e-ac8a-a6bbc713356b">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f0fb1e3c-c642-4d1e-ac8a-a6bbc713356b')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1078,7 +1087,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-1f136125-8644-42bf-a11f-12fd6050ceef button');
+        document.querySelector('#df-f0fb1e3c-c642-4d1e-ac8a-a6bbc713356b button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1139,7 +1148,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-d1b86908-ac08-4e43-804f-2598f2044db5" class="colab-df-container">
+  <div id="df-436c7277-3761-4698-94a5-17d1ba24f5ed" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1159,8 +1168,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1169,48 +1178,48 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
-      <td>Banda Aceh  Cabor Soft Tennis PON  dimulai Per...</td>
-      <td>banda aceh  cabor soft tennis pon  dimulai per...</td>
+      <td>Jakarta  Atlet bulutangkis Indonesia Apriyani ...</td>
+      <td>jakarta  atlet bulutangkis indonesia apriyani ...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
-      <td>Jakarta  Cabang olahraga anggar pada Pekan Ola...</td>
-      <td>jakarta  cabang olahraga anggar pada pekan ola...</td>
+      <td>Jakarta  Putri Kusuma Wardani hadapi wakil Tai...</td>
+      <td>jakarta  putri kusuma wardani hadapi wakil tai...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
-      <td>Tangerang  National Paralympic Committee NPC I...</td>
-      <td>tangerang  national paralympic committee npc i...</td>
+      <td>Jakarta  Fajar AlfianMuhammad Rian Ardianto be...</td>
+      <td>jakarta  fajar alfianmuhammad rian ardianto be...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...</td>
-      <td>hong kong  chico aura dwi wardoyo mesti langsu...</td>
+      <td>Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...</td>
+      <td>jakarta  komang ayu cahya dewi hadapi liang ti...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Gregoria Mariska Tunjung melaju ke ...</td>
-      <td>hong kong  gregoria mariska tunjung melaju ke ...</td>
+      <td>Jakarta  Turnamen Korea Masters  memasuki hari...</td>
+      <td>jakarta  turnamen korea masters  memasuki hari...</td>
     </tr>
   </tbody>
 </table>
@@ -1218,7 +1227,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-d1b86908-ac08-4e43-804f-2598f2044db5')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-436c7277-3761-4698-94a5-17d1ba24f5ed')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1270,12 +1279,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-d1b86908-ac08-4e43-804f-2598f2044db5 button.colab-df-convert');
+        document.querySelector('#df-436c7277-3761-4698-94a5-17d1ba24f5ed button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-d1b86908-ac08-4e43-804f-2598f2044db5');
+        const element = document.querySelector('#df-436c7277-3761-4698-94a5-17d1ba24f5ed');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1295,8 +1304,8 @@ document.write(`
   </div>
 
 
-<div id="df-65877c47-58f6-4cdf-bb7a-43ac0f3fd201">
-  <button class="colab-df-quickchart" onclick="quickchart('df-65877c47-58f6-4cdf-bb7a-43ac0f3fd201')"
+<div id="df-f4c0c76b-bce7-47c9-bf91-29cdcb584672">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f4c0c76b-bce7-47c9-bf91-29cdcb584672')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1415,7 +1424,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-65877c47-58f6-4cdf-bb7a-43ac0f3fd201 button');
+        document.querySelector('#df-f4c0c76b-bce7-47c9-bf91-29cdcb584672 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1468,7 +1477,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-5b67f925-a39c-4ee8-bea1-d9e0d81e4ff5" class="colab-df-container">
+  <div id="df-0e2a8ffa-0eba-4735-aa07-4c01c0aa9823" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1488,8 +1497,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1499,53 +1508,53 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
-      <td>Banda Aceh  Cabor Soft Tennis PON  dimulai Per...</td>
-      <td>banda aceh  cabor soft tennis pon  dimulai per...</td>
-      <td>[banda, aceh, cabor, soft, tennis, pon, dimula...</td>
+      <td>Jakarta  Atlet bulutangkis Indonesia Apriyani ...</td>
+      <td>jakarta  atlet bulutangkis indonesia apriyani ...</td>
+      <td>[jakarta, atlet, bulutangkis, indonesia, apriy...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
-      <td>Jakarta  Cabang olahraga anggar pada Pekan Ola...</td>
-      <td>jakarta  cabang olahraga anggar pada pekan ola...</td>
-      <td>[jakarta, cabang, olahraga, anggar, pada, peka...</td>
+      <td>Jakarta  Putri Kusuma Wardani hadapi wakil Tai...</td>
+      <td>jakarta  putri kusuma wardani hadapi wakil tai...</td>
+      <td>[jakarta, putri, kusuma, wardani, hadapi, waki...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
-      <td>Tangerang  National Paralympic Committee NPC I...</td>
-      <td>tangerang  national paralympic committee npc i...</td>
-      <td>[tangerang, national, paralympic, committee, n...</td>
+      <td>Jakarta  Fajar AlfianMuhammad Rian Ardianto be...</td>
+      <td>jakarta  fajar alfianmuhammad rian ardianto be...</td>
+      <td>[jakarta, fajar, alfianmuhammad, rian, ardiant...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...</td>
-      <td>hong kong  chico aura dwi wardoyo mesti langsu...</td>
-      <td>[hong, kong, chico, aura, dwi, wardoyo, mesti,...</td>
+      <td>Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...</td>
+      <td>jakarta  komang ayu cahya dewi hadapi liang ti...</td>
+      <td>[jakarta, komang, ayu, cahya, dewi, hadapi, li...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Gregoria Mariska Tunjung melaju ke ...</td>
-      <td>hong kong  gregoria mariska tunjung melaju ke ...</td>
-      <td>[hong, kong, gregoria, mariska, tunjung, melaj...</td>
+      <td>Jakarta  Turnamen Korea Masters  memasuki hari...</td>
+      <td>jakarta  turnamen korea masters  memasuki hari...</td>
+      <td>[jakarta, turnamen, korea, masters, memasuki, ...</td>
     </tr>
   </tbody>
 </table>
@@ -1553,7 +1562,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-5b67f925-a39c-4ee8-bea1-d9e0d81e4ff5')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0e2a8ffa-0eba-4735-aa07-4c01c0aa9823')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1605,12 +1614,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-5b67f925-a39c-4ee8-bea1-d9e0d81e4ff5 button.colab-df-convert');
+        document.querySelector('#df-0e2a8ffa-0eba-4735-aa07-4c01c0aa9823 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-5b67f925-a39c-4ee8-bea1-d9e0d81e4ff5');
+        const element = document.querySelector('#df-0e2a8ffa-0eba-4735-aa07-4c01c0aa9823');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1630,8 +1639,8 @@ document.write(`
   </div>
 
 
-<div id="df-6e1f4be6-7dd0-438d-bfce-7e196b41e96f">
-  <button class="colab-df-quickchart" onclick="quickchart('df-6e1f4be6-7dd0-438d-bfce-7e196b41e96f')"
+<div id="df-9aac40e1-07ee-4673-971f-cc20a5efb8db">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9aac40e1-07ee-4673-971f-cc20a5efb8db')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1750,7 +1759,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-6e1f4be6-7dd0-438d-bfce-7e196b41e96f button');
+        document.querySelector('#df-9aac40e1-07ee-4673-971f-cc20a5efb8db button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -1801,7 +1810,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /root/nltk_data...
-[nltk_data]   Unzipping corpora/stopwords.zip.
+[nltk_data]   Package stopwords is already up-to-date!
 </pre></div>
 </div>
 </div>
@@ -1819,7 +1828,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-74e508bb-4117-43b7-9dd7-e4960bdc4611" class="colab-df-container">
+  <div id="df-bf86b5eb-a88e-4cf0-b4d6-2afd530c2ff5" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1839,8 +1848,8 @@ document.write(`
     <tr style="text-align: right;">
       <th></th>
       <th>judul</th>
-      <th>isi</th>
       <th>tanggal</th>
+      <th>isi</th>
       <th>kategori</th>
       <th>cleansing</th>
       <th>case_folding</th>
@@ -1851,58 +1860,58 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>Soft Tenis PON 2024 Dimulai, Keras Berebut Emas</td>
-      <td>Banda Aceh - Cabor Soft Tennis PON 2024 dimula...</td>
-      <td>Rabu, 11 Sep 2024 23:15 WIB</td>
+      <td>Apriyani Rahayu Sudah Berlatih Lagi, Ingin Com...</td>
+      <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+      <td>Jakarta - Atlet bulutangkis Indonesia Apriyani...</td>
       <td>Olahraga</td>
-      <td>Banda Aceh  Cabor Soft Tennis PON  dimulai Per...</td>
-      <td>banda aceh  cabor soft tennis pon  dimulai per...</td>
-      <td>[banda, aceh, cabor, soft, tennis, pon, dimula...</td>
-      <td>banda aceh cabor soft tennis pon persaingan ke...</td>
+      <td>Jakarta  Atlet bulutangkis Indonesia Apriyani ...</td>
+      <td>jakarta  atlet bulutangkis indonesia apriyani ...</td>
+      <td>[jakarta, atlet, bulutangkis, indonesia, apriy...</td>
+      <td>jakarta atlet bulutangkis indonesia apriyani r...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>220 Atlet Anggar Perebutkan Medali PON 2024</td>
-      <td>Jakarta - Cabang olahraga anggar pada Pekan Ol...</td>
-      <td>Rabu, 11 Sep 2024 22:15 WIB</td>
+      <td>Hasil Korea Masters 2024: Putri KW Lanjut ke 1...</td>
+      <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+      <td>Jakarta - Putri Kusuma Wardani hadapi wakil Ta...</td>
       <td>Olahraga</td>
-      <td>Jakarta  Cabang olahraga anggar pada Pekan Ola...</td>
-      <td>jakarta  cabang olahraga anggar pada pekan ola...</td>
-      <td>[jakarta, cabang, olahraga, anggar, pada, peka...</td>
-      <td>jakarta cabang olahraga anggar pekan olahraga ...</td>
+      <td>Jakarta  Putri Kusuma Wardani hadapi wakil Tai...</td>
+      <td>jakarta  putri kusuma wardani hadapi wakil tai...</td>
+      <td>[jakarta, putri, kusuma, wardani, hadapi, waki...</td>
+      <td>jakarta putri kusuma wardani hadapi wakil taiw...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>NPC: Ada Peran Menpora di Balik Sukses Paralim...</td>
-      <td>Tangerang - National Paralympic Committee (NPC...</td>
-      <td>Rabu, 11 Sep 2024 21:15 WIB</td>
+      <td>Fajar/Rian di Japan dan China Masters: Inginny...</td>
+      <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+      <td>Jakarta - Fajar Alfian/Muhammad Rian Ardianto ...</td>
       <td>Olahraga</td>
-      <td>Tangerang  National Paralympic Committee NPC I...</td>
-      <td>tangerang  national paralympic committee npc i...</td>
-      <td>[tangerang, national, paralympic, committee, n...</td>
-      <td>tangerang national paralympic committee npc in...</td>
+      <td>Jakarta  Fajar AlfianMuhammad Rian Ardianto be...</td>
+      <td>jakarta  fajar alfianmuhammad rian ardianto be...</td>
+      <td>[jakarta, fajar, alfianmuhammad, rian, ardiant...</td>
+      <td>jakarta fajar alfianmuhammad rian ardianto ber...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Hasil Hong Kong Open 2024: Chico Terdepak di B...</td>
-      <td>Hong Kong - Chico Aura Dwi Wardoyo mesti langs...</td>
-      <td>Rabu, 11 Sep 2024 20:11 WIB</td>
+      <td>Hasil Korea Masters 2024: Komang Ayu Tersingkir</td>
+      <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+      <td>Jakarta - Komang Ayu Cahya Dewi hadapi Liang T...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Chico Aura Dwi Wardoyo mesti langsu...</td>
-      <td>hong kong  chico aura dwi wardoyo mesti langsu...</td>
-      <td>[hong, kong, chico, aura, dwi, wardoyo, mesti,...</td>
-      <td>hong kong chico aura dwi wardoyo mesti langsun...</td>
+      <td>Jakarta  Komang Ayu Cahya Dewi hadapi Liang Ti...</td>
+      <td>jakarta  komang ayu cahya dewi hadapi liang ti...</td>
+      <td>[jakarta, komang, ayu, cahya, dewi, hadapi, li...</td>
+      <td>jakarta komang ayu cahya dewi hadapi liang tin...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Hong Kong Open 2024: Gregoria Melaju ke Babak ...</td>
-      <td>Hong Kong - Gregoria Mariska Tunjung melaju ke...</td>
-      <td>Rabu, 11 Sep 2024 19:15 WIB</td>
+      <td>Korea Masters 2024 Hari Kedua: Tiga Wakil RI B...</td>
+      <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+      <td>Jakarta - Turnamen Korea Masters 2024 memasuki...</td>
       <td>Olahraga</td>
-      <td>Hong Kong  Gregoria Mariska Tunjung melaju ke ...</td>
-      <td>hong kong  gregoria mariska tunjung melaju ke ...</td>
-      <td>[hong, kong, gregoria, mariska, tunjung, melaj...</td>
-      <td>hong kong gregoria mariska tunjung melaju baba...</td>
+      <td>Jakarta  Turnamen Korea Masters  memasuki hari...</td>
+      <td>jakarta  turnamen korea masters  memasuki hari...</td>
+      <td>[jakarta, turnamen, korea, masters, memasuki, ...</td>
+      <td>jakarta turnamen korea masters memasuki penyel...</td>
     </tr>
   </tbody>
 </table>
@@ -1910,7 +1919,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-74e508bb-4117-43b7-9dd7-e4960bdc4611')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bf86b5eb-a88e-4cf0-b4d6-2afd530c2ff5')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1962,12 +1971,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-74e508bb-4117-43b7-9dd7-e4960bdc4611 button.colab-df-convert');
+        document.querySelector('#df-bf86b5eb-a88e-4cf0-b4d6-2afd530c2ff5 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-74e508bb-4117-43b7-9dd7-e4960bdc4611');
+        const element = document.querySelector('#df-bf86b5eb-a88e-4cf0-b4d6-2afd530c2ff5');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1987,8 +1996,8 @@ document.write(`
   </div>
 
 
-<div id="df-17ac11ed-6a61-4f81-955e-50ca83350276">
-  <button class="colab-df-quickchart" onclick="quickchart('df-17ac11ed-6a61-4f81-955e-50ca83350276')"
+<div id="df-31145eea-6653-4113-993d-c0e1a39a0305">
+  <button class="colab-df-quickchart" onclick="quickchart('df-31145eea-6653-4113-993d-c0e1a39a0305')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2107,7 +2116,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-17ac11ed-6a61-4f81-955e-50ca83350276 button');
+        document.querySelector('#df-31145eea-6653-4113-993d-c0e1a39a0305 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -2126,8 +2135,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="tf-idf-term-frequency-inverse-document-frequency">
-<h2><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em><a class="headerlink" href="#tf-idf-term-frequency-inverse-document-frequency" title="Link to this heading">#</a></h2>
+<section id="term-frequency-inverse-document-frequency-tf-idf">
+<h2><em><strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong></em><a class="headerlink" href="#term-frequency-inverse-document-frequency-tf-idf" title="Link to this heading">#</a></h2>
 <p>TF-IDF (Term Frequency-Inverse Document Frequency) adalah suatu metode yang digunakan untuk menghitung pentingnya suatu kata dalam suatu dokumen. Metode ini menghitung frekuensi kata dalam suatu dokumen (Term Frequency) dan juga menghitung frekuensi kata dalam semua dokumen lainnya (Inverse Document Frequency). Dengan demikian, TF-IDF dapat digunakan untuk menghitung pentingnya suatu kata dalam suatu dokumen dan juga untuk menghitung relevansi suatu kata dengan suatu topik.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2161,7 +2170,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-cc6f6b52-d394-4910-80ae-ff9e465e0717" class="colab-df-container">
+  <div id="df-69fefaa4-eb75-428b-ac06-2292e31f9333" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2180,278 +2189,278 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>abubakar</th>
+      <th>abadi</th>
+      <th>abdul</th>
+      <th>abs</th>
+      <th>absen</th>
+      <th>absennya</th>
+      <th>ac</th>
+      <th>acara</th>
+      <th>accident</th>
+      <th>accu</th>
       <th>aceh</th>
-      <th>acehsumut</th>
-      <th>acehsumutini</th>
-      <th>advertisement</th>
-      <th>agus</th>
-      <th>air</th>
-      <th>ajang</th>
-      <th>alifa</th>
-      <th>allif</th>
       <th>...</th>
-      <th>wide</th>
-      <th>widjaja</th>
-      <th>widodo</th>
-      <th>with</th>
-      <th>xin</th>
-      <th>xxi</th>
-      <th>ya</th>
-      <th>yuhsuanpada</th>
-      <th>zheng</th>
-      <th>zulfikar</th>
+      <th>yuan</th>
+      <th>yuhsun</th>
+      <th>yuni</th>
+      <th>yusuf</th>
+      <th>yzrm</th>
+      <th>zarco</th>
+      <th>zenix</th>
+      <th>zero</th>
+      <th>zf</th>
+      <th>zhi</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000000</td>
-      <td>0.203678</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.048628</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.054772</td>
-      <td>0.054772</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.052251</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.024314</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.033963</td>
-      <td>0.202075</td>
-      <td>0.203778</td>
-      <td>0.033963</td>
-      <td>0.030153</td>
-      <td>0.067926</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.086615</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
+      <td>0.250595</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.015077</td>
-      <td>0.000000</td>
-      <td>0.101889</td>
-      <td>0.028872</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.033963</td>
     </tr>
     <tr>
       <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.085223</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.050867</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.025434</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.039616</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.019808</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.056435</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.028218</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.063566</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>5</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.068146</td>
     </tr>
     <tr>
       <th>6</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.179681</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>7</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.049265</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.024633</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>8</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.046933</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.105727</td>
-      <td>0.000000</td>
-      <td>0.023467</td>
-      <td>0.052863</td>
-      <td>0.000000</td>
-      <td>0.044939</td>
-      <td>0.000000</td>
-      <td>0.052863</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
     <tr>
       <th>9</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.046355</td>
-      <td>0.000000</td>
-      <td>0.052212</td>
-      <td>0.044385</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>...</td>
-      <td>0.052212</td>
+      <td>0.0</td>
       <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.023177</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.000000</td>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 650 columns</p>
+<p>10 rows × 4310 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-cc6f6b52-d394-4910-80ae-ff9e465e0717')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-69fefaa4-eb75-428b-ac06-2292e31f9333')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2503,12 +2512,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-cc6f6b52-d394-4910-80ae-ff9e465e0717 button.colab-df-convert');
+        document.querySelector('#df-69fefaa4-eb75-428b-ac06-2292e31f9333 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-cc6f6b52-d394-4910-80ae-ff9e465e0717');
+        const element = document.querySelector('#df-69fefaa4-eb75-428b-ac06-2292e31f9333');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2528,8 +2537,8 @@ document.write(`
   </div>
 
 
-<div id="df-ec9db319-1efc-4f7d-a9c1-aa7e699b492b">
-  <button class="colab-df-quickchart" onclick="quickchart('df-ec9db319-1efc-4f7d-a9c1-aa7e699b492b')"
+<div id="df-996707c5-fb7b-41dd-9923-3f4b3f5ed743">
+  <button class="colab-df-quickchart" onclick="quickchart('df-996707c5-fb7b-41dd-9923-3f4b3f5ed743')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2648,7 +2657,7 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-ec9db319-1efc-4f7d-a9c1-aa7e699b492b button');
+        document.querySelector('#df-996707c5-fb7b-41dd-9923-3f4b3f5ed743 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
@@ -2658,6 +2667,20 @@ document.write(`
     </div>
   </div>
 </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="c1"># Simpan tfidf_matrix dan vectorizer ke dalam file pickle</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/PPW/tugas2/tfidf_matrix.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/content/drive/My Drive/PPW/tugas2/vectorizer.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">vectorizer</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -2698,15 +2721,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Tugas1: Crawling Data</strong></p>
+        <p class="prev-next-title"><strong>Crawling Data Olahraga dan Otomotif</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="Tugas3_Prediksi_Data.html"
+       href="Tugas3_Logistic_Regression.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Tugas 3: Prediksi Data</strong></p>
+        <p class="prev-next-title"><strong>Tugas 3: Logistic Regression</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2717,7 +2740,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2730,7 +2754,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-folding"><em><strong>Case Folding</strong></em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization"><em><strong>Tokenization</strong></em></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopword-removal"><em><strong>Stopword Removal</strong></em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-term-frequency-inverse-document-frequency"><em><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong></em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf"><em><strong>Term Frequency-Inverse Document Frequency (TF-IDF)</strong></em></a></li>
 </ul>
   </nav></div>
 
@@ -2779,8 +2803,8 @@ By The Jupyter Book Community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
