@@ -1,0 +1,3388 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Tugas 7: Klasifikasi Berita Metode Logistic Regression dengan Reduksi
+      Dimensi &#8212; My Repository
+    </title>
+
+    <link rel="icon" type="image/webp" href="_static/icon.webp">
+
+    <script data-cfasync="false">
+      document.documentElement.dataset.mode =
+        localStorage.getItem("mode") || "";
+      document.documentElement.dataset.theme =
+        localStorage.getItem("theme") || "";
+    </script>
+    <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+    <noscript>
+      <style>
+        .pst-js-only {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+
+    <!-- Loaded before other Sphinx assets -->
+    <link
+      href="_static/styles/theme.css?digest=8878045cc6db502f8baf"
+      rel="stylesheet"
+    />
+    <link
+      href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/pygments.css?v=fa44fd50"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/styles/sphinx-book-theme.css?v=a3416100"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/togglebutton.css?v=13237357"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/copybutton.css?v=76b2166b"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/sphinx-thebe.css?v=4fa983c6"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="_static/sphinx-design.min.css?v=95c83b7e"
+    />
+
+    <!-- So that users can add custom icons -->
+    <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+    <!-- Pre-loaded scripts that we'll load fully later -->
+    <link
+      rel="preload"
+      as="script"
+      href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"
+    />
+    <link
+      rel="preload"
+      as="script"
+      href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"
+    />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>
+      let toggleHintShow = "Click to show";
+    </script>
+    <script>
+      let toggleHintHide = "Click to hide";
+    </script>
+    <script>
+      let toggleOpenOnPrint = "true";
+    </script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>
+      var togglebuttonSelector = ".toggle, .admonition.dropdown";
+    </script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>
+      const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js";
+      const thebe_selector = ".thebe,.cell";
+      const thebe_selector_input = "pre";
+      const thebe_selector_output = ".output, .cell_output";
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>
+      var togglebuttonSelector = ".toggle, .admonition.dropdown";
+    </script>
+    <script>
+      const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js";
+      const thebe_selector = ".thebe,.cell";
+      const thebe_selector_input = "pre";
+      const thebe_selector_output = ".output, .cell_output";
+    </script>
+    <script>
+      DOCUMENTATION_OPTIONS.pagename =
+        "Tugas7_Klasifikasi_Berita_Mengunakan_SVD";
+    </script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link
+      rel="next"
+      title="Tugas 8: Fuzzy C-Means Clustering"
+      href="Tugas8_Clustering_Fuzzy.html"
+    />
+    <link
+      rel="prev"
+      title="Tugas 6 : Membuat pencarian Query dengan kalimat dalam dokumen dengan penerapan Singular Value Decomposition (SVD)"
+      href="Tugas6_Pencarian_Query_Menggunakan_SVD.html"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:version" content="" />
+  </head>
+  <style>
+    .logo-circle {
+      width: 100px; /* Atur ukuran sesuai kebutuhan */
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      text-align: center; /* Mengatur teks agar berada di tengah */
+      margin-top: 10px; /* Jarak antara gambar dan teks */
+    }
+
+    .logo-text h2 {
+      margin: 0; /* Menghilangkan margin default pada h2 */
+      font-size: 1.2em; /* Ukuran font untuk nama */
+    }
+
+    .logo-text p {
+      margin: 0; /* Menghilangkan margin default pada p */
+      font-size: 0.9em; /* Ukuran font untuk jabatan */
+      color: #555; /* Warna teks jabatan */
+    }
+  </style>   
+  <body
+    data-bs-spy="scroll"
+    data-bs-target=".bd-toc-nav"
+    data-offset="180"
+    data-bs-root-margin="0px 0px -60%"
+    data-default-mode=""
+  >
+    <div id="pst-skip-link" class="skip-link d-print-none">
+      <a href="#main-content">Skip to main content</a>
+    </div>
+
+    <div id="pst-scroll-pixel-helper"></div>
+
+    <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+      <i class="fa-solid fa-arrow-up"></i>Back to top
+    </button>
+
+    <dialog id="pst-search-dialog">
+      <form
+        class="bd-search d-flex align-items-center"
+        action="search.html"
+        method="get"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="search"
+          class="form-control"
+          name="q"
+          placeholder="Search this book..."
+          aria-label="Search this book..."
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
+        <span class="search-button__kbd-shortcut"
+          ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+        >
+      </form>
+    </dialog>
+
+    <div class="pst-async-banner-revealer d-none">
+      <aside
+        id="bd-header-version-warning"
+        class="d-none d-print-none"
+        aria-label="Version warning"
+      ></aside>
+    </div>
+
+    <header
+      class="bd-header navbar navbar-expand-lg bd-navbar d-print-none"
+    ></header>
+
+    <div class="bd-container">
+      <div class="bd-container__inner bd-page-width">
+        <dialog id="pst-primary-sidebar-modal"></dialog>
+        <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+          <div class="sidebar-header-items sidebar-primary__section"></div>
+
+          <div class="sidebar-primary-items__start sidebar-primary__section">
+            <div class="sidebar-primary-item">
+              <a class="navbar-brand logo" href="intro.html">
+                <img
+                  src="_static/logo.png"
+                  class="logo__image only-light logo-circle"
+                  alt="My sample book - Home"
+                />
+                <script>
+                  document.write(
+                    `<img src="_static/logo.png" class="logo__image only-dark logo-circle" alt="My sample book - Home"/>`
+                  );
+                </script>
+                <div class="logo-text">
+                  <h2><strong>210411100160 Qoid Rif'at</strong></h2>
+                  <p>Beginner Web Developer | Data Analytics</p>
+                </div>
+              </a>
+            </div>
+            <div class="sidebar-primary-item">
+              <button
+                class="btn search-button-field search-button__button pst-js-only"
+                title="Search"
+                aria-label="Search"
+                data-bs-placement="bottom"
+                data-bs-toggle="tooltip"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-button__default-text">Search</span>
+                <span class="search-button__kbd-shortcut"
+                  ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd
+                    class="kbd-shortcut__modifier"
+                    >K</kbd
+                  ></span
+                >
+              </button>
+            </div>
+            <div class="sidebar-primary-item">
+              <nav class="bd-links bd-docs-nav" aria-label="Main">
+                <div class="bd-toc-item navbar-nav active">
+                  <ul class="nav bd-sidenav bd-sidenav__home-link">
+                    <li class="toctree-l1">
+                      <a class="reference internal" href="intro.html">
+                        Welcome to My Repository
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav bd-sidenav">
+                    <li class="toctree-l1 ">
+                      <a
+                        class="reference internal"
+                        href="Tugas1_Crawling_Data.html"
+                        ><strong
+                          >Tugas 1: Crawling Data Olahraga dan Otomotif</strong
+                        ></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal "
+                        href="Tugas2_Pre-processing_dan_TF-IDF.html"
+                        ><strong>Tugas 2: Pre-processing dan TFIDF</strong></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Tugas3_Logistic_Regression.html"
+                        ><strong>Tugas 3: Logistic Regression</strong></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a class="reference internal" href="word_embeding.html"
+                        ><strong>Word Embeding (Skip-gram)</strong></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Tugas4_Encoder_dan_Graf.html"
+                        ><strong>Tugas 4: Encoder dan Graph</strong></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Tugas5_Keyword_Extraction.html"
+                        ><strong>Tugas 5: Keyword Extraction</strong></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Tugas6_Pencarian_Query_Menggunakan_SVD.html"
+                        ><strong
+                          >Tugas 6 : Membuat pencarian Query dengan kalimat
+                          dalam dokumen dengan penerapan
+                          <em>Singular Value Decomposition</em> (SVD)</strong
+                        ></a
+                      >
+                    </li>
+                    <li class="toctree-l1 current active">
+                      <a
+                        class="reference internal"
+                        href="#"
+                        ><strong
+                          >Tugas 7: Klasifikasi Berita Metode Logistic
+                          Regression dengan Reduksi Dimensi</strong
+                        ></a
+                      >
+                    </li>
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Tugas8_Clustering_Fuzzy.html"
+                        ><strong>Tugas 8: Fuzzy C-Means Clustering</strong></a
+                      >
+                    </li>
+
+                    <li class="toctree-l1">
+                      <a
+                        class="reference internal"
+                        href="Deployment_Report_Applications.html"
+                        ><strong>Deployment Report Aplikasi</strong></a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <div class="sidebar-primary-items__end sidebar-primary__section">
+            <div class="sidebar-primary-item">
+              <div
+                id="ethical-ad-placement"
+                class="flat"
+                data-ea-publisher="readthedocs"
+                data-ea-type="readthedocs-sidebar"
+                data-ea-manual="true"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <main id="main-content" class="bd-main" role="main">
+          <div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              <div class="bd-header-article d-print-none">
+                <div class="header-article-items header-article__inner">
+                  <div class="header-article-items__start">
+                    <div class="header-article-item">
+                      <button
+                        class="sidebar-toggle primary-toggle btn btn-sm"
+                        title="Toggle primary sidebar"
+                        data-bs-placement="bottom"
+                        data-bs-toggle="tooltip"
+                      >
+                        <span class="fa-solid fa-bars"></span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="header-article-items__end">
+                    <div class="header-article-item">
+                      <div class="article-header-buttons">
+                        <div class="dropdown dropdown-source-buttons">
+                          <button
+                            class="btn dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            aria-label="Source repositories"
+                          >
+                            <i class="fab fa-github"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a
+                                href="https://github.com/executablebooks/jupyter-book"
+                                target="_blank"
+                                class="btn btn-sm btn-source-repository-button dropdown-item"
+                                title="Source repository"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fab fa-github"></i>
+                                </span>
+                                <span class="btn__text-container"
+                                  >Repository</span
+                                >
+                              </a>
+                            </li>
+
+                            <li>
+                              <a
+                                href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTugas7_Klasifikasi_Berita_Mengunakan_SVD.html&body=Your%20issue%20content%20here."
+                                target="_blank"
+                                class="btn btn-sm btn-source-issues-button dropdown-item"
+                                title="Open an issue"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-lightbulb"></i>
+                                </span>
+                                <span class="btn__text-container"
+                                  >Open issue</span
+                                >
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <div class="dropdown dropdown-download-buttons">
+                          <button
+                            class="btn dropdown-toggle"
+                            type="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            aria-label="Download this page"
+                          >
+                            <i class="fas fa-download"></i>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li>
+                              <a
+                                href="_sources/Tugas7_Klasifikasi_Berita_Mengunakan_SVD.ipynb"
+                                target="_blank"
+                                class="btn btn-sm btn-download-source-button dropdown-item"
+                                title="Download source file"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-file"></i>
+                                </span>
+                                <span class="btn__text-container">.ipynb</span>
+                              </a>
+                            </li>
+
+                            <li>
+                              <button
+                                onclick="window.print()"
+                                class="btn btn-sm btn-download-pdf-button dropdown-item"
+                                title="Print to PDF"
+                                data-bs-placement="left"
+                                data-bs-toggle="tooltip"
+                              >
+                                <span class="btn__icon-container">
+                                  <i class="fas fa-file-pdf"></i>
+                                </span>
+                                <span class="btn__text-container">.pdf</span>
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+
+                        <button
+                          onclick="toggleFullScreen()"
+                          class="btn btn-sm btn-fullscreen-button"
+                          title="Fullscreen mode"
+                          data-bs-placement="bottom"
+                          data-bs-toggle="tooltip"
+                        >
+                          <span class="btn__icon-container">
+                            <i class="fas fa-expand"></i>
+                          </span>
+                        </button>
+
+                        <button
+                          class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only"
+                          aria-label="Color mode"
+                          data-bs-title="Color mode"
+                          data-bs-placement="bottom"
+                          data-bs-toggle="tooltip"
+                        >
+                          <i
+                            class="theme-switch fa-solid fa-sun fa-lg"
+                            data-mode="light"
+                            title="Light"
+                          ></i>
+                          <i
+                            class="theme-switch fa-solid fa-moon fa-lg"
+                            data-mode="dark"
+                            title="Dark"
+                          ></i>
+                          <i
+                            class="theme-switch fa-solid fa-circle-half-stroke fa-lg"
+                            data-mode="auto"
+                            title="System Settings"
+                          ></i>
+                        </button>
+
+                        <button
+                          class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only"
+                          title="Search"
+                          aria-label="Search"
+                          data-bs-placement="bottom"
+                          data-bs-toggle="tooltip"
+                        >
+                          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                        </button>
+                        <button
+                          class="sidebar-toggle secondary-toggle btn btn-sm"
+                          title="Toggle secondary sidebar"
+                          data-bs-placement="bottom"
+                          data-bs-toggle="tooltip"
+                        >
+                          <span class="fa-solid fa-list"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="jb-print-docs-body" class="onlyprint">
+                <h1>
+                  Tugas 7: Klasifikasi Berita Metode Logistic Regression dengan
+                  Reduksi Dimensi
+                </h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                  <div id="jb-print-toc">
+                    <div>
+                      <h2>Contents</h2>
+                    </div>
+                    <nav aria-label="Page">
+                      <ul class="visible nav section-nav flex-column">
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#label-encoder"
+                            ><strong>Label Encoder</strong></a
+                          >
+                        </li>
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#split-data"
+                            ><strong>Split Data</strong></a
+                          >
+                        </li>
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#term-frequency-inverse-document-frequency-tf-idf"
+                            ><strong
+                              ><em
+                                >Term Frequency-Inverse Document Frequency</em
+                              >
+                              (TF-IDF)</strong
+                            ></a
+                          >
+                        </li>
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#reduksi-dimensi-svd"
+                            ><strong>Reduksi Dimensi (SVD)</strong></a
+                          >
+                        </li>
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#model-logistic-regression"
+                            ><strong>Model Logistic Regression</strong></a
+                          >
+                        </li>
+                        <li class="toc-h2 nav-item toc-entry">
+                          <a
+                            class="reference internal nav-link"
+                            href="#pengujian"
+                            ><strong>Pengujian</strong></a
+                          >
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+
+              <div id="searchbox"></div>
+              <article class="bd-article">
+                <section
+                  id="tugas-7-klasifikasi-berita-metode-logistic-regression-dengan-reduksi-dimensi"
+                >
+                  <h1>
+                    <strong
+                      >Tugas 7: Klasifikasi Berita Metode Logistic Regression
+                      dengan Reduksi Dimensi</strong
+                    ><a
+                      class="headerlink"
+                      href="#tugas-7-klasifikasi-berita-metode-logistic-regression-dengan-reduksi-dimensi"
+                      title="Link to this heading"
+                      >#</a
+                    >
+                  </h1>
+                  <div class="cell docutils container">
+                    <div class="cell_input docutils container">
+                      <div class="highlight-ipython3 notranslate">
+                        <div class="highlight">
+                          <pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell_output docutils container">
+                      <div
+                        class="output traceback highlight-ipythontb notranslate"
+                      >
+                        <div class="highlight">
+                          <pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-d5df0069828e&gt;</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, readonly)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span> <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">force_remount</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout_ms</span><span class="o">=</span><span class="mi">120000</span><span class="p">,</span> <span class="n">readonly</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Mount your Google Drive at the specified mountpoint path.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">100</span>   <span class="k">return</span> <span class="n">_mount</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>       <span class="n">mountpoint</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span>       <span class="n">force_remount</span><span class="o">=</span><span class="n">force_remount</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/drive.py</span> in <span class="ni">_mount</span><span class="nt">(mountpoint, force_remount, timeout_ms, ephemeral, readonly)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>   <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>   <span class="k">if</span> <span class="n">ephemeral</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>     <span class="n">_message</span><span class="o">.</span><span class="n">blocking_request</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>         <span class="s1">&#39;request_auth&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="n">request</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;authType&#39;</span><span class="p">:</span> <span class="s1">&#39;dfs_ephemeral&#39;</span><span class="p">},</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">blocking_request</span><span class="nt">(request_type, request, timeout_sec, parent)</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span>       <span class="n">request_type</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">expect_reply</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>   <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">176</span>   <span class="k">return</span> <span class="n">read_reply_from_input</span><span class="p">(</span><span class="n">request_id</span><span class="p">,</span> <span class="n">timeout_sec</span><span class="p">)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/google/colab/_message.py</span> in <span class="ni">read_reply_from_input</span><span class="nt">(message_id, timeout_sec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reply</span> <span class="o">=</span> <span class="n">_read_next_input_message</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="k">if</span> <span class="n">reply</span> <span class="o">==</span> <span class="n">_NOT_READY</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">reply</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">96</span>       <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.025</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>       <span class="k">continue</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span>     <span class="k">if</span> <span class="p">(</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cell docutils container">
+                    <div class="cell_input docutils container">
+                      <div class="highlight-ipython3 notranslate">
+                        <div class="highlight">
+                          <pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;/content/drive/My Drive/PPW/tugas7/hasil_prepros.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell_output docutils container">
+                      <div class="output text_html">
+                        <div
+                          id="df-bc9df46e-0763-4015-a469-6b2bf443094e"
+                          class="colab-df-container"
+                        >
+                          <div>
+                            <style scoped>
+                              .dataframe tbody tr th:only-of-type {
+                                vertical-align: middle;
+                              }
+
+                              .dataframe tbody tr th {
+                                vertical-align: top;
+                              }
+
+                              .dataframe thead th {
+                                text-align: right;
+                              }
+                            </style>
+                            <table border="1" class="dataframe">
+                              <thead>
+                                <tr style="text-align: right">
+                                  <th></th>
+                                  <th>judul</th>
+                                  <th>tanggal</th>
+                                  <th>isi</th>
+                                  <th>kategori</th>
+                                  <th>cleansing</th>
+                                  <th>case_folding</th>
+                                  <th>tokenize</th>
+                                  <th>stopword_removal</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th>0</th>
+                                  <td>
+                                    Apriyani Rahayu Sudah Berlatih Lagi, Ingin
+                                    Com...
+                                  </td>
+                                  <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+                                  <td>
+                                    Jakarta - Atlet bulutangkis Indonesia
+                                    Apriyani...
+                                  </td>
+                                  <td>Olahraga</td>
+                                  <td>
+                                    Jakarta Atlet bulutangkis Indonesia Apriyani
+                                    ...
+                                  </td>
+                                  <td>
+                                    jakarta atlet bulutangkis indonesia apriyani
+                                    ...
+                                  </td>
+                                  <td>
+                                    ['jakarta', 'atlet', 'bulutangkis',
+                                    'indonesia...
+                                  </td>
+                                  <td>
+                                    jakarta atlet bulutangkis indonesia apriyani
+                                    r...
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>1</th>
+                                  <td>
+                                    Hasil Korea Masters 2024: Putri KW Lanjut ke
+                                    1...
+                                  </td>
+                                  <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+                                  <td>
+                                    Jakarta - Putri Kusuma Wardani hadapi wakil
+                                    Ta...
+                                  </td>
+                                  <td>Olahraga</td>
+                                  <td>
+                                    Jakarta Putri Kusuma Wardani hadapi wakil
+                                    Tai...
+                                  </td>
+                                  <td>
+                                    jakarta putri kusuma wardani hadapi wakil
+                                    tai...
+                                  </td>
+                                  <td>
+                                    ['jakarta', 'putri', 'kusuma', 'wardani',
+                                    'had...
+                                  </td>
+                                  <td>
+                                    jakarta putri kusuma wardani hadapi wakil
+                                    taiw...
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>2</th>
+                                  <td>
+                                    Fajar/Rian di Japan dan China Masters:
+                                    Inginny...
+                                  </td>
+                                  <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+                                  <td>
+                                    Jakarta - Fajar Alfian/Muhammad Rian
+                                    Ardianto ...
+                                  </td>
+                                  <td>Olahraga</td>
+                                  <td>
+                                    Jakarta Fajar AlfianMuhammad Rian Ardianto
+                                    be...
+                                  </td>
+                                  <td>
+                                    jakarta fajar alfianmuhammad rian ardianto
+                                    be...
+                                  </td>
+                                  <td>
+                                    ['jakarta', 'fajar', 'alfianmuhammad',
+                                    'rian',...
+                                  </td>
+                                  <td>
+                                    jakarta fajar alfianmuhammad rian ardianto
+                                    ber...
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>3</th>
+                                  <td>
+                                    Hasil Korea Masters 2024: Komang Ayu
+                                    Tersingkir
+                                  </td>
+                                  <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+                                  <td>
+                                    Jakarta - Komang Ayu Cahya Dewi hadapi Liang
+                                    T...
+                                  </td>
+                                  <td>Olahraga</td>
+                                  <td>
+                                    Jakarta Komang Ayu Cahya Dewi hadapi Liang
+                                    Ti...
+                                  </td>
+                                  <td>
+                                    jakarta komang ayu cahya dewi hadapi liang
+                                    ti...
+                                  </td>
+                                  <td>
+                                    ['jakarta', 'komang', 'ayu', 'cahya',
+                                    'dewi', ...
+                                  </td>
+                                  <td>
+                                    jakarta komang ayu cahya dewi hadapi liang
+                                    tin...
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>4</th>
+                                  <td>
+                                    Korea Masters 2024 Hari Kedua: Tiga Wakil RI
+                                    B...
+                                  </td>
+                                  <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+                                  <td>
+                                    Jakarta - Turnamen Korea Masters 2024
+                                    memasuki...
+                                  </td>
+                                  <td>Olahraga</td>
+                                  <td>
+                                    Jakarta Turnamen Korea Masters memasuki
+                                    hari...
+                                  </td>
+                                  <td>
+                                    jakarta turnamen korea masters memasuki
+                                    hari...
+                                  </td>
+                                  <td>
+                                    ['jakarta', 'turnamen', 'korea', 'masters',
+                                    'm...
+                                  </td>
+                                  <td>
+                                    jakarta turnamen korea masters memasuki
+                                    penyel...
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="colab-df-buttons">
+                            <div class="colab-df-container">
+                              <button
+                                class="colab-df-convert"
+                                onclick="convertToInteractive('df-bc9df46e-0763-4015-a469-6b2bf443094e')"
+                                title="Convert this dataframe to an interactive table."
+                                style="display: none"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  height="24px"
+                                  viewBox="0 -960 960 960"
+                                >
+                                  <path
+                                    d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"
+                                  />
+                                </svg>
+                              </button>
+
+                              <style>
+                                .colab-df-container {
+                                  display: flex;
+                                  gap: 12px;
+                                }
+
+                                .colab-df-convert {
+                                  background-color: #e8f0fe;
+                                  border: none;
+                                  border-radius: 50%;
+                                  cursor: pointer;
+                                  display: none;
+                                  fill: #1967d2;
+                                  height: 32px;
+                                  padding: 0 0 0 0;
+                                  width: 32px;
+                                }
+
+                                .colab-df-convert:hover {
+                                  background-color: #e2ebfa;
+                                  box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3),
+                                    0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                  fill: #174ea6;
+                                }
+
+                                .colab-df-buttons div {
+                                  margin-bottom: 4px;
+                                }
+
+                                [theme="dark"] .colab-df-convert {
+                                  background-color: #3b4455;
+                                  fill: #d2e3fc;
+                                }
+
+                                [theme="dark"] .colab-df-convert:hover {
+                                  background-color: #434b5c;
+                                  box-shadow: 0px 1px 3px 1px
+                                    rgba(0, 0, 0, 0.15);
+                                  filter: drop-shadow(
+                                    0px 1px 2px rgba(0, 0, 0, 0.3)
+                                  );
+                                  fill: #ffffff;
+                                }
+                              </style>
+
+                              <script>
+                                const buttonEl = document.querySelector(
+                                  "#df-bc9df46e-0763-4015-a469-6b2bf443094e button.colab-df-convert"
+                                );
+                                buttonEl.style.display = google.colab.kernel
+                                  .accessAllowed
+                                  ? "block"
+                                  : "none";
+
+                                async function convertToInteractive(key) {
+                                  const element = document.querySelector(
+                                    "#df-bc9df46e-0763-4015-a469-6b2bf443094e"
+                                  );
+                                  const dataTable =
+                                    await google.colab.kernel.invokeFunction(
+                                      "convertToInteractive",
+                                      [key],
+                                      {}
+                                    );
+                                  if (!dataTable) return;
+
+                                  const docLinkHtml =
+                                    "Like what you see? Visit the " +
+                                    '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>' +
+                                    " to learn more about interactive tables.";
+                                  element.innerHTML = "";
+                                  dataTable["output_type"] = "display_data";
+                                  await google.colab.output.renderOutput(
+                                    dataTable,
+                                    element
+                                  );
+                                  const docLink = document.createElement("div");
+                                  docLink.innerHTML = docLinkHtml;
+                                  element.appendChild(docLink);
+                                }
+                              </script>
+                            </div>
+
+                            <div id="df-84c18729-a5fd-43c3-937a-4801c32dae7b">
+                              <button
+                                class="colab-df-quickchart"
+                                onclick="quickchart('df-84c18729-a5fd-43c3-937a-4801c32dae7b')"
+                                title="Suggest charts"
+                                style="display: none"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  height="24px"
+                                  viewBox="0 0 24 24"
+                                  width="24px"
+                                >
+                                  <g>
+                                    <path
+                                      d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                    />
+                                  </g>
+                                </svg>
+                              </button>
+
+                              <style>
+                                .colab-df-quickchart {
+                                  --bg-color: #e8f0fe;
+                                  --fill-color: #1967d2;
+                                  --hover-bg-color: #e2ebfa;
+                                  --hover-fill-color: #174ea6;
+                                  --disabled-fill-color: #aaa;
+                                  --disabled-bg-color: #ddd;
+                                }
+
+                                [theme="dark"] .colab-df-quickchart {
+                                  --bg-color: #3b4455;
+                                  --fill-color: #d2e3fc;
+                                  --hover-bg-color: #434b5c;
+                                  --hover-fill-color: #ffffff;
+                                  --disabled-bg-color: #3b4455;
+                                  --disabled-fill-color: #666;
+                                }
+
+                                .colab-df-quickchart {
+                                  background-color: var(--bg-color);
+                                  border: none;
+                                  border-radius: 50%;
+                                  cursor: pointer;
+                                  display: none;
+                                  fill: var(--fill-color);
+                                  height: 32px;
+                                  padding: 0;
+                                  width: 32px;
+                                }
+
+                                .colab-df-quickchart:hover {
+                                  background-color: var(--hover-bg-color);
+                                  box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+                                    0 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                  fill: var(--button-hover-fill-color);
+                                }
+
+                                .colab-df-quickchart-complete:disabled,
+                                .colab-df-quickchart-complete:disabled:hover {
+                                  background-color: var(--disabled-bg-color);
+                                  fill: var(--disabled-fill-color);
+                                  box-shadow: none;
+                                }
+
+                                .colab-df-spinner {
+                                  border: 2px solid var(--fill-color);
+                                  border-color: transparent;
+                                  border-bottom-color: var(--fill-color);
+                                  animation: spin 1s steps(1) infinite;
+                                }
+
+                                @keyframes spin {
+                                  0% {
+                                    border-color: transparent;
+                                    border-bottom-color: var(--fill-color);
+                                    border-left-color: var(--fill-color);
+                                  }
+                                  20% {
+                                    border-color: transparent;
+                                    border-left-color: var(--fill-color);
+                                    border-top-color: var(--fill-color);
+                                  }
+                                  30% {
+                                    border-color: transparent;
+                                    border-left-color: var(--fill-color);
+                                    border-top-color: var(--fill-color);
+                                    border-right-color: var(--fill-color);
+                                  }
+                                  40% {
+                                    border-color: transparent;
+                                    border-right-color: var(--fill-color);
+                                    border-top-color: var(--fill-color);
+                                  }
+                                  60% {
+                                    border-color: transparent;
+                                    border-right-color: var(--fill-color);
+                                  }
+                                  80% {
+                                    border-color: transparent;
+                                    border-right-color: var(--fill-color);
+                                    border-bottom-color: var(--fill-color);
+                                  }
+                                  90% {
+                                    border-color: transparent;
+                                    border-bottom-color: var(--fill-color);
+                                  }
+                                }
+                              </style>
+
+                              <script>
+                                async function quickchart(key) {
+                                  const quickchartButtonEl =
+                                    document.querySelector(
+                                      "#" + key + " button"
+                                    );
+                                  quickchartButtonEl.disabled = true; // To prevent multiple clicks.
+                                  quickchartButtonEl.classList.add(
+                                    "colab-df-spinner"
+                                  );
+                                  try {
+                                    const charts =
+                                      await google.colab.kernel.invokeFunction(
+                                        "suggestCharts",
+                                        [key],
+                                        {}
+                                      );
+                                  } catch (error) {
+                                    console.error(
+                                      "Error during call to suggestCharts:",
+                                      error
+                                    );
+                                  }
+                                  quickchartButtonEl.classList.remove(
+                                    "colab-df-spinner"
+                                  );
+                                  quickchartButtonEl.classList.add(
+                                    "colab-df-quickchart-complete"
+                                  );
+                                }
+                                (() => {
+                                  let quickchartButtonEl =
+                                    document.querySelector(
+                                      "#df-84c18729-a5fd-43c3-937a-4801c32dae7b button"
+                                    );
+                                  quickchartButtonEl.style.display = google
+                                    .colab.kernel.accessAllowed
+                                    ? "block"
+                                    : "none";
+                                })();
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <section id="label-encoder">
+                    <h2>
+                      <strong>Label Encoder</strong
+                      ><a
+                        class="headerlink"
+                        href="#label-encoder"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="c1"># Transformasi data kategorik</span>
+<span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori&#39;</span><span class="p">])</span>
+
+<span class="c1"># Menampilkan nilai sebelum dan sesudah konversi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Nilai sebelum dan sesudah konversi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">))))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame setelah Label Encoding:&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output stream highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>Nilai sebelum dan sesudah konversi:
+{&#39;Olahraga&#39;: 0, &#39;Otomotif&#39;: 1}
+
+DataFrame setelah Label Encoding:
+</pre>
+                          </div>
+                        </div>
+                        <div class="output text_html">
+                          <div
+                            id="df-d897a224-ad4d-43e8-a4b3-9499b576e7b2"
+                            class="colab-df-container"
+                          >
+                            <div>
+                              <style scoped>
+                                .dataframe tbody tr th:only-of-type {
+                                  vertical-align: middle;
+                                }
+
+                                .dataframe tbody tr th {
+                                  vertical-align: top;
+                                }
+
+                                .dataframe thead th {
+                                  text-align: right;
+                                }
+                              </style>
+                              <table border="1" class="dataframe">
+                                <thead>
+                                  <tr style="text-align: right">
+                                    <th></th>
+                                    <th>judul</th>
+                                    <th>tanggal</th>
+                                    <th>isi</th>
+                                    <th>kategori</th>
+                                    <th>cleansing</th>
+                                    <th>case_folding</th>
+                                    <th>tokenize</th>
+                                    <th>stopword_removal</th>
+                                    <th>kategori_encoded</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th>0</th>
+                                    <td>
+                                      Apriyani Rahayu Sudah Berlatih Lagi, Ingin
+                                      Com...
+                                    </td>
+                                    <td>Rabu, 06 Nov 2024 15:25 WIB</td>
+                                    <td>
+                                      Jakarta - Atlet bulutangkis Indonesia
+                                      Apriyani...
+                                    </td>
+                                    <td>Olahraga</td>
+                                    <td>
+                                      Jakarta Atlet bulutangkis Indonesia
+                                      Apriyani ...
+                                    </td>
+                                    <td>
+                                      jakarta atlet bulutangkis indonesia
+                                      apriyani ...
+                                    </td>
+                                    <td>
+                                      ['jakarta', 'atlet', 'bulutangkis',
+                                      'indonesia...
+                                    </td>
+                                    <td>
+                                      jakarta atlet bulutangkis indonesia
+                                      apriyani r...
+                                    </td>
+                                    <td>0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>1</th>
+                                    <td>
+                                      Hasil Korea Masters 2024: Putri KW Lanjut
+                                      ke 1...
+                                    </td>
+                                    <td>Rabu, 06 Nov 2024 14:36 WIB</td>
+                                    <td>
+                                      Jakarta - Putri Kusuma Wardani hadapi
+                                      wakil Ta...
+                                    </td>
+                                    <td>Olahraga</td>
+                                    <td>
+                                      Jakarta Putri Kusuma Wardani hadapi wakil
+                                      Tai...
+                                    </td>
+                                    <td>
+                                      jakarta putri kusuma wardani hadapi wakil
+                                      tai...
+                                    </td>
+                                    <td>
+                                      ['jakarta', 'putri', 'kusuma', 'wardani',
+                                      'had...
+                                    </td>
+                                    <td>
+                                      jakarta putri kusuma wardani hadapi wakil
+                                      taiw...
+                                    </td>
+                                    <td>0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>2</th>
+                                    <td>
+                                      Fajar/Rian di Japan dan China Masters:
+                                      Inginny...
+                                    </td>
+                                    <td>Rabu, 06 Nov 2024 14:13 WIB</td>
+                                    <td>
+                                      Jakarta - Fajar Alfian/Muhammad Rian
+                                      Ardianto ...
+                                    </td>
+                                    <td>Olahraga</td>
+                                    <td>
+                                      Jakarta Fajar AlfianMuhammad Rian Ardianto
+                                      be...
+                                    </td>
+                                    <td>
+                                      jakarta fajar alfianmuhammad rian ardianto
+                                      be...
+                                    </td>
+                                    <td>
+                                      ['jakarta', 'fajar', 'alfianmuhammad',
+                                      'rian',...
+                                    </td>
+                                    <td>
+                                      jakarta fajar alfianmuhammad rian ardianto
+                                      ber...
+                                    </td>
+                                    <td>0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>3</th>
+                                    <td>
+                                      Hasil Korea Masters 2024: Komang Ayu
+                                      Tersingkir
+                                    </td>
+                                    <td>Rabu, 06 Nov 2024 12:45 WIB</td>
+                                    <td>
+                                      Jakarta - Komang Ayu Cahya Dewi hadapi
+                                      Liang T...
+                                    </td>
+                                    <td>Olahraga</td>
+                                    <td>
+                                      Jakarta Komang Ayu Cahya Dewi hadapi Liang
+                                      Ti...
+                                    </td>
+                                    <td>
+                                      jakarta komang ayu cahya dewi hadapi liang
+                                      ti...
+                                    </td>
+                                    <td>
+                                      ['jakarta', 'komang', 'ayu', 'cahya',
+                                      'dewi', ...
+                                    </td>
+                                    <td>
+                                      jakarta komang ayu cahya dewi hadapi liang
+                                      tin...
+                                    </td>
+                                    <td>0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>4</th>
+                                    <td>
+                                      Korea Masters 2024 Hari Kedua: Tiga Wakil
+                                      RI B...
+                                    </td>
+                                    <td>Rabu, 06 Nov 2024 10:55 WIB</td>
+                                    <td>
+                                      Jakarta - Turnamen Korea Masters 2024
+                                      memasuki...
+                                    </td>
+                                    <td>Olahraga</td>
+                                    <td>
+                                      Jakarta Turnamen Korea Masters memasuki
+                                      hari...
+                                    </td>
+                                    <td>
+                                      jakarta turnamen korea masters memasuki
+                                      hari...
+                                    </td>
+                                    <td>
+                                      ['jakarta', 'turnamen', 'korea',
+                                      'masters', 'm...
+                                    </td>
+                                    <td>
+                                      jakarta turnamen korea masters memasuki
+                                      penyel...
+                                    </td>
+                                    <td>0</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="colab-df-buttons">
+                              <div class="colab-df-container">
+                                <button
+                                  class="colab-df-convert"
+                                  onclick="convertToInteractive('df-d897a224-ad4d-43e8-a4b3-9499b576e7b2')"
+                                  title="Convert this dataframe to an interactive table."
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 -960 960 960"
+                                  >
+                                    <path
+                                      d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"
+                                    />
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-container {
+                                    display: flex;
+                                    gap: 12px;
+                                  }
+
+                                  .colab-df-convert {
+                                    background-color: #e8f0fe;
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: #1967d2;
+                                    height: 32px;
+                                    padding: 0 0 0 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-convert:hover {
+                                    background-color: #e2ebfa;
+                                    box-shadow: 0px 1px 2px
+                                        rgba(60, 64, 67, 0.3),
+                                      0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: #174ea6;
+                                  }
+
+                                  .colab-df-buttons div {
+                                    margin-bottom: 4px;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert {
+                                    background-color: #3b4455;
+                                    fill: #d2e3fc;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert:hover {
+                                    background-color: #434b5c;
+                                    box-shadow: 0px 1px 3px 1px
+                                      rgba(0, 0, 0, 0.15);
+                                    filter: drop-shadow(
+                                      0px 1px 2px rgba(0, 0, 0, 0.3)
+                                    );
+                                    fill: #ffffff;
+                                  }
+                                </style>
+
+                                <script>
+                                  const buttonEl = document.querySelector(
+                                    "#df-d897a224-ad4d-43e8-a4b3-9499b576e7b2 button.colab-df-convert"
+                                  );
+                                  buttonEl.style.display = google.colab.kernel
+                                    .accessAllowed
+                                    ? "block"
+                                    : "none";
+
+                                  async function convertToInteractive(key) {
+                                    const element = document.querySelector(
+                                      "#df-d897a224-ad4d-43e8-a4b3-9499b576e7b2"
+                                    );
+                                    const dataTable =
+                                      await google.colab.kernel.invokeFunction(
+                                        "convertToInteractive",
+                                        [key],
+                                        {}
+                                      );
+                                    if (!dataTable) return;
+
+                                    const docLinkHtml =
+                                      "Like what you see? Visit the " +
+                                      '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>' +
+                                      " to learn more about interactive tables.";
+                                    element.innerHTML = "";
+                                    dataTable["output_type"] = "display_data";
+                                    await google.colab.output.renderOutput(
+                                      dataTable,
+                                      element
+                                    );
+                                    const docLink =
+                                      document.createElement("div");
+                                    docLink.innerHTML = docLinkHtml;
+                                    element.appendChild(docLink);
+                                  }
+                                </script>
+                              </div>
+
+                              <div id="df-976bc4df-86b2-4d92-829b-a8087644b9d1">
+                                <button
+                                  class="colab-df-quickchart"
+                                  onclick="quickchart('df-976bc4df-86b2-4d92-829b-a8087644b9d1')"
+                                  title="Suggest charts"
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                  >
+                                    <g>
+                                      <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                      />
+                                    </g>
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-quickchart {
+                                    --bg-color: #e8f0fe;
+                                    --fill-color: #1967d2;
+                                    --hover-bg-color: #e2ebfa;
+                                    --hover-fill-color: #174ea6;
+                                    --disabled-fill-color: #aaa;
+                                    --disabled-bg-color: #ddd;
+                                  }
+
+                                  [theme="dark"] .colab-df-quickchart {
+                                    --bg-color: #3b4455;
+                                    --fill-color: #d2e3fc;
+                                    --hover-bg-color: #434b5c;
+                                    --hover-fill-color: #ffffff;
+                                    --disabled-bg-color: #3b4455;
+                                    --disabled-fill-color: #666;
+                                  }
+
+                                  .colab-df-quickchart {
+                                    background-color: var(--bg-color);
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: var(--fill-color);
+                                    height: 32px;
+                                    padding: 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-quickchart:hover {
+                                    background-color: var(--hover-bg-color);
+                                    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+                                      0 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: var(--button-hover-fill-color);
+                                  }
+
+                                  .colab-df-quickchart-complete:disabled,
+                                  .colab-df-quickchart-complete:disabled:hover {
+                                    background-color: var(--disabled-bg-color);
+                                    fill: var(--disabled-fill-color);
+                                    box-shadow: none;
+                                  }
+
+                                  .colab-df-spinner {
+                                    border: 2px solid var(--fill-color);
+                                    border-color: transparent;
+                                    border-bottom-color: var(--fill-color);
+                                    animation: spin 1s steps(1) infinite;
+                                  }
+
+                                  @keyframes spin {
+                                    0% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                      border-left-color: var(--fill-color);
+                                    }
+                                    20% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    30% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    40% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    60% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    80% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                    90% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                  }
+                                </style>
+
+                                <script>
+                                  async function quickchart(key) {
+                                    const quickchartButtonEl =
+                                      document.querySelector(
+                                        "#" + key + " button"
+                                      );
+                                    quickchartButtonEl.disabled = true; // To prevent multiple clicks.
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-spinner"
+                                    );
+                                    try {
+                                      const charts =
+                                        await google.colab.kernel.invokeFunction(
+                                          "suggestCharts",
+                                          [key],
+                                          {}
+                                        );
+                                    } catch (error) {
+                                      console.error(
+                                        "Error during call to suggestCharts:",
+                                        error
+                                      );
+                                    }
+                                    quickchartButtonEl.classList.remove(
+                                      "colab-df-spinner"
+                                    );
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-quickchart-complete"
+                                    );
+                                  }
+                                  (() => {
+                                    let quickchartButtonEl =
+                                      document.querySelector(
+                                        "#df-976bc4df-86b2-4d92-829b-a8087644b9d1 button"
+                                      );
+                                    quickchartButtonEl.style.display = google
+                                      .colab.kernel.accessAllowed
+                                      ? "block"
+                                      : "none";
+                                  })();
+                                </script>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Memisahkan fitur dan label</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;stopword_removal&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;kategori_encoded&#39;</span><span class="p">]</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="split-data">
+                    <h2>
+                      <strong>Split Data</strong
+                      ><a
+                        class="headerlink"
+                        href="#split-data"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Membagi data menjadi data latih dan data uji</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section
+                    id="term-frequency-inverse-document-frequency-tf-idf"
+                  >
+                    <h2>
+                      <strong
+                        ><em>Term Frequency-Inverse Document Frequency</em>
+                        (TF-IDF)</strong
+                      ><a
+                        class="headerlink"
+                        href="#term-frequency-inverse-document-frequency-tf-idf"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Tahap 1: TF-IDF</span>
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">x_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+<span class="n">x_test_tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="c1"># Mengonversi hasil TF-IDF menjadi DataFrame</span>
+<span class="n">df_train_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_train_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="n">df_test_tfidf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_test_tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hasil TF-IDF (Data Latih):&quot;</span><span class="p">)</span>
+<span class="n">df_train_tfidf</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output stream highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>Hasil TF-IDF (Data Latih):
+</pre>
+                          </div>
+                        </div>
+                        <div class="output text_html">
+                          <div
+                            id="df-f762030e-9316-47ac-8381-e42e4713e85d"
+                            class="colab-df-container"
+                          >
+                            <div>
+                              <style scoped>
+                                .dataframe tbody tr th:only-of-type {
+                                  vertical-align: middle;
+                                }
+
+                                .dataframe tbody tr th {
+                                  vertical-align: top;
+                                }
+
+                                .dataframe thead th {
+                                  text-align: right;
+                                }
+                              </style>
+                              <table border="1" class="dataframe">
+                                <thead>
+                                  <tr style="text-align: right">
+                                    <th></th>
+                                    <th>abadi</th>
+                                    <th>abs</th>
+                                    <th>absen</th>
+                                    <th>absennya</th>
+                                    <th>ac</th>
+                                    <th>acara</th>
+                                    <th>accident</th>
+                                    <th>accu</th>
+                                    <th>aceh</th>
+                                    <th>acosta</th>
+                                    <th>...</th>
+                                    <th>yu</th>
+                                    <th>yuan</th>
+                                    <th>yuhsun</th>
+                                    <th>yuni</th>
+                                    <th>yusuf</th>
+                                    <th>zarco</th>
+                                    <th>zenix</th>
+                                    <th>zero</th>
+                                    <th>zf</th>
+                                    <th>zhi</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th>0</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>1</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>2</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>3</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.075791</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>4</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>...</th>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                  </tr>
+                                  <tr>
+                                    <th>75</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>76</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>77</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>78</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                  <tr>
+                                    <th>79</th>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.000000</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>...</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                    <td>0.0</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <p>80 rows × 3779 columns</p>
+                            </div>
+                            <div class="colab-df-buttons">
+                              <div class="colab-df-container">
+                                <button
+                                  class="colab-df-convert"
+                                  onclick="convertToInteractive('df-f762030e-9316-47ac-8381-e42e4713e85d')"
+                                  title="Convert this dataframe to an interactive table."
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 -960 960 960"
+                                  >
+                                    <path
+                                      d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"
+                                    />
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-container {
+                                    display: flex;
+                                    gap: 12px;
+                                  }
+
+                                  .colab-df-convert {
+                                    background-color: #e8f0fe;
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: #1967d2;
+                                    height: 32px;
+                                    padding: 0 0 0 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-convert:hover {
+                                    background-color: #e2ebfa;
+                                    box-shadow: 0px 1px 2px
+                                        rgba(60, 64, 67, 0.3),
+                                      0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: #174ea6;
+                                  }
+
+                                  .colab-df-buttons div {
+                                    margin-bottom: 4px;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert {
+                                    background-color: #3b4455;
+                                    fill: #d2e3fc;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert:hover {
+                                    background-color: #434b5c;
+                                    box-shadow: 0px 1px 3px 1px
+                                      rgba(0, 0, 0, 0.15);
+                                    filter: drop-shadow(
+                                      0px 1px 2px rgba(0, 0, 0, 0.3)
+                                    );
+                                    fill: #ffffff;
+                                  }
+                                </style>
+
+                                <script>
+                                  const buttonEl = document.querySelector(
+                                    "#df-f762030e-9316-47ac-8381-e42e4713e85d button.colab-df-convert"
+                                  );
+                                  buttonEl.style.display = google.colab.kernel
+                                    .accessAllowed
+                                    ? "block"
+                                    : "none";
+
+                                  async function convertToInteractive(key) {
+                                    const element = document.querySelector(
+                                      "#df-f762030e-9316-47ac-8381-e42e4713e85d"
+                                    );
+                                    const dataTable =
+                                      await google.colab.kernel.invokeFunction(
+                                        "convertToInteractive",
+                                        [key],
+                                        {}
+                                      );
+                                    if (!dataTable) return;
+
+                                    const docLinkHtml =
+                                      "Like what you see? Visit the " +
+                                      '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>' +
+                                      " to learn more about interactive tables.";
+                                    element.innerHTML = "";
+                                    dataTable["output_type"] = "display_data";
+                                    await google.colab.output.renderOutput(
+                                      dataTable,
+                                      element
+                                    );
+                                    const docLink =
+                                      document.createElement("div");
+                                    docLink.innerHTML = docLinkHtml;
+                                    element.appendChild(docLink);
+                                  }
+                                </script>
+                              </div>
+
+                              <div id="df-0e909cd6-a2b8-4616-9f95-5b22b4bcd404">
+                                <button
+                                  class="colab-df-quickchart"
+                                  onclick="quickchart('df-0e909cd6-a2b8-4616-9f95-5b22b4bcd404')"
+                                  title="Suggest charts"
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                  >
+                                    <g>
+                                      <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                      />
+                                    </g>
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-quickchart {
+                                    --bg-color: #e8f0fe;
+                                    --fill-color: #1967d2;
+                                    --hover-bg-color: #e2ebfa;
+                                    --hover-fill-color: #174ea6;
+                                    --disabled-fill-color: #aaa;
+                                    --disabled-bg-color: #ddd;
+                                  }
+
+                                  [theme="dark"] .colab-df-quickchart {
+                                    --bg-color: #3b4455;
+                                    --fill-color: #d2e3fc;
+                                    --hover-bg-color: #434b5c;
+                                    --hover-fill-color: #ffffff;
+                                    --disabled-bg-color: #3b4455;
+                                    --disabled-fill-color: #666;
+                                  }
+
+                                  .colab-df-quickchart {
+                                    background-color: var(--bg-color);
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: var(--fill-color);
+                                    height: 32px;
+                                    padding: 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-quickchart:hover {
+                                    background-color: var(--hover-bg-color);
+                                    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+                                      0 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: var(--button-hover-fill-color);
+                                  }
+
+                                  .colab-df-quickchart-complete:disabled,
+                                  .colab-df-quickchart-complete:disabled:hover {
+                                    background-color: var(--disabled-bg-color);
+                                    fill: var(--disabled-fill-color);
+                                    box-shadow: none;
+                                  }
+
+                                  .colab-df-spinner {
+                                    border: 2px solid var(--fill-color);
+                                    border-color: transparent;
+                                    border-bottom-color: var(--fill-color);
+                                    animation: spin 1s steps(1) infinite;
+                                  }
+
+                                  @keyframes spin {
+                                    0% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                      border-left-color: var(--fill-color);
+                                    }
+                                    20% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    30% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    40% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    60% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    80% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                    90% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                  }
+                                </style>
+
+                                <script>
+                                  async function quickchart(key) {
+                                    const quickchartButtonEl =
+                                      document.querySelector(
+                                        "#" + key + " button"
+                                      );
+                                    quickchartButtonEl.disabled = true; // To prevent multiple clicks.
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-spinner"
+                                    );
+                                    try {
+                                      const charts =
+                                        await google.colab.kernel.invokeFunction(
+                                          "suggestCharts",
+                                          [key],
+                                          {}
+                                        );
+                                    } catch (error) {
+                                      console.error(
+                                        "Error during call to suggestCharts:",
+                                        error
+                                      );
+                                    }
+                                    quickchartButtonEl.classList.remove(
+                                      "colab-df-spinner"
+                                    );
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-quickchart-complete"
+                                    );
+                                  }
+                                  (() => {
+                                    let quickchartButtonEl =
+                                      document.querySelector(
+                                        "#df-0e909cd6-a2b8-4616-9f95-5b22b4bcd404 button"
+                                      );
+                                    quickchartButtonEl.style.display = google
+                                      .colab.kernel.accessAllowed
+                                      ? "block"
+                                      : "none";
+                                  })();
+                                </script>
+                              </div>
+
+                              <div id="id_a5a52288-7d47-4238-bf0e-8633b0bf3ee1">
+                                <style>
+                                  .colab-df-generate {
+                                    background-color: #e8f0fe;
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: #1967d2;
+                                    height: 32px;
+                                    padding: 0 0 0 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-generate:hover {
+                                    background-color: #e2ebfa;
+                                    box-shadow: 0px 1px 2px
+                                        rgba(60, 64, 67, 0.3),
+                                      0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: #174ea6;
+                                  }
+
+                                  [theme="dark"] .colab-df-generate {
+                                    background-color: #3b4455;
+                                    fill: #d2e3fc;
+                                  }
+
+                                  [theme="dark"] .colab-df-generate:hover {
+                                    background-color: #434b5c;
+                                    box-shadow: 0px 1px 3px 1px
+                                      rgba(0, 0, 0, 0.15);
+                                    filter: drop-shadow(
+                                      0px 1px 2px rgba(0, 0, 0, 0.3)
+                                    );
+                                    fill: #ffffff;
+                                  }
+                                </style>
+                                <button
+                                  class="colab-df-generate"
+                                  onclick="generateWithVariable('df_train_tfidf')"
+                                  title="Generate code using this dataframe."
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                  >
+                                    <path
+                                      d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"
+                                    />
+                                  </svg>
+                                </button>
+                                <script>
+                                  (() => {
+                                    const buttonEl = document.querySelector(
+                                      "#id_a5a52288-7d47-4238-bf0e-8633b0bf3ee1 button.colab-df-generate"
+                                    );
+                                    buttonEl.style.display = google.colab.kernel
+                                      .accessAllowed
+                                      ? "block"
+                                      : "none";
+
+                                    buttonEl.onclick = () => {
+                                      google.colab.notebook.generateWithVariable(
+                                        "df_train_tfidf"
+                                      );
+                                    };
+                                  })();
+                                </script>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="reduksi-dimensi-svd">
+                    <h2>
+                      <strong>Reduksi Dimensi (SVD)</strong
+                      ><a
+                        class="headerlink"
+                        href="#reduksi-dimensi-svd"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Tahap 2: SVD (Reduksi Dimensi)</span>
+<span class="n">svd</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># Sesuaikan n_components dengan kebutuhan</span>
+<span class="n">x_train_svd</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train_tfidf</span><span class="p">)</span>
+<span class="n">x_test_svd</span> <span class="o">=</span> <span class="n">svd</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_test_tfidf</span><span class="p">)</span>
+
+<span class="c1"># Mengonversi hasil SVD menjadi DataFrame</span>
+<span class="n">df_train_svd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_train_svd</span><span class="p">)</span>
+<span class="n">df_test_svd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_test_svd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hasil SVD (Data Latih):&quot;</span><span class="p">)</span>
+<span class="n">df_train_svd</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output stream highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>Hasil SVD (Data Latih):
+</pre>
+                          </div>
+                        </div>
+                        <div class="output text_html">
+                          <div
+                            id="df-38208bbd-a76c-4c4e-a354-8ecabb41f5db"
+                            class="colab-df-container"
+                          >
+                            <div>
+                              <style scoped>
+                                .dataframe tbody tr th:only-of-type {
+                                  vertical-align: middle;
+                                }
+
+                                .dataframe tbody tr th {
+                                  vertical-align: top;
+                                }
+
+                                .dataframe thead th {
+                                  text-align: right;
+                                }
+                              </style>
+                              <table border="1" class="dataframe">
+                                <thead>
+                                  <tr style="text-align: right">
+                                    <th></th>
+                                    <th>0</th>
+                                    <th>1</th>
+                                    <th>2</th>
+                                    <th>3</th>
+                                    <th>4</th>
+                                    <th>5</th>
+                                    <th>6</th>
+                                    <th>7</th>
+                                    <th>8</th>
+                                    <th>9</th>
+                                    <th>...</th>
+                                    <th>70</th>
+                                    <th>71</th>
+                                    <th>72</th>
+                                    <th>73</th>
+                                    <th>74</th>
+                                    <th>75</th>
+                                    <th>76</th>
+                                    <th>77</th>
+                                    <th>78</th>
+                                    <th>79</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th>0</th>
+                                    <td>0.047412</td>
+                                    <td>0.134567</td>
+                                    <td>0.072374</td>
+                                    <td>0.052510</td>
+                                    <td>0.389958</td>
+                                    <td>-0.065717</td>
+                                    <td>0.828859</td>
+                                    <td>-0.046917</td>
+                                    <td>0.188008</td>
+                                    <td>-0.156450</td>
+                                    <td>...</td>
+                                    <td>-0.001157</td>
+                                    <td>0.000815</td>
+                                    <td>-0.006709</td>
+                                    <td>0.000988</td>
+                                    <td>-0.075147</td>
+                                    <td>0.026975</td>
+                                    <td>-0.213606</td>
+                                    <td>0.000705</td>
+                                    <td>0.000287</td>
+                                    <td>0.000016</td>
+                                  </tr>
+                                  <tr>
+                                    <th>1</th>
+                                    <td>0.055423</td>
+                                    <td>0.155740</td>
+                                    <td>0.222254</td>
+                                    <td>0.121290</td>
+                                    <td>0.577320</td>
+                                    <td>-0.138958</td>
+                                    <td>-0.169675</td>
+                                    <td>0.037793</td>
+                                    <td>-0.265563</td>
+                                    <td>0.029694</td>
+                                    <td>...</td>
+                                    <td>0.005292</td>
+                                    <td>-0.010659</td>
+                                    <td>-0.030901</td>
+                                    <td>0.002548</td>
+                                    <td>0.006419</td>
+                                    <td>-0.000928</td>
+                                    <td>-0.003856</td>
+                                    <td>-0.000067</td>
+                                    <td>0.000180</td>
+                                    <td>0.000087</td>
+                                  </tr>
+                                  <tr>
+                                    <th>2</th>
+                                    <td>0.665166</td>
+                                    <td>-0.135995</td>
+                                    <td>-0.027788</td>
+                                    <td>-0.069785</td>
+                                    <td>-0.062039</td>
+                                    <td>-0.280775</td>
+                                    <td>0.006384</td>
+                                    <td>0.024635</td>
+                                    <td>0.022471</td>
+                                    <td>0.018259</td>
+                                    <td>...</td>
+                                    <td>-0.132310</td>
+                                    <td>0.336315</td>
+                                    <td>0.004153</td>
+                                    <td>0.000837</td>
+                                    <td>0.001650</td>
+                                    <td>-0.000573</td>
+                                    <td>-0.001031</td>
+                                    <td>0.000178</td>
+                                    <td>-0.008192</td>
+                                    <td>0.000005</td>
+                                  </tr>
+                                  <tr>
+                                    <th>3</th>
+                                    <td>0.120382</td>
+                                    <td>0.024396</td>
+                                    <td>0.053221</td>
+                                    <td>0.500952</td>
+                                    <td>-0.118713</td>
+                                    <td>0.019229</td>
+                                    <td>-0.003447</td>
+                                    <td>-0.473477</td>
+                                    <td>0.023962</td>
+                                    <td>0.031125</td>
+                                    <td>...</td>
+                                    <td>-0.288377</td>
+                                    <td>-0.018981</td>
+                                    <td>-0.004295</td>
+                                    <td>0.002329</td>
+                                    <td>0.002407</td>
+                                    <td>0.001278</td>
+                                    <td>0.001624</td>
+                                    <td>-0.000071</td>
+                                    <td>0.000233</td>
+                                    <td>0.000021</td>
+                                  </tr>
+                                  <tr>
+                                    <th>4</th>
+                                    <td>0.021500</td>
+                                    <td>0.049822</td>
+                                    <td>0.043430</td>
+                                    <td>0.044502</td>
+                                    <td>0.224678</td>
+                                    <td>-0.048011</td>
+                                    <td>-0.015934</td>
+                                    <td>0.004664</td>
+                                    <td>-0.204635</td>
+                                    <td>0.021877</td>
+                                    <td>...</td>
+                                    <td>-0.000799</td>
+                                    <td>-0.000167</td>
+                                    <td>0.002509</td>
+                                    <td>-0.004339</td>
+                                    <td>-0.001856</td>
+                                    <td>-0.000586</td>
+                                    <td>-0.000307</td>
+                                    <td>-0.000287</td>
+                                    <td>-0.000435</td>
+                                    <td>0.000024</td>
+                                  </tr>
+                                  <tr>
+                                    <th>...</th>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                    <td>...</td>
+                                  </tr>
+                                  <tr>
+                                    <th>75</th>
+                                    <td>0.025417</td>
+                                    <td>0.072046</td>
+                                    <td>0.056878</td>
+                                    <td>0.039518</td>
+                                    <td>0.214269</td>
+                                    <td>-0.053035</td>
+                                    <td>-0.030915</td>
+                                    <td>0.011002</td>
+                                    <td>-0.218107</td>
+                                    <td>0.014749</td>
+                                    <td>...</td>
+                                    <td>-0.003773</td>
+                                    <td>-0.002696</td>
+                                    <td>0.001390</td>
+                                    <td>-0.001388</td>
+                                    <td>-0.001896</td>
+                                    <td>0.001175</td>
+                                    <td>0.001665</td>
+                                    <td>-0.000227</td>
+                                    <td>0.000077</td>
+                                    <td>-0.000027</td>
+                                  </tr>
+                                  <tr>
+                                    <th>76</th>
+                                    <td>0.026245</td>
+                                    <td>0.053464</td>
+                                    <td>0.015269</td>
+                                    <td>0.019878</td>
+                                    <td>0.103722</td>
+                                    <td>-0.029637</td>
+                                    <td>0.007780</td>
+                                    <td>-0.018233</td>
+                                    <td>-0.103611</td>
+                                    <td>0.072064</td>
+                                    <td>...</td>
+                                    <td>-0.000500</td>
+                                    <td>0.002229</td>
+                                    <td>0.002620</td>
+                                    <td>-0.007866</td>
+                                    <td>0.004913</td>
+                                    <td>-0.001140</td>
+                                    <td>0.000372</td>
+                                    <td>0.000086</td>
+                                    <td>0.000017</td>
+                                    <td>0.000188</td>
+                                  </tr>
+                                  <tr>
+                                    <th>77</th>
+                                    <td>0.575415</td>
+                                    <td>-0.104115</td>
+                                    <td>-0.020712</td>
+                                    <td>-0.028364</td>
+                                    <td>-0.021023</td>
+                                    <td>-0.058260</td>
+                                    <td>0.001082</td>
+                                    <td>-0.018499</td>
+                                    <td>0.010384</td>
+                                    <td>0.002813</td>
+                                    <td>...</td>
+                                    <td>0.024008</td>
+                                    <td>0.079029</td>
+                                    <td>0.005573</td>
+                                    <td>-0.000392</td>
+                                    <td>0.000175</td>
+                                    <td>-0.000676</td>
+                                    <td>-0.000353</td>
+                                    <td>-0.000144</td>
+                                    <td>-0.002913</td>
+                                    <td>0.000018</td>
+                                  </tr>
+                                  <tr>
+                                    <th>78</th>
+                                    <td>0.049843</td>
+                                    <td>0.171676</td>
+                                    <td>0.901979</td>
+                                    <td>-0.164433</td>
+                                    <td>-0.207615</td>
+                                    <td>0.021723</td>
+                                    <td>0.019126</td>
+                                    <td>0.005034</td>
+                                    <td>0.051312</td>
+                                    <td>0.031922</td>
+                                    <td>...</td>
+                                    <td>0.000100</td>
+                                    <td>0.000833</td>
+                                    <td>0.000029</td>
+                                    <td>0.001233</td>
+                                    <td>0.000219</td>
+                                    <td>0.000071</td>
+                                    <td>-0.000636</td>
+                                    <td>-0.093446</td>
+                                    <td>-0.000683</td>
+                                    <td>0.064842</td>
+                                  </tr>
+                                  <tr>
+                                    <th>79</th>
+                                    <td>0.119884</td>
+                                    <td>0.678041</td>
+                                    <td>-0.144206</td>
+                                    <td>-0.072701</td>
+                                    <td>-0.127016</td>
+                                    <td>0.004592</td>
+                                    <td>-0.070090</td>
+                                    <td>0.019072</td>
+                                    <td>0.035159</td>
+                                    <td>-0.200382</td>
+                                    <td>...</td>
+                                    <td>-0.010865</td>
+                                    <td>-0.004766</td>
+                                    <td>0.140702</td>
+                                    <td>-0.015005</td>
+                                    <td>0.009435</td>
+                                    <td>0.059741</td>
+                                    <td>0.002045</td>
+                                    <td>0.000211</td>
+                                    <td>0.000161</td>
+                                    <td>0.000010</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <p>80 rows × 80 columns</p>
+                            </div>
+                            <div class="colab-df-buttons">
+                              <div class="colab-df-container">
+                                <button
+                                  class="colab-df-convert"
+                                  onclick="convertToInteractive('df-38208bbd-a76c-4c4e-a354-8ecabb41f5db')"
+                                  title="Convert this dataframe to an interactive table."
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 -960 960 960"
+                                  >
+                                    <path
+                                      d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"
+                                    />
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-container {
+                                    display: flex;
+                                    gap: 12px;
+                                  }
+
+                                  .colab-df-convert {
+                                    background-color: #e8f0fe;
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: #1967d2;
+                                    height: 32px;
+                                    padding: 0 0 0 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-convert:hover {
+                                    background-color: #e2ebfa;
+                                    box-shadow: 0px 1px 2px
+                                        rgba(60, 64, 67, 0.3),
+                                      0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: #174ea6;
+                                  }
+
+                                  .colab-df-buttons div {
+                                    margin-bottom: 4px;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert {
+                                    background-color: #3b4455;
+                                    fill: #d2e3fc;
+                                  }
+
+                                  [theme="dark"] .colab-df-convert:hover {
+                                    background-color: #434b5c;
+                                    box-shadow: 0px 1px 3px 1px
+                                      rgba(0, 0, 0, 0.15);
+                                    filter: drop-shadow(
+                                      0px 1px 2px rgba(0, 0, 0, 0.3)
+                                    );
+                                    fill: #ffffff;
+                                  }
+                                </style>
+
+                                <script>
+                                  const buttonEl = document.querySelector(
+                                    "#df-38208bbd-a76c-4c4e-a354-8ecabb41f5db button.colab-df-convert"
+                                  );
+                                  buttonEl.style.display = google.colab.kernel
+                                    .accessAllowed
+                                    ? "block"
+                                    : "none";
+
+                                  async function convertToInteractive(key) {
+                                    const element = document.querySelector(
+                                      "#df-38208bbd-a76c-4c4e-a354-8ecabb41f5db"
+                                    );
+                                    const dataTable =
+                                      await google.colab.kernel.invokeFunction(
+                                        "convertToInteractive",
+                                        [key],
+                                        {}
+                                      );
+                                    if (!dataTable) return;
+
+                                    const docLinkHtml =
+                                      "Like what you see? Visit the " +
+                                      '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>' +
+                                      " to learn more about interactive tables.";
+                                    element.innerHTML = "";
+                                    dataTable["output_type"] = "display_data";
+                                    await google.colab.output.renderOutput(
+                                      dataTable,
+                                      element
+                                    );
+                                    const docLink =
+                                      document.createElement("div");
+                                    docLink.innerHTML = docLinkHtml;
+                                    element.appendChild(docLink);
+                                  }
+                                </script>
+                              </div>
+
+                              <div id="df-08f225be-3135-4532-87ce-8df13642c2cc">
+                                <button
+                                  class="colab-df-quickchart"
+                                  onclick="quickchart('df-08f225be-3135-4532-87ce-8df13642c2cc')"
+                                  title="Suggest charts"
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                  >
+                                    <g>
+                                      <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"
+                                      />
+                                    </g>
+                                  </svg>
+                                </button>
+
+                                <style>
+                                  .colab-df-quickchart {
+                                    --bg-color: #e8f0fe;
+                                    --fill-color: #1967d2;
+                                    --hover-bg-color: #e2ebfa;
+                                    --hover-fill-color: #174ea6;
+                                    --disabled-fill-color: #aaa;
+                                    --disabled-bg-color: #ddd;
+                                  }
+
+                                  [theme="dark"] .colab-df-quickchart {
+                                    --bg-color: #3b4455;
+                                    --fill-color: #d2e3fc;
+                                    --hover-bg-color: #434b5c;
+                                    --hover-fill-color: #ffffff;
+                                    --disabled-bg-color: #3b4455;
+                                    --disabled-fill-color: #666;
+                                  }
+
+                                  .colab-df-quickchart {
+                                    background-color: var(--bg-color);
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: var(--fill-color);
+                                    height: 32px;
+                                    padding: 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-quickchart:hover {
+                                    background-color: var(--hover-bg-color);
+                                    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3),
+                                      0 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: var(--button-hover-fill-color);
+                                  }
+
+                                  .colab-df-quickchart-complete:disabled,
+                                  .colab-df-quickchart-complete:disabled:hover {
+                                    background-color: var(--disabled-bg-color);
+                                    fill: var(--disabled-fill-color);
+                                    box-shadow: none;
+                                  }
+
+                                  .colab-df-spinner {
+                                    border: 2px solid var(--fill-color);
+                                    border-color: transparent;
+                                    border-bottom-color: var(--fill-color);
+                                    animation: spin 1s steps(1) infinite;
+                                  }
+
+                                  @keyframes spin {
+                                    0% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                      border-left-color: var(--fill-color);
+                                    }
+                                    20% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    30% {
+                                      border-color: transparent;
+                                      border-left-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    40% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-top-color: var(--fill-color);
+                                    }
+                                    60% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                    }
+                                    80% {
+                                      border-color: transparent;
+                                      border-right-color: var(--fill-color);
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                    90% {
+                                      border-color: transparent;
+                                      border-bottom-color: var(--fill-color);
+                                    }
+                                  }
+                                </style>
+
+                                <script>
+                                  async function quickchart(key) {
+                                    const quickchartButtonEl =
+                                      document.querySelector(
+                                        "#" + key + " button"
+                                      );
+                                    quickchartButtonEl.disabled = true; // To prevent multiple clicks.
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-spinner"
+                                    );
+                                    try {
+                                      const charts =
+                                        await google.colab.kernel.invokeFunction(
+                                          "suggestCharts",
+                                          [key],
+                                          {}
+                                        );
+                                    } catch (error) {
+                                      console.error(
+                                        "Error during call to suggestCharts:",
+                                        error
+                                      );
+                                    }
+                                    quickchartButtonEl.classList.remove(
+                                      "colab-df-spinner"
+                                    );
+                                    quickchartButtonEl.classList.add(
+                                      "colab-df-quickchart-complete"
+                                    );
+                                  }
+                                  (() => {
+                                    let quickchartButtonEl =
+                                      document.querySelector(
+                                        "#df-08f225be-3135-4532-87ce-8df13642c2cc button"
+                                      );
+                                    quickchartButtonEl.style.display = google
+                                      .colab.kernel.accessAllowed
+                                      ? "block"
+                                      : "none";
+                                  })();
+                                </script>
+                              </div>
+
+                              <div id="id_6e9730b4-589d-411e-89ef-9535dafd014d">
+                                <style>
+                                  .colab-df-generate {
+                                    background-color: #e8f0fe;
+                                    border: none;
+                                    border-radius: 50%;
+                                    cursor: pointer;
+                                    display: none;
+                                    fill: #1967d2;
+                                    height: 32px;
+                                    padding: 0 0 0 0;
+                                    width: 32px;
+                                  }
+
+                                  .colab-df-generate:hover {
+                                    background-color: #e2ebfa;
+                                    box-shadow: 0px 1px 2px
+                                        rgba(60, 64, 67, 0.3),
+                                      0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+                                    fill: #174ea6;
+                                  }
+
+                                  [theme="dark"] .colab-df-generate {
+                                    background-color: #3b4455;
+                                    fill: #d2e3fc;
+                                  }
+
+                                  [theme="dark"] .colab-df-generate:hover {
+                                    background-color: #434b5c;
+                                    box-shadow: 0px 1px 3px 1px
+                                      rgba(0, 0, 0, 0.15);
+                                    filter: drop-shadow(
+                                      0px 1px 2px rgba(0, 0, 0, 0.3)
+                                    );
+                                    fill: #ffffff;
+                                  }
+                                </style>
+                                <button
+                                  class="colab-df-generate"
+                                  onclick="generateWithVariable('df_train_svd')"
+                                  title="Generate code using this dataframe."
+                                  style="display: none"
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    height="24px"
+                                    viewBox="0 0 24 24"
+                                    width="24px"
+                                  >
+                                    <path
+                                      d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"
+                                    />
+                                  </svg>
+                                </button>
+                                <script>
+                                  (() => {
+                                    const buttonEl = document.querySelector(
+                                      "#id_6e9730b4-589d-411e-89ef-9535dafd014d button.colab-df-generate"
+                                    );
+                                    buttonEl.style.display = google.colab.kernel
+                                      .accessAllowed
+                                      ? "block"
+                                      : "none";
+
+                                    buttonEl.onclick = () => {
+                                      google.colab.notebook.generateWithVariable(
+                                        "df_train_svd"
+                                      );
+                                    };
+                                  })();
+                                </script>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="model-logistic-regression">
+                    <h2>
+                      <strong>Model Logistic Regression</strong
+                      ><a
+                        class="headerlink"
+                        href="#model-logistic-regression"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Tahap 3: Klasifikasi dengan Logistic Regression</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train_svd</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test_svd</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Evaluasi Model</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Accuracy:&quot;</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output stream highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>Accuracy: 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00         8
+
+    accuracy                           1.00        20
+   macro avg       1.00      1.00      1.00        20
+weighted avg       1.00      1.00      1.00        20
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Simpan TF-IDF vectorizer dan model</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;svd_tfidf.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tfidf_file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">x_train_svd</span><span class="p">,</span> <span class="n">tfidf_file</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;logistic_regression_model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">model_file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">model_file</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                  <section id="pengujian">
+                    <h2>
+                      <strong>Pengujian</strong
+                      ><a
+                        class="headerlink"
+                        href="#pengujian"
+                        title="Link to this heading"
+                        >#</a
+                      >
+                    </h2>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="c1"># Misalnya, Anda telah membuat pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;tfidf&#39;</span><span class="p">,</span> <span class="n">TfidfVectorizer</span><span class="p">()),</span>
+    <span class="p">(</span><span class="s1">&#39;svd&#39;</span><span class="p">,</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s1">&#39;clf&#39;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())</span>
+<span class="p">])</span>
+
+<span class="c1"># Setelah melatih model</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Menyimpan pipeline</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="s1">&#39;svd_tfidf_pipeline.pkl&#39;</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output text_plain highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>[&#39;svd_tfidf_pipeline.pkl&#39;]
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell docutils container">
+                      <div class="cell_input docutils container">
+                        <div class="highlight-ipython3 notranslate">
+                          <div class="highlight">
+                            <pre><span></span><span class="c1"># Teks baru yang ingin diprediksi</span>
+<span class="n">new_text_1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Jakarta - Putri Kusuma Wardani hadapi wakil Taiwan, Huang Yu-Hsun di Korea Masters 2024. Putri KW menang dua gim langsung dan</span>
+<span class="s1">kunci tiket ke babak 16 besar! Korea Masters 2024 berlangsung di Iksan City, Korea Selatan, Rabu (6/1). Hari ini merupakan perebutan</span>
+<span class="s1">tiket ke babak 16 besar. Di nomor tunggal putri, Putri Kusuma Wardani ditantang Huang Yu-Hsun. Putri KW menangi gim pertama 21-4 dan</span>
+<span class="s1">menangi gim kedua .. Gim pertama dimulai, Putri KW langsung pegang kendali. Dirinya nyaman memimpin 7-1, lalu unggul di interval 11-2.</span>
+<span class="s1">Putri KW terus tancap gas. Tak butuh waktu lama, dirinya sudahi gim pertama dengan kemenangan telak 21-4. Gim kedua, Huang Yu-Hsun</span>
+<span class="s1">coba bangkit dengan unggul duluan 3-1. Putri KW langsung menyalipnya, 4-3 dan unggul di interval 11-4. Putri KW terus memimpin 15-5.</span>
+<span class="s1">Selanjutnya, Putri KW mampu kunci gim kedua dengan kemenangan 21-9.</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">]</span>
+
+<span class="n">new_text_2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">Jakarta - Suzuki Motor Corporation resmi meluncurkan mobil listrik bertenaga baterai (BEV) pertamanya. Mobil listrik hasil</span>
+<span class="s1">produksi massal dari eVX itu dijual dengan nama e Vitara. Suzuki meluncurkan e Vitara pertama kali di Eropa, tepatnya di Milan, Italia.</span>
+<span class="s1">Produksi akan dimulai di Suzuki Motor Gujarat di India pada 2025. Mobil ini akan mulai dijual di berbagai negara, termasuk Eropa,</span>
+<span class="s1">India, dan Jepang, sekitar pertengahan tahun 2025. &quot;&quot;e VITARA adalah BEV pertama kami, yang dikembangkan melalui uji coba berulang</span>
+<span class="s1">kali untuk menciptakan BEV yang mudah digunakan bagi pelanggan kami. Untuk mewujudkan masyarakat yang netral karbon, kami akan menyediakan</span>
+<span class="s1">berbagai pilihan, termasuk BEV, kendaraan hybrid, dan kendaraan CNG, yang disesuaikan dengan wilayah tertentu,&quot;&quot; kata Toshihiro Suzuki,</span>
+<span class="s1">Representative Director and President Suzuki Motor Corporation dikutip dari siaran persnya &quot;&quot;Peluncuran e VITARA merupakan tonggak penting</span>
+<span class="s1">dalam mencapai netralitas karbon. Setelah peluncuran e VITARA, kami akan terus memperluas jajaran BEV kami dan mengusulkan solusi mobilitas</span>
+<span class="s1">yang disesuaikan dengan kebutuhan negara dan wilayah tertentu.</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">]</span>
+
+<span class="c1"># Gabungkan kedua teks menjadi satu list</span>
+<span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text_1</span> <span class="o">+</span> <span class="n">new_text_2</span>
+
+<span class="c1"># Melakukan prediksi dengan pipeline</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_text</span><span class="p">)</span>
+
+<span class="c1"># Hasil prediksi</span>
+<span class="n">predicted_categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Olahraga&quot;</span> <span class="k">if</span> <span class="n">prediction</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;Otomotif&quot;</span> <span class="k">for</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">]</span>
+
+<span class="c1"># Output hasil prediksi untuk masing-masing teks</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">category</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">predicted_categories</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi untuk teks </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell_output docutils container">
+                        <div
+                          class="output stream highlight-myst-ansi notranslate"
+                        >
+                          <div class="highlight">
+                            <pre><span></span>Prediksi untuk teks 1: Olahraga
+Prediksi untuk teks 2: Otomotif
+</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </section>
+
+                <script type="text/x-thebe-config">
+                  {
+                      requestKernel: true,
+                      binderOptions: {
+                          repo: "binder-examples/jupyter-stacks-datascience",
+                          ref: "master",
+                      },
+                      codeMirrorConfig: {
+                          theme: "abcdef",
+                          mode: "python"
+                      },
+                      kernelOptions: {
+                          name: "python3",
+                          path: "./."
+                      },
+                      predefinedOutput: true
+                  }
+                </script>
+                <script>
+                  kernelName = "python3";
+                </script>
+              </article>
+
+              <footer class="prev-next-footer d-print-none">
+                <div class="prev-next-area">
+                  <a
+                    class="left-prev"
+                    href="Tugas6_Pencarian_Query_Menggunakan_SVD.html"
+                    title="previous page"
+                  >
+                    <i class="fa-solid fa-angle-left"></i>
+                    <div class="prev-next-info">
+                      <p class="prev-next-subtitle">previous</p>
+                      <p class="prev-next-title">
+                        <strong
+                          >Tugas 6 : Membuat pencarian Query dengan kalimat
+                          dalam dokumen dengan penerapan
+                          <em>Singular Value Decomposition</em> (SVD)</strong
+                        >
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    class="right-next"
+                    href="Tugas8_Clustering_Fuzzy.html"
+                    title="next page"
+                  >
+                    <div class="prev-next-info">
+                      <p class="prev-next-subtitle">next</p>
+                      <p class="prev-next-title">
+                        <strong>Tugas 8: Fuzzy C-Means Clustering</strong>
+                      </p>
+                    </div>
+                    <i class="fa-solid fa-angle-right"></i>
+                  </a>
+                </div>
+              </footer>
+            </div>
+
+            <dialog id="pst-secondary-sidebar-modal"></dialog>
+            <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc">
+              <div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="sidebar-secondary-item">
+                  <div class="page-toc tocsection onthispage">
+                    <i class="fa-solid fa-list"></i> Contents
+                  </div>
+                  <nav class="bd-toc-nav page-toc">
+                    <ul class="visible nav section-nav flex-column">
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a
+                          class="reference internal nav-link"
+                          href="#label-encoder"
+                          ><strong>Label Encoder</strong></a
+                        >
+                      </li>
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a
+                          class="reference internal nav-link"
+                          href="#split-data"
+                          ><strong>Split Data</strong></a
+                        >
+                      </li>
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a
+                          class="reference internal nav-link"
+                          href="#term-frequency-inverse-document-frequency-tf-idf"
+                          ><strong
+                            ><em>Term Frequency-Inverse Document Frequency</em>
+                            (TF-IDF)</strong
+                          ></a
+                        >
+                      </li>
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a
+                          class="reference internal nav-link"
+                          href="#reduksi-dimensi-svd"
+                          ><strong>Reduksi Dimensi (SVD)</strong></a
+                        >
+                      </li>
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a
+                          class="reference internal nav-link"
+                          href="#model-logistic-regression"
+                          ><strong>Model Logistic Regression</strong></a
+                        >
+                      </li>
+                      <li class="toc-h2 nav-item toc-entry">
+                        <a class="reference internal nav-link" href="#pengujian"
+                          ><strong>Pengujian</strong></a
+                        >
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner container">
+              <div class="footer-item">
+                <p class="component-author">By 210411100160 | Qoid Rif'at</p>
+              </div>
+
+              <div class="footer-item">
+                <p class="copyright">
+                  © Copyright 2024.
+                  <br />
+                </p>
+              </div>
+
+              <div class="footer-item"></div>
+
+              <div class="footer-item"></div>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </div>
+
+    <!-- Scripts loaded after <body> so the DOM is not blocked -->
+    <script
+      defer
+      src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"
+    ></script>
+    <script
+      defer
+      src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"
+    ></script>
+
+    <footer class="bd-footer"></footer>
+  </body>
+</html>
